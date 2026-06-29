@@ -1,160 +1,258 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
-  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Readings — Venkatesh Akula</title>
-  <meta name="description" content="Curated reading list: papers, books, and resources on mathematics, ML, systems, and quantitative finance.">
+  <meta name="description"
+    content="Curated reading list: papers, books, and resources on mathematics, ML, systems, and quantitative finance.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/main.css">
   <style>
     .reading-chips {
-      display: flex; flex-wrap: wrap; gap: 0.5rem;
-      justify-content: center; margin-bottom: var(--space-3xl);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: var(--space-3xl);
     }
+
     .reading-chip {
-      padding: 0.45rem 1.1rem; border-radius: 20px;
-      background: var(--bg-card); color: var(--text-secondary);
-      font-size: 0.85rem; border: 1px solid var(--border);
-      cursor: pointer; transition: all var(--transition); font-weight: 500;
+      padding: 0.45rem 1.1rem;
+      border-radius: 20px;
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all var(--transition);
+      font-weight: 500;
     }
-    .reading-chip:hover, .reading-chip.active {
-      background: var(--accent); color: #fff; border-color: var(--accent);
+
+    .reading-chip:hover,
+    .reading-chip.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
     }
+
     .reading-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius-md); padding: var(--space-xl);
-      margin-bottom: var(--space-lg); transition: all var(--transition);
-      display: block; text-decoration: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-lg);
+      transition: all var(--transition);
+      display: block;
+      text-decoration: none;
     }
+
     .reading-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 24px var(--shadow); border-color: var(--accent);
+      box-shadow: 0 8px 24px var(--shadow);
+      border-color: var(--accent);
     }
+
     .reading-card-title {
-      font-family: var(--font-heading); font-size: 1.15rem;
-      font-weight: 600; color: var(--text); margin-bottom: 0.3rem;
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.3rem;
     }
+
     .reading-card-author {
-      font-family: var(--font-mono); font-size: 0.8rem;
-      color: var(--accent); margin-bottom: 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
     }
+
     .reading-card-excerpt {
-      font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
     }
+
     .reading-card-rating {
-      margin-top: 0.8rem; font-size: 0.85rem;
-      color: var(--text-muted); font-family: var(--font-mono);
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
     }
   </style>
 </head>
+
 <body>
-  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
-  <header class="site-header" id="site-header"><nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log book</span></a><div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/" class="nav-link">CV</a><a href="/projects/" class="nav-link">Projects</a><a href="/publications/" class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a href="/readings/" class="nav-link active">Readings</a><a href="/life/" class="nav-link">Life</a><a href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div><div class="nav-actions"><button class="search-btn" aria-label="Search" style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></nav></header>
+  <div class="progress-container">
+    <div class="progress-bar" id="reading-progress"></div>
+  </div>
+  <header class="site-header" id="site-header">
+    <nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span
+          class="nav-logo-text">Venkatesh's log book</span></a>
+      <div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/"
+          class="nav-link">CV</a><a href="/projects/" class="nav-link">Projects</a><a href="/publications/"
+          class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a
+          href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a
+          href="/readings/" class="nav-link active">Readings</a><a href="/life/" class="nav-link">Life</a><a
+          href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div>
+      <div class="nav-actions"><button class="search-btn" aria-label="Search"
+          style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button
+          class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <path
+              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
+          </svg></button><button class="nav-menu-btn" id="nav-menu-btn"
+          aria-label="Toggle menu"><span></span><span></span><span></span></button></div>
+    </nav>
+  </header>
 
-  <main class="section pt-header"><div class="container content-body" style="max-width: 900px;">
+  <main class="section pt-header">
+    <div class="container content-body" style="max-width: 900px;">
 
-    <div style="text-align:center; margin-bottom: var(--space-3xl);">
-      <h1 style="font-family:var(--font-heading);font-size:clamp(2.2rem, 5vw, 3rem);margin-bottom:var(--space-sm);color:var(--text);">Readings</h1>
-      <p style="color:var(--text-secondary);font-size: 1.05rem; max-width: 600px; margin: 0 auto;">Books, papers, and resources that shaped how I think. Click any card to read my full review.</p>
-    </div>
+      <div style="text-align:center; margin-bottom: var(--space-3xl);">
+        <h1
+          style="font-family:var(--font-heading);font-size:clamp(2.2rem, 5vw, 3rem);margin-bottom:var(--space-sm);color:var(--text);">
+          Readings</h1>
+        <p style="color:var(--text-secondary);font-size: 1.05rem; max-width: 600px; margin: 0 auto;">Books, papers, and
+          resources that shaped how I think. Click any card to read my full review.</p>
+      </div>
 
-    <!-- Category Chips -->
-    <div class="reading-chips">
-      <span class="reading-chip active" data-cat="all">All</span>
-      <span class="reading-chip" data-cat="math">📐 Mathematics</span>
-      <span class="reading-chip" data-cat="ml">🤖 ML & AI</span>
-      <span class="reading-chip" data-cat="systems">⚙️ Systems</span>
-      <span class="reading-chip" data-cat="quant">📈 Quant Finance</span>
-      <span class="reading-chip" data-cat="fiction">📖 Fiction</span>
-      <span class="reading-chip" data-cat="self-help">🧠 Self-Help</span>
-    </div>
+      <!-- Category Chips -->
+      <div class="reading-chips">
+        <span class="reading-chip active" data-cat="all">All</span>
+        <span class="reading-chip" data-cat="math">📐 Mathematics</span>
+        <span class="reading-chip" data-cat="ml">🤖 ML & AI</span>
+        <span class="reading-chip" data-cat="systems">⚙️ Systems</span>
+        <span class="reading-chip" data-cat="quant">📈 Quant Finance</span>
+        <span class="reading-chip" data-cat="fiction">📖 Fiction</span>
+        <span class="reading-chip" data-cat="self-help">🧠 Self-Help</span>
+        <span class="reading-chip" data-cat="autobiography">👤 Autobiography</span>
+      </div>
 
-    <div id="readings-list">
+      <div id="readings-list">
 
-      <a href="/readings/concrete-mathematics/" class="reading-card fade-in" data-category="math">
-        <div class="reading-card-title">Concrete Mathematics</div>
-        <div class="reading-card-author">Graham, Knuth, Patashnik</div>
-        <div class="reading-card-excerpt">An absolute masterpiece. It bridges the gap between continuous and discrete mathematics perfectly.</div>
-        <div class="reading-card-rating">★★★★★</div>
-      </a>
+        <a href="/readings/concrete-mathematics/" class="reading-card fade-in" data-category="math">
+          <div class="reading-card-title">Concrete Mathematics</div>
+          <div class="reading-card-author">Graham, Knuth, Patashnik</div>
+          <div class="reading-card-excerpt">An absolute masterpiece. It bridges the gap between continuous and discrete
+            mathematics perfectly.</div>
+          <div class="reading-card-rating">★★★★★</div>
+        </a>
 
-      <a href="/readings/art-of-problem-solving/" class="reading-card fade-in" data-category="math">
-        <div class="reading-card-title">The Art and Craft of Problem Solving</div>
-        <div class="reading-card-author">Paul Zeitz</div>
-        <div class="reading-card-excerpt">This book taught me how to think rather than just how to calculate.</div>
-        <div class="reading-card-rating">★★★★★</div>
-      </a>
+        <a href="/readings/art-of-problem-solving/" class="reading-card fade-in" data-category="math">
+          <div class="reading-card-title">The Art and Craft of Problem Solving</div>
+          <div class="reading-card-author">Paul Zeitz</div>
+          <div class="reading-card-excerpt">This book taught me how to think rather than just how to calculate.</div>
+          <div class="reading-card-rating">★★★★★</div>
+        </a>
 
-      <a href="/readings/munkres-topology/" class="reading-card fade-in" data-category="math">
-        <div class="reading-card-title">Topology</div>
-        <div class="reading-card-author">James Munkres</div>
-        <div class="reading-card-excerpt">The gold standard for point-set topology. Very rigorous, yet readable.</div>
-        <div class="reading-card-rating">★★★★☆</div>
-      </a>
+        <a href="/readings/munkres-topology/" class="reading-card fade-in" data-category="math">
+          <div class="reading-card-title">Topology</div>
+          <div class="reading-card-author">James Munkres</div>
+          <div class="reading-card-excerpt">The gold standard for point-set topology. Very rigorous, yet readable.</div>
+          <div class="reading-card-rating">★★★★☆</div>
+        </a>
 
-      <a href="/readings/bishop-prml/" class="reading-card fade-in" data-category="ml">
-        <div class="reading-card-title">Pattern Recognition and Machine Learning</div>
-        <div class="reading-card-author">Christopher Bishop</div>
-        <div class="reading-card-excerpt">The definitive text for understanding the probabilistic perspective of ML.</div>
-        <div class="reading-card-rating">★★★★★</div>
-      </a>
+        <a href="/readings/bishop-prml/" class="reading-card fade-in" data-category="ml">
+          <div class="reading-card-title">Pattern Recognition and Machine Learning</div>
+          <div class="reading-card-author">Christopher Bishop</div>
+          <div class="reading-card-excerpt">The definitive text for understanding the probabilistic perspective of ML.
+          </div>
+          <div class="reading-card-rating">★★★★★</div>
+        </a>
 
-      <a href="/readings/ostep/" class="reading-card fade-in" data-category="systems">
-        <div class="reading-card-title">Operating Systems: Three Easy Pieces</div>
-        <div class="reading-card-author">Arpaci-Dusseau & Arpaci-Dusseau</div>
-        <div class="reading-card-excerpt">The most engaging CS textbook I've ever read.</div>
-        <div class="reading-card-rating">★★★★★</div>
-      </a>
+        <a href="/readings/ostep/" class="reading-card fade-in" data-category="systems">
+          <div class="reading-card-title">Operating Systems: Three Easy Pieces</div>
+          <div class="reading-card-author">Arpaci-Dusseau & Arpaci-Dusseau</div>
+          <div class="reading-card-excerpt">The most engaging CS textbook I've ever read.</div>
+          <div class="reading-card-rating">★★★★★</div>
+        </a>
 
-      <a href="/readings/ddia/" class="reading-card fade-in" data-category="systems">
-        <div class="reading-card-title">Designing Data-Intensive Applications</div>
-        <div class="reading-card-author">Martin Kleppmann</div>
-        <div class="reading-card-excerpt">If you want to understand how modern distributed systems actually work under the hood, this is the bible.</div>
-        <div class="reading-card-rating">★★★★★</div>
-      </a>
+        <a href="/readings/ddia/" class="reading-card fade-in" data-category="systems">
+          <div class="reading-card-title">Designing Data-Intensive Applications</div>
+          <div class="reading-card-author">Martin Kleppmann</div>
+          <div class="reading-card-excerpt">If you want to understand how modern distributed systems actually work under
+            the hood, this is the bible.</div>
+          <div class="reading-card-rating">★★★★★</div>
+        </a>
 
-      <a href="/readings/advances-financial-ml/" class="reading-card fade-in" data-category="quant">
-        <div class="reading-card-title">Advances in Financial Machine Learning</div>
-        <div class="reading-card-author">Marcos López de Prado</div>
-        <div class="reading-card-excerpt">A sobering reality check on why standard ML techniques fail in finance.</div>
-        <div class="reading-card-rating">★★★★★</div>
-      </a>
+        <a href="/readings/advances-financial-ml/" class="reading-card fade-in" data-category="quant">
+          <div class="reading-card-title">Advances in Financial Machine Learning</div>
+          <div class="reading-card-author">Marcos López de Prado</div>
+          <div class="reading-card-excerpt">A sobering reality check on why standard ML techniques fail in finance.
+          </div>
+          <div class="reading-card-rating">★★★★★</div>
+        </a>
 
-      <a href="/readings/green-book/" class="reading-card fade-in" data-category="quant">
-        <div class="reading-card-title">A Practical Guide to Quantitative Finance Interviews</div>
-        <div class="reading-card-author">Xinfeng Zhou</div>
-        <div class="reading-card-excerpt">The classic prep book. Great collection of probability, brainteasers, and stochastic calculus problems.</div>
-        <div class="reading-card-rating">★★★★☆</div>
-      </a>
+        <a href="/readings/green-book/" class="reading-card fade-in" data-category="quant">
+          <div class="reading-card-title">A Practical Guide to Quantitative Finance Interviews</div>
+          <div class="reading-card-author">Xinfeng Zhou</div>
+          <div class="reading-card-excerpt">The classic prep book. Great collection of probability, brainteasers, and
+            stochastic calculus problems.</div>
+          <div class="reading-card-rating">★★★★☆</div>
+        </a>
 
-      <a href="/readings/deep-work/" class="reading-card fade-in" data-category="self-help">
-        <div class="reading-card-title">Deep Work</div>
-        <div class="reading-card-author">Cal Newport</div>
-        <div class="reading-card-excerpt">Rules for focused success in a distracted world. Changed how I structure my study sessions.</div>
-        <div class="reading-card-rating">★★★★☆</div>
-      </a>
+        <a href="/readings/deep-work/" class="reading-card fade-in" data-category="self-help">
+          <div class="reading-card-title">Deep Work</div>
+          <div class="reading-card-author">Cal Newport</div>
+          <div class="reading-card-excerpt">Rules for focused success in a distracted world. Changed how I structure my
+            study sessions.</div>
+          <div class="reading-card-rating">★★★★☆</div>
+        </a>
 
-      <a href="/readings/atomic-habits/" class="reading-card fade-in" data-category="self-help">
-        <div class="reading-card-title">Atomic Habits</div>
-        <div class="reading-card-author">James Clear</div>
-        <div class="reading-card-excerpt">The definitive guide to building good habits and breaking bad ones.</div>
-        <div class="reading-card-rating">★★★★☆</div>
-      </a>
+        <a href="/readings/atomic-habits/" class="reading-card fade-in" data-category="self-help">
+          <div class="reading-card-title">Atomic Habits</div>
+          <div class="reading-card-author">James Clear</div>
+          <div class="reading-card-excerpt">The definitive guide to building good habits and breaking bad ones.</div>
+          <div class="reading-card-rating">★★★★☆</div>
+        </a>
 
-      <!-- Fiction placeholder -->
-      <div class="reading-card fade-in" data-category="fiction" style="border-style: dashed; background: transparent; cursor: default;">
-        <div class="reading-card-title" style="color: var(--text-secondary);">Fiction reviews coming soon...</div>
-        <div class="reading-card-author" style="color: var(--text-muted);">📖 Stay tuned</div>
-        <div class="reading-card-excerpt">Novel reviews, sci-fi breakdowns, and other fiction I found worth thinking about.</div>
+        <!-- Fiction placeholder -->
+        <div class="reading-card fade-in" data-category="fiction"
+          style="border-style: dashed; background: transparent; cursor: default;">
+          <div class="reading-card-title" style="color: var(--text-secondary);">Fiction reviews coming soon...</div>
+          <div class="reading-card-author" style="color: var(--text-muted);">📖 Stay tuned</div>
+          <div class="reading-card-excerpt">Novel reviews, sci-fi breakdowns, and other fiction I found worth thinking
+            about.</div>
+        </div>
+
+        <a href="/readings/wings-of-fire/" class="reading-card fade-in" data-category="autobiography">
+          <div class="reading-card-title">Wings of Fire</div>
+          <div class="reading-card-author">A.P.J. Abdul Kalam</div>
+          <div class="reading-card-excerpt">An inspiring journey of leadership, resilience, and India's space and
+            missile programs.</div>
+          <div class="reading-card-rating">★★★★★</div>
+        </a>
+
+        <a href="/readings/perfect-rigor/" class="reading-card fade-in" data-category="autobiography">
+          <div class="reading-card-title">Perfect Rigor</div>
+          <div class="reading-card-author">Masha Gessen</div>
+          <div class="reading-card-excerpt">A haunting look at Grigori Perelman, the Poincaré conjecture, and the
+            extreme limits of mathematical devotion.</div>
+          <div class="reading-card-rating">★★★★★</div>
+        </a>
+
       </div>
 
     </div>
+  </main>
 
-  </div></main>
-
-  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div>
+    </div>
+  </footer>
   <script src="/js/main.js"></script>
   <script>
     document.querySelectorAll('.reading-chip').forEach(chip => {
@@ -169,4 +267,5 @@
     });
   </script>
 </body>
+
 </html>
