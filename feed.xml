@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Venkatesh Akula's Blog</title>
+    <description>Writing on quantitative research, competitive programming, multi-agent systems, and ML engineering.</description>
+    <link>https://venkateshakula.dev/blog/</link>
+    <atom:link href="https://venkateshakula.dev/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Jun 2026 00:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>Why I Chose Quantitative Research Over Software Engineering</title>
+      <link>https://venkateshakula.dev/blog/why-quant-research/</link>
+      <description>On choosing quantitative research at Squarepoint Capital over software engineering — why mathematics, markets, and rigorous problem-solving drew me in.</description>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>https://venkateshakula.dev/blog/why-quant-research/</guid>
+    </item>
+
+    <item>
+      <title>Competitive Programming as Mathematical Training</title>
+      <link>https://venkateshakula.dev/blog/competitive-programming-math/</link>
+      <description>How competitive programming and contest mathematics develop the rapid pattern recognition skills essential for quantitative research.</description>
+      <pubDate>Wed, 20 May 2026 00:00:00 +0000</pubDate>
+      <guid>https://venkateshakula.dev/blog/competitive-programming-math/</guid>
+    </item>
+
+    <item>
+      <title>Building Efficient Multi-Agent Systems: Lessons from Adobe Research</title>
+      <link>https://venkateshakula.dev/blog/multi-agent-systems-lessons/</link>
+      <description>Technical lessons from optimizing multi-agent LLM workflows at Adobe Research.</description>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://venkateshakula.dev/blog/multi-agent-systems-lessons/</guid>
+    </item>
+
+    <item>
+      <title>The ML Systems Stack: From Data Pipelines to Inference</title>
+      <link>https://venkateshakula.dev/blog/ml-systems-stack/</link>
+      <description>An opinionated overview of the end-to-end ML systems stack.</description>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://venkateshakula.dev/blog/ml-systems-stack/</guid>
+    </item>
+  </channel>
+</rss>

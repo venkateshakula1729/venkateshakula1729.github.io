@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Adaptation — Venkatesh Akula</title>
+  <meta name="description" content="Continual domain adaptation with LwP classifiers and Gaussian prototypes. 88% accuracy with 0.03% catastrophic forgetting.">
+  <meta property="og:title" content="Continual Domain Adaptation — Venkatesh Akula"><meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  <header class="site-header" id="site-header"><nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log book</span></a><div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/" class="nav-link">CV</a><a href="/projects/" class="nav-link active">Projects</a><a href="/publications/" class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a href="/readings/" class="nav-link">Readings</a><a href="/life/" class="nav-link">Life</a><a href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div><div class="nav-actions"><button class="search-btn" aria-label="Search" style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></nav></header>
+
+  <div class="page-header"><div class="container">
+    <p class="section-label">CS771 · Introduction to Machine Learning</p>
+    <h1>Continual Domain Adaptation</h1>
+    <div class="page-header-meta"><span>Jan – Apr 2024</span><span>IIT Kanpur</span><span><a href="https://github.com/venkateshakula1729/Machine-Learning-CS771" target="_blank" rel="noopener">GitHub ↗</a></span></div>
+  </div></div>
+
+  <main class="section"><div class="container content-body">
+    <div class="architecture-placeholder">[ Hero Image — Distribution shift across domains D₁ to D₂₀ ]</div>
+
+    <h2>Overview</h2>
+    <p>Real-world data is non-stationary — the distribution that a model was trained on drifts over time. This project addressed <strong>continual domain adaptation</strong>: how to sequentially adapt a classifier across 20 domains while retaining performance on all previously seen domains, without storing historical data.</p>
+
+    <h2>Motivation</h2>
+    <p>Standard supervised learning assumes training and test data come from the same distribution. In production, this assumption breaks down constantly — user behavior shifts, sensor calibration drifts, market regimes change. The naive approach (retraining from scratch) is expensive. Fine-tuning on new data causes catastrophic forgetting of old domains. The challenge is to adapt continuously while remembering.</p>
+
+    <h2>Technical Details</h2>
+    <h3>LwP Classifier with Gaussian Prototypes</h3>
+    <p>Instead of storing raw historical data, we represent each class-domain combination as a <strong>Gaussian prototype</strong> — a mean vector and covariance matrix in feature space. Classification is then nearest-prototype assignment. This gives us a compact, privacy-friendly summary of past domains.</p>
+
+    <h3>Sequential Adaptation Strategy</h3>
+    <p>For a sequence of 20 domain-specific classifiers {f₁, f₂, ..., f₂₀}:</p>
+    <ul>
+      <li><strong>Parameter blending</strong> — new model parameters are a weighted average of the previous model and the domain-specific update, with weights determined by domain similarity</li>
+      <li><strong>Prototype replay</strong> — synthetic examples generated from stored Gaussian prototypes are mixed with new domain data during training</li>
+      <li><strong>SWD minimization</strong> — Sliced Wasserstein Distance between source and target feature distributions guides the adaptation objective</li>
+    </ul>
+
+    <div class="architecture-placeholder">[ Architecture Diagram ]<br><br>Domain Dₖ → Feature Extractor → SWD Alignment → Prototype Update → LwP Classifier → Predictions</div>
+
+    <h2>Results</h2>
+    <div class="results-grid">
+      <div class="result-card"><div class="result-value">88%</div><div class="result-label">Homogeneous Domains</div></div>
+      <div class="result-card"><div class="result-value">71–87%</div><div class="result-label">Heterogeneous Domains</div></div>
+      <div class="result-card"><div class="result-value">0.03%</div><div class="result-label">Forgetting Rate</div></div>
+      <div class="result-card"><div class="result-value">20</div><div class="result-label">Sequential Domains</div></div>
+    </div>
+    <p>On homogeneous domains (D₁–D₂₀ with similar feature distributions), the framework maintained 88% accuracy. On heterogeneous distributions (D₁₁–D₂₀ with significant shift), accuracy ranged from 71% to 87%, with catastrophic forgetting limited to 0.03%.</p>
+
+    <h2>Lessons Learned</h2>
+    <ul>
+      <li>Gaussian prototypes are a surprisingly effective proxy for historical data — compact, differentiable, and generatively useful</li>
+      <li>SWD is more practical than full Wasserstein distance for high-dimensional alignment — the slicing provides computational tractability without sacrificing too much fidelity</li>
+      <li>The forgetting-adaptation tradeoff is the central challenge — more aggressive adaptation to new domains inevitably comes at the cost of old domain performance</li>
+    </ul>
+
+    <h2>Future Work</h2>
+    <ul>
+      <li>Extending to non-Gaussian prototype representations (mixture models, normalizing flows)</li>
+      <li>Online adaptation without explicit domain boundaries — detecting shift from the data stream itself</li>
+      <li>Application to financial time-series where regime changes are analogous to domain shifts</li>
+    </ul>
+
+    <div class="project-links">
+      <a href="https://github.com/venkateshakula1729/Machine-Learning-CS771" class="btn btn-primary" target="_blank" rel="noopener">View Code →</a>
+      <a href="/projects/" class="btn btn-outline">← All Projects</a>
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>

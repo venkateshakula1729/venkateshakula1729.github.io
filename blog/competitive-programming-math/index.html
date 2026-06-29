@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competitive Programming as Mathematical Training — Venkatesh Akula</title>
+  <meta name="description" content="How competitive programming and contest math build the rapid pattern recognition skills essential for quantitative research.">
+  <meta property="og:title" content="Competitive Programming as Mathematical Training"><meta property="og:type" content="article">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Competitive Programming as Mathematical Training","author":{"@type":"Person","name":"Venkatesh Akula"},"datePublished":"2026-05-20"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- Prism.js for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js" defer></script>
+
+<style>
+.blog-3col {
+      display: grid; grid-template-columns: 220px minmax(600px, 1fr) 220px;
+      gap: var(--space-xl); max-width: 1400px; margin: 0 auto;
+    }
+    @media (max-width: 1100px) {
+      .blog-3col { grid-template-columns: 1fr; }
+      .blog-explorer, .blog-toc-sidebar { display: none; }
+    }
+    .blog-explorer {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.84rem; padding-right: var(--space-sm);
+    }
+    .blog-explorer::-webkit-scrollbar { width: 3px; }
+    .blog-explorer::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .blog-toc-sidebar {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.8rem;
+    }
+    .toc-title {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: var(--space-md);
+    }
+    .toc-link {
+      display: block; padding: 0.3rem 0; color: var(--text-secondary);
+      font-size: 0.82rem; text-decoration: none;
+      border-left: 2px solid transparent; padding-left: 0.8rem;
+      transition: all var(--transition);
+    }
+    .toc-link:hover, .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+    .tree-nav a.current { background: var(--bg-card); color: var(--accent); font-weight: 600; }
+    .blog-back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-mono); font-size: 0.82rem;
+      color: var(--accent); text-decoration: none;
+      margin-bottom: var(--space-xl); transition: all var(--transition);
+    }
+    .blog-back-link:hover { transform: translateX(-3px); }
+    .blog-minimal-header {
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100; background: var(--bg);
+      backdrop-filter: blur(12px);
+    }
+    .blog-minimal-header .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+</style>
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  
+  <!-- Minimal standalone header -->
+  <header class="blog-minimal-header" id="site-header">
+    <div class="container">
+      <a href="/" class="nav-logo" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-family:var(--font-heading); font-size:1.2rem; color:var(--text);"><span class="nav-logo-symbol" style="color:var(--accent); font-size:1.4rem;">∇</span> Venkatesh's log book</a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 1rem;">← Back to Home</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  
+
+  <main class="section" style="padding-top: 2rem;"><div class="container">
+    <div class="blog-3col">
+      
+      <!-- LEFT: Explorer -->
+      <aside class="blog-explorer fade-in">
+        <h3 class="sidebar-title">Explorer ▾</h3>
+        <ul class="tree-nav">
+          <li><details open><summary>CS</summary><ul>
+            <li><details open><summary>Algorithms</summary><ul>
+              <li><a href="/blog/competitive-programming-math/" class="current">CP as Mathematical Training</a></li>
+            </ul></details></li>
+            <li><details open><summary>Machine Learning</summary><ul>
+              <li><a href="/blog/multi-agent-systems-lessons/">Multi-Agent Systems Lessons</a></li>
+            </ul></details></li>
+            <li><details open><summary>Systems</summary><ul>
+              <li><a href="/blog/ml-systems-stack/">The ML Systems Stack</a></li>
+            </ul></details></li>
+          </ul></details></li>
+          <li><details open><summary>Quantitative Finance</summary><ul>
+            <li><a href="/blog/why-quant-research/">Why Quant Research</a></li>
+          </ul></details></li>
+          <li><details open><summary>Career</summary><ul>
+            <li><a href="/blog/placement-purgatory/">Placement Purgatory</a></li>
+          </ul></details></li>
+          <li><details open><summary>Puzzles</summary><ul>
+            <li><a href="/blog/advent-of-code-2024/">Advent of Code 2024</a></li>
+          </ul></details></li>
+          <li><details open><summary>Miscellaneous</summary><ul>
+            <li><details open><summary>IIT Kanpur</summary><ul>
+              <li><a href="/blog/campus-life/">Campus Life</a></li>
+            </ul></details></li>
+          </ul></details></li>
+        </ul>
+      </aside>
+<div class="blog-post-body">
+        <a href="/blog/" class="blog-back-link">← Back to Blog</a>
+        <h1 style="font-family:var(--font-heading);font-size:2.8rem;margin-bottom:1.5rem;line-height:1.2;">Competitive Programming as Mathematical Training</h1>
+        <div class="blog-meta" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <span>Published: May 20, 2026</span>
+          <span>Updated: Jun 3, 2026</span>
+          <span>⏱ 12 min read</span>
+        </div>
+        
+
+
+    <p>In December 2024, I solved all 50 Advent of Code problems and ranked first at IIT Kanpur among 200+ participants. My Codeforces rating peaked at 1729 — the Hardy-Ramanujan number, which I find fitting. I have been doing competitive programming seriously since my second year, and before that, I was doing contest math through RMO, AMTI, AIMED, and KVPY.</p>
+    <p>There is a popular view that competitive programming is "just implementation" or "just DSA for interviews." I disagree. Done well, competitive programming is mathematical training with a compiler as your proof checker.</p>
+
+    <h2 id="the-transfer-from-contest-math">The Transfer from Contest Math</h2>
+    <p>When I was preparing for RMO and INMO in class 9-10, the problems required finding elegant constructions, proving inequalities, and reasoning about combinatorial structures. The tools were different from CP — no computers, no time limits — but the cognitive process was identical: decompose a problem, identify the key structural insight, and build a solution from that insight.</p>
+    <p>In Codeforces Div 2, problems C through E follow the same pattern. The implementation is secondary. The hard part is seeing that a string problem is secretly a graph problem, or that an optimization question reduces to a binary search over the answer space. This is mathematical pattern recognition, not software engineering.</p>
+
+    <h2 id="why-quant-firms-care-about-cp">Why Quant Firms Care About CP</h2>
+    <p>Every serious quant firm — Jane Street, HRT, Citadel, Squarepoint — weights competitive programming and mathematical problem-solving heavily in their hiring. This is not an accident. Quantitative research requires:</p>
+    <ul>
+      <li><strong>Speed under pressure</strong> — markets move fast, and the ability to formulate and test hypotheses quickly is essential</li>
+      <li><strong>Rigorous reasoning</strong> — a trading strategy must be mathematically sound, not just empirically profitable on backtests</li>
+      <li><strong>Edge-case thinking</strong> — the adversarial nature of CP (edge cases, corner cases, wrong answer on test 47) mirrors the adversarial nature of markets</li>
+      <li><strong>Optimization instinct</strong> — reducing time complexity from O(n²) to O(n log n) is directly analogous to reducing latency in trading systems</li>
+    </ul>
+
+    <h2 id="concrete-examples">Concrete Examples</h2>
+    <p>Here are patterns from CP that I have seen directly in quantitative contexts:</p>
+    <ul>
+      <li><strong>Binary search on the answer</strong> — this technique, ubiquitous in CP, is essentially how you calibrate parameters in quantitative models when the objective function is monotonic</li>
+      <li><strong>Segment trees and range queries</strong> — the exact data structures used in real-time market data processing, where you need efficient aggregation over sliding windows</li>
+      <li><strong>Dynamic programming</strong> — optimal substructure is the foundation of pricing models, portfolio optimization, and execution algorithms</li>
+      <li><strong>Graph algorithms</strong> — market networks, correlation structures, and order routing can all be modeled as graph problems</li>
+    </ul>
+
+    <h2 id="the-deliberate-practice-framework">The Deliberate Practice Framework</h2>
+    <p>My approach to CP training was systematic, not casual:</p>
+    <ul>
+      <li>After each contest, review <em>every</em> problem I did not solve — understand the editorial, implement it, and categorize the technique</li>
+      <li>Maintain a personal problem log organized by technique (greedy, DP, graphs, number theory, etc.)</li>
+      <li>Practice under timed conditions — CodeChef starters, Codeforces rounds — to build speed and stress tolerance</li>
+      <li>Focus on the problems just above my current level (rated 1800-2100 when my rating was ~1700)</li>
+    </ul>
+    <p>This is the same approach I now apply to learning quantitative methods: systematic, categorized, with deliberate focus on the frontier of my understanding.</p>
+
+    <hr>
+    <p><em>If you are a student considering whether CP is "worth it" — especially if you are targeting quant roles — the answer is yes. But do it as mathematical training, not as interview prep. The depth of understanding matters more than the badge color.</em></p>
+
+      
+      
+    
+      <div class="blog-tags" style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+        <span class="tag" style="margin-right: 0.5rem;">Math</span><span class="tag" style="margin-right: 0.5rem;">Algorithms</span>
+      </div>
+      
+      <div class="comments" style="margin-top: 3rem;">
+        <script src="https://giscus.app/client.js"
+                data-repo="venkateshakula1729/Logbook"
+                data-repo-id=""
+                data-category="Announcements"
+                data-category-id=""
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+      </div>
+            <aside class="blog-toc-sidebar">
+        <div class="toc-title">On this page</div>
+        <a href="#the-transfer-from-contest-math" class="toc-link">The Transfer from Contest Math</a>
+        <a href="#why-quant-firms-care-about-cp" class="toc-link">Why Quant Firms Care About CP</a>
+        <a href="#concrete-examples" class="toc-link">Concrete Examples</a>
+        <a href="#the-deliberate-practice-framework" class="toc-link">The Deliberate Practice Framework</a>
+      </aside>
+
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+
+  <script>
+    // TOC active-state tracking
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href')));
+    window.addEventListener('scroll', () => {
+      let current = '';
+      headings.forEach(h => { if (h && h.getBoundingClientRect().top < 120) current = h.id; });
+      tocLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Agent LLM Optimization — Venkatesh Akula</title>
+  <meta name="description"
+    content="Optimized multi-agent LLM workflows at Adobe Research. 35% token reduction and 1.5x latency gains on HotpotQA, GPQA, GSM8K benchmarks.">
+  <meta property="og:title" content="Multi-Agent LLM Optimization — Venkatesh Akula">
+  <meta property="og:description"
+    content="Token-efficient communication protocols for multi-agent LLM systems at Adobe Research.">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <script
+    type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Multi-Agent LLM Workflow Optimization","author":{"@type":"Person","name":"Venkatesh Akula"},"datePublished":"2025-07-01"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+  <div class="progress-container">
+    <div class="progress-bar" id="reading-progress"></div>
+  </div>
+  <header class="site-header" id="site-header">
+    <nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span
+          class="nav-logo-text">Venkatesh's log book</span></a>
+      <div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/"
+          class="nav-link">CV</a><a href="/projects/" class="nav-link active">Projects</a><a href="/publications/"
+          class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a
+          href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a
+          href="/readings/" class="nav-link">Readings</a><a href="/life/" class="nav-link">Life</a><a href="/timeline/"
+          class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div>
+      <div class="nav-actions"><button class="search-btn" aria-label="Search"
+          style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button
+          class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <path
+              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
+          </svg></button><button class="nav-menu-btn" id="nav-menu-btn"
+          aria-label="Toggle menu"><span></span><span></span><span></span></button></div>
+    </nav>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label">Adobe Research · Big Data Experience Lab</p>
+      <h1>Multi-Agent LLM Workflow Optimization</h1>
+      <div class="page-header-meta">
+        <span>May – Jul 2025</span>
+        <span>Intern Research Assistant</span>
+        <span>Multi-Agent Systems · LLMs · Prompt Optimization</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="section">
+    <div class="container content-body">
+
+      <figure>
+        <img src="/projects/multi-agent-llm/image.png" alt="Multi-agent communication network visualization"
+          class="article-image" />
+
+      </figure>
+      <h2>Overview</h2>
+      <p>During my research internship at Adobe's Big Data Experience Lab, I investigated a fundamental problem in
+        multi-agent LLM systems: as the number of agents increases, communication overhead grows superlinearly, leading
+        to token waste, context pollution, and latency degradation. The goal was to design communication protocols that
+        preserve task performance while dramatically reducing computational cost.</p>
+
+      <h2>Motivation</h2>
+      <p>Multi-agent LLM architectures are increasingly deployed for complex tasks — code generation, multi-hop
+        reasoning, debate-based verification — where a single model falls short. However, existing frameworks like
+        AutoGen and LangChain treat inter-agent communication as unconstrained text exchange. This leads to several
+        problems:</p>
+      <ul>
+        <li><strong>Token explosion</strong> — agents repeat context unnecessarily across turns</li>
+        <li><strong>Context window saturation</strong> — long conversations push agents past their effective context
+          limits</li>
+        <li><strong>Latency compounding</strong> — each redundant token increases end-to-end response time</li>
+        <li><strong>Quality degradation</strong> — irrelevant context introduces noise into downstream reasoning</li>
+      </ul>
+
+      <h2>Technical Details</h2>
+      <h3>Framework Evaluation</h3>
+      <p>I began by systematically benchmarking existing agent communication frameworks — AutoGen, LangChain — and
+        prompt optimization systems — DSPy, TextGrad, AdalFlow — across standardized tasks. This evaluation revealed
+        consistent patterns: most frameworks optimize for individual agent quality but neglect inter-agent communication
+        efficiency.</p>
+
+      <figure>
+        <img src="/projects/multi-agent-llm/Communication Overview.png" alt="Multi-agent communication overview"
+          class="article-image" />
+      </figure>
+      <h3>Context-Aware Communication Protocol</h3>
+      <p>The core contribution was a <strong>task-aware communication protocol</strong> that enables agents to share
+        only the information relevant to the current subtask. The protocol includes:</p>
+      <ul>
+        <li>A context compression layer that identifies and removes redundant information before inter-agent transfer
+        </li>
+        <li>A task-decomposition module that routes specific context slices to the agents that need them</li>
+        <li>A token-efficient training pipeline that maintains accuracy while operating on compressed representations
+        </li>
+      </ul>
+
+      <h3>Architecture</h3>
+      <figure>
+        <img src="/projects/multi-agent-llm/Architecture.png" alt="Multi-agent communication network visualization"
+          class="article-image" />
+      </figure>
+
+      <h2>Results</h2>
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-value">~35%</div>
+          <div class="result-label">Token Reduction</div>
+        </div>
+        <div class="result-card">
+          <div class="result-value">1.5×</div>
+          <div class="result-label">Latency Improvement</div>
+        </div>
+        <div class="result-card">
+          <div class="result-value">≥ SOTA</div>
+          <div class="result-label">Accuracy Maintained</div>
+        </div>
+        <div class="result-card">
+          <div class="result-value">3</div>
+          <div class="result-label">Benchmark Suites</div>
+        </div>
+      </div>
+      <p>Validated on <strong>HotpotQA</strong> (multi-hop QA), <strong>GPQA</strong> (graduate-level reasoning), and
+        <strong>GSM8K</strong> (mathematical problem-solving) in multi-turn, long-context settings. The system
+        consistently outperformed state-of-the-art baselines on both efficiency and accuracy metrics.
+      </p>
+
+      <h2>Lessons Learned</h2>
+      <ul>
+        <li>Communication overhead is often the dominant bottleneck in multi-agent systems — not individual agent
+          quality</li>
+        <li>Prompt optimization frameworks (DSPy, TextGrad) are powerful but orthogonal to the communication efficiency
+          problem</li>
+        <li>Context compression must be task-aware; naive truncation destroys critical reasoning chains</li>
+        <li>Real-time coordination is feasible even with large language models when communication is structured</li>
+      </ul>
+
+      <h2>Future Work</h2>
+      <ul>
+        <li>Extending the protocol to support dynamic agent addition/removal during task execution</li>
+        <li>Investigating the protocol's behavior with heterogeneous model sizes (e.g., GPT-4 + smaller specialist
+          models)</li>
+        <li>Formal analysis of communication complexity bounds in multi-agent LLM systems</li>
+      </ul>
+
+      <div class="project-links">
+        <a href="/projects/" class="btn btn-outline">← All Projects</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div>
+    </div>
+  </footer>
+  <script src="/js/main.js"></script>
+</body>
+
+</html>

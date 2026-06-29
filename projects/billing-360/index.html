@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billing 360 — Venkatesh Akula</title>
+  <meta name="description" content="A comprehensive MERN stack billing and inventory management application designed for micro-enterprises.">
+  <meta property="og:title" content="Billing 360 — Venkatesh Akula"><meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  <header class="site-header" id="site-header"><nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log book</span></a><div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/" class="nav-link">CV</a><a href="/projects/" class="nav-link active">Projects</a><a href="/publications/" class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a href="/readings/" class="nav-link">Readings</a><a href="/life/" class="nav-link">Life</a><a href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div><div class="nav-actions"><button class="search-btn" aria-label="Search" style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></nav></header>
+
+  <div class="page-header"><div class="container">
+    <p class="section-label">CS253 Course Project · MERN Stack</p>
+    <h1>Billing 360: Full-Stack Retail Management</h1>
+    <div class="page-header-meta"><span>Jan – Apr 2024</span><span>IIT Kanpur</span><span><a href="#" target="_blank" rel="noopener">GitHub ↗</a></span></div>
+  </div></div>
+
+  <main class="section"><div class="container content-body">
+    
+    <h2>Introduction</h2>
+    <p>Developed during my fourth semester at IIT Kanpur under the mentorship of Prof. Indranil Saha, Billing 360 is an end-to-end MERN stack web application built for micro-enterprises. The project served as my first major foray into large-scale collaborative software engineering, where I worked alongside a 10-person team following rigorous Agile methodologies.</p>
+    <p>The software streamlines daily retail operations, offering a robust suite of tools including automated invoice generation, real-time inventory tracking, credit management, and data analytics. We handled the entire software development lifecycle—from drafting the initial Software Requirements Specification (SRS) and system architecture to final deployment and load testing.</p>
+
+    <h2>Core Contributions</h2>
+
+    <h3>System Architecture & Database Design</h3>
+    <p>I helped architect the core MongoDB schemas mapping to invoices, inventory states, and transactional ledgers. A primary focus was ensuring referential integrity and strict data consistency across highly coupled entities.</p>
+
+    <h3>Invoice Engine & API Development</h3>
+    <p>Collaborating closely with a sub-team, I built out the primary billing infrastructure. This required engineering several critical REST APIs responsible for PDF invoice rendering, asynchronous inventory updates, and transaction logging. On the frontend, I implemented a complex, highly responsive searchable dropdown component for rapid item entry during checkout.</p>
+
+    <h3>UI/UX Design</h3>
+    <p>I co-designed the complete frontend layout. The goal was to produce a clean, intuitive interface tailored for non-technical retail users, emphasizing responsive design and frictionless navigation.</p>
+
+    <h3>Performance Testing & QA</h3>
+    <p>Recognizing that PDF generation was a major bottleneck, I spearheaded the performance profiling for the invoice generation APIs. I also ran extensive testing phases, identifying and resolving critical concurrency bugs to prevent race conditions during simultaneous inventory updates.</p>
+
+    <h2>Reflections</h2>
+    <p>Building Billing 360 reinforced that effective software engineering extends far beyond writing code. The project was a masterclass in requirement elicitation, API design, and the realities of distributed teamwork. Gaining hands-on experience with Agile sprints, systematic bug tracking, and performance tuning fundamentally shifted my perspective on what it takes to ship production-ready full-stack applications.</p>
+
+    <div class="project-links">
+      <a href="#" class="btn btn-primary" target="_blank" rel="noopener">View Code →</a>
+      <a href="/projects/" class="btn btn-outline">← All Projects</a>
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>

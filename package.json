@@ -1,0 +1,10 @@
+{
+  "name": "venkatesh-akula-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal portfolio — Mathematics · Engineering · Research",
+  "scripts": {
+    "dev": "npx -y live-server --port=3000 --no-browser",
+    "serve": "npx -y serve -l 3000"
+  }
+}

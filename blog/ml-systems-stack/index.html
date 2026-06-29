@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The ML Systems Stack — Venkatesh Akula</title>
+  <meta name="description" content="An opinionated overview of the end-to-end ML systems stack — data pipelines, training infrastructure, serving, and observability.">
+  <meta property="og:title" content="The ML Systems Stack: From Data Pipelines to Inference"><meta property="og:type" content="article">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The ML Systems Stack: From Data Pipelines to Inference","author":{"@type":"Person","name":"Venkatesh Akula"},"datePublished":"2026-03-15"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- Prism.js for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js" defer></script>
+
+<style>
+.blog-3col {
+      display: grid; grid-template-columns: 220px minmax(600px, 1fr) 220px;
+      gap: var(--space-xl); max-width: 1400px; margin: 0 auto;
+    }
+    @media (max-width: 1100px) {
+      .blog-3col { grid-template-columns: 1fr; }
+      .blog-explorer, .blog-toc-sidebar { display: none; }
+    }
+    .blog-explorer {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.84rem; padding-right: var(--space-sm);
+    }
+    .blog-explorer::-webkit-scrollbar { width: 3px; }
+    .blog-explorer::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .blog-toc-sidebar {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.8rem;
+    }
+    .toc-title {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: var(--space-md);
+    }
+    .toc-link {
+      display: block; padding: 0.3rem 0; color: var(--text-secondary);
+      font-size: 0.82rem; text-decoration: none;
+      border-left: 2px solid transparent; padding-left: 0.8rem;
+      transition: all var(--transition);
+    }
+    .toc-link:hover, .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+    .tree-nav a.current { background: var(--bg-card); color: var(--accent); font-weight: 600; }
+    .blog-back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-mono); font-size: 0.82rem;
+      color: var(--accent); text-decoration: none;
+      margin-bottom: var(--space-xl); transition: all var(--transition);
+    }
+    .blog-back-link:hover { transform: translateX(-3px); }
+    .blog-minimal-header {
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100; background: var(--bg);
+      backdrop-filter: blur(12px);
+    }
+    .blog-minimal-header .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+</style>
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  
+  <!-- Minimal standalone header -->
+  <header class="blog-minimal-header" id="site-header">
+    <div class="container">
+      <a href="/" class="nav-logo" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-family:var(--font-heading); font-size:1.2rem; color:var(--text);"><span class="nav-logo-symbol" style="color:var(--accent); font-size:1.4rem;">∇</span> Venkatesh's log book</a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 1rem;">← Back to Home</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  
+
+  <main class="section" style="padding-top: 2rem;"><div class="container">
+    <div class="blog-3col">
+      
+      <!-- LEFT: Explorer -->
+      <aside class="blog-explorer fade-in">
+        <h3 class="sidebar-title">Explorer ▾</h3>
+        <ul class="tree-nav">
+          <li><details open><summary>CS</summary><ul>
+            <li><details open><summary>Algorithms</summary><ul>
+              <li><a href="/blog/competitive-programming-math/">CP as Mathematical Training</a></li>
+            </ul></details></li>
+            <li><details open><summary>Machine Learning</summary><ul>
+              <li><a href="/blog/multi-agent-systems-lessons/">Multi-Agent Systems Lessons</a></li>
+            </ul></details></li>
+            <li><details open><summary>Systems</summary><ul>
+              <li><a href="/blog/ml-systems-stack/" class="current">The ML Systems Stack</a></li>
+            </ul></details></li>
+          </ul></details></li>
+          <li><details open><summary>Quantitative Finance</summary><ul>
+            <li><a href="/blog/why-quant-research/">Why Quant Research</a></li>
+          </ul></details></li>
+          <li><details open><summary>Career</summary><ul>
+            <li><a href="/blog/placement-purgatory/">Placement Purgatory</a></li>
+          </ul></details></li>
+          <li><details open><summary>Puzzles</summary><ul>
+            <li><a href="/blog/advent-of-code-2024/">Advent of Code 2024</a></li>
+          </ul></details></li>
+          <li><details open><summary>Miscellaneous</summary><ul>
+            <li><details open><summary>IIT Kanpur</summary><ul>
+              <li><a href="/blog/campus-life/">Campus Life</a></li>
+            </ul></details></li>
+          </ul></details></li>
+        </ul>
+      </aside>
+<div class="blog-post-body">
+        <a href="/blog/" class="blog-back-link">← Back to Blog</a>
+        <h1 style="font-family:var(--font-heading);font-size:2.8rem;margin-bottom:1.5rem;line-height:1.2;">The ML Systems Stack: From Data Pipelines to Inference</h1>
+        <div class="blog-meta" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <span>Published: March 15, 2026</span>
+          <span>Updated: Apr 12, 2026</span>
+          <span>⏱ 15 min read</span>
+        </div>
+        
+
+
+    <p>Most ML courses teach you to train models. Almost none teach you to run them in production. After working on HPC systems (CS633), operating systems (CS330), and multi-agent LLM pipelines (Adobe Research), I have developed opinions about what the full ML systems stack should look like. This post is an opinionated walkthrough.</p>
+
+    <h2 id="layer-1-data-ingestion">Layer 1: Data Ingestion</h2>
+    <p>Everything starts with data. The first decision — batch vs. streaming — determines the architecture of everything downstream.</p>
+    <ul>
+      <li><strong>Batch processing</strong> is simpler and sufficient for most training workloads. Tools: Apache Spark, Dask, or even well-written Python scripts for moderate data sizes.</li>
+      <li><strong>Stream processing</strong> is necessary when features depend on real-time events — trading signals, user behavior, sensor readings. Tools: Kafka + Flink, or lighter-weight solutions like Redis Streams.</li>
+    </ul>
+    <p>The critical insight from my HPC work: <strong>I/O is almost always the bottleneck</strong>. In CS633, replacing sequential I/O with parallel MPI-IO gave us 8× speedup. The same principle applies to data pipelines — parallelize reads, use columnar formats (Parquet, Arrow), and never let your GPU sit idle waiting for data.</p>
+
+    <h2 id="layer-2-feature-engineering">Layer 2: Feature Engineering</h2>
+    <p>The gap between academic ML and production ML is largest at the feature engineering layer. In courses, features are given. In production, they must be computed, versioned, validated, and served at inference time with the same code that produced training features.</p>
+    <p>Training-serving skew — where features are computed differently during training vs. inference — is the single most common source of silent model failures.</p>
+
+    <h2 id="layer-3-training-infrastructure">Layer 3: Training Infrastructure</h2>
+    <p>For single-GPU training, PyTorch is sufficient. For distributed training, the stack becomes complex:</p>
+    <ul>
+      <li><strong>Data parallelism</strong> (DDP) — each GPU trains on a different data shard, gradients are all-reduced</li>
+      <li><strong>Model parallelism</strong> — for models too large for a single GPU, split layers across devices</li>
+      <li><strong>Pipeline parallelism</strong> — overlap computation across micro-batches to improve GPU utilization</li>
+    </ul>
+    <p>From CS633, I learned that the communication pattern matters as much as the computation. Ring all-reduce, tree reduction, and gradient compression are not academic curiosities — they determine whether your training job runs in hours or days.</p>
+
+    <h2 id="layer-4-serving-and-inference">Layer 4: Serving and Inference</h2>
+    <p>A model that cannot serve predictions at the required latency and throughput is useless. Key considerations:</p>
+    <ul>
+      <li><strong>Batching</strong> — dynamic batching (collecting multiple requests and processing them together) is essential for GPU utilization</li>
+      <li><strong>Quantization</strong> — INT8/FP16 inference can halve latency with minimal accuracy loss for most models</li>
+      <li><strong>Caching</strong> — for models with repeated inputs (recommendation systems, search), caching predictions is often more efficient than recomputing</li>
+    </ul>
+
+    <h2 id="layer-5-observability">Layer 5: Observability</h2>
+    <p>This is the layer most teams skip. A model in production without monitoring is a ticking time bomb. You need:</p>
+    <ul>
+      <li><strong>Input distribution monitoring</strong> — detect data drift before it causes silent accuracy degradation</li>
+      <li><strong>Prediction distribution monitoring</strong> — sudden shifts in output distribution signal model issues</li>
+      <li><strong>Latency monitoring</strong> — p50, p95, p99 latencies, not just averages</li>
+      <li><strong>Business metric correlation</strong> — link model predictions to downstream outcomes</li>
+    </ul>
+
+    <h2 id="what-quantitative-systems-add">What Quantitative Systems Add</h2>
+    <p>In quantitative finance, the ML stack has additional constraints that make everything harder:</p>
+    <ul>
+      <li><strong>Latency requirements</strong> are measured in microseconds, not milliseconds — this rules out most standard serving frameworks</li>
+      <li><strong>Non-stationarity</strong> — financial data distributions shift constantly, requiring continuous retraining and model selection</li>
+      <li><strong>Adversarial environment</strong> — other market participants adapt to your signals, creating a moving target</li>
+      <li><strong>Regulatory constraints</strong> — explainability, audit trails, and risk limits impose architectural requirements</li>
+    </ul>
+
+    <hr>
+    <p><em>Building ML systems is engineering work that requires both breadth and depth. If this space interests you, start with the fundamentals: operating systems (how memory and I/O actually work), networking (how data moves between machines), and distributed systems (how machines coordinate). The ML-specific layers build on top of these foundations.</em></p>
+
+      
+      
+    
+      <div class="blog-tags" style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+        <span class="tag" style="margin-right: 0.5rem;">Systems</span><span class="tag" style="margin-right: 0.5rem;">ML</span>
+      </div>
+      
+      <div class="comments" style="margin-top: 3rem;">
+        <script src="https://giscus.app/client.js"
+                data-repo="venkateshakula1729/Logbook"
+                data-repo-id=""
+                data-category="Announcements"
+                data-category-id=""
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+      </div>
+            <aside class="blog-toc-sidebar">
+        <div class="toc-title">On this page</div>
+        <a href="#layer-1-data-ingestion" class="toc-link">Layer 1: Data Ingestion</a>
+        <a href="#layer-2-feature-engineering" class="toc-link">Layer 2: Feature Engineering</a>
+        <a href="#layer-3-training-infrastructure" class="toc-link">Layer 3: Training Infrastructure</a>
+        <a href="#layer-4-serving-and-inference" class="toc-link">Layer 4: Serving and Inference</a>
+        <a href="#layer-5-observability" class="toc-link">Layer 5: Observability</a>
+        <a href="#what-quantitative-systems-add" class="toc-link">What Quantitative Systems Add</a>
+      </aside>
+
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+
+  <script>
+    // TOC active-state tracking
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href')));
+    window.addEventListener('scroll', () => {
+      let current = '';
+      headings.forEach(h => { if (h && h.getBoundingClientRect().top < 120) current = h.id; });
+      tocLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+</body>
+
+</html>

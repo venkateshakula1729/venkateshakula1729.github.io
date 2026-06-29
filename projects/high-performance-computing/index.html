@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>High-Performance Computing — Venkatesh Akula</title>
+  <meta name="description" content="MPI-based parallel computing for 3D time-series datasets. 8x I/O speedup and 3.4x parallel scaling on 16 cores.">
+  <meta property="og:title" content="HPC with MPI — Venkatesh Akula"><meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  <header class="site-header" id="site-header"><nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log book</span></a><div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/" class="nav-link">CV</a><a href="/projects/" class="nav-link active">Projects</a><a href="/publications/" class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a href="/readings/" class="nav-link">Readings</a><a href="/life/" class="nav-link">Life</a><a href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div><div class="nav-actions"><button class="search-btn" aria-label="Search" style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></nav></header>
+
+  <div class="page-header"><div class="container">
+    <p class="section-label">CS633 · Parallel Computing</p>
+    <h1>High-Performance Computing with MPI</h1>
+    <div class="page-header-meta"><span>May – Jun 2025</span><span>IIT Kanpur</span><span><a href="https://github.com/venkateshakula1729/Parallel-Computing-CS633" target="_blank" rel="noopener">GitHub ↗</a></span></div>
+  </div></div>
+
+  <main class="section"><div class="container content-body">
+    <div class="architecture-placeholder">[ Hero Image — 3D domain decomposition grid ]</div>
+
+    <h2>Overview</h2>
+    <p>This project tackled a core challenge in scientific computing: efficiently computing extrema values over large 3D time-series datasets using distributed memory parallelism via MPI. The focus was on optimal domain decomposition, eliminating I/O bottlenecks, and achieving near-linear speedup on a multi-core cluster.</p>
+
+    <h2>Motivation</h2>
+    <p>Scientific simulations routinely produce 3D volumetric data over time — weather models, fluid dynamics, molecular simulations. Analyzing these datasets sequentially becomes infeasible as grid resolution increases. The challenge is to decompose both the computation and the I/O across multiple processes while minimizing communication overhead.</p>
+
+    <h2>Technical Details</h2>
+    <h3>3D Domain Decomposition</h3>
+    <p>The 3D dataset (up to 64 × 64 × 64 dimensions) was decomposed across MPI processes using a balanced partitioning strategy. Each process handles a contiguous sub-volume, with ghost cells for boundary communication.</p>
+
+    <h3>Parallel I/O Optimization</h3>
+    <p>The initial implementation used sequential I/O — a single process read the entire dataset and scattered it to others. This was the dominant bottleneck. I replaced it with <strong>custom MPI subarray datatypes</strong> that allow each process to independently read its sub-volume directly from disk using MPI-IO, achieving <strong>8× faster data loading</strong>.</p>
+
+    <h3>Communication Pattern</h3>
+    <p>Boundary exchange between neighboring subdomains used non-blocking MPI sends/receives (<code>MPI_Isend</code>/<code>MPI_Irecv</code>) to overlap communication with computation. The extrema reduction used <code>MPI_Allreduce</code> with custom operators.</p>
+
+    <div class="architecture-placeholder">[ Architecture Diagram ]<br><br>Disk → MPI-IO (parallel read) → 3D Subdomain per Process → Local Compute → Ghost Cell Exchange → Global Reduction</div>
+
+    <h2>Results</h2>
+    <div class="results-grid">
+      <div class="result-card"><div class="result-value">8×</div><div class="result-label">I/O Speedup</div></div>
+      <div class="result-card"><div class="result-value">3.4×</div><div class="result-label">Parallel Scaling (16P)</div></div>
+      <div class="result-card"><div class="result-value">64³</div><div class="result-label">Max Grid Size</div></div>
+      <div class="result-card"><div class="result-value">16</div><div class="result-label">Optimal Core Count</div></div>
+    </div>
+
+    <h2>Lessons Learned</h2>
+    <ul>
+      <li>I/O is almost always the bottleneck in HPC — optimizing computation without fixing I/O yields marginal gains</li>
+      <li>MPI subarray datatypes are underused but powerful — they eliminate the need for manual buffer packing/unpacking</li>
+      <li>Non-blocking communication with computation overlap is essential for scaling beyond 8 processes</li>
+      <li>Strong scaling efficiency drops off due to communication-to-computation ratio as subdomain size decreases</li>
+    </ul>
+
+    <h2>Future Work</h2>
+    <ul>
+      <li>Hybrid MPI + OpenMP parallelism for intra-node optimization</li>
+      <li>Adaptive mesh refinement for non-uniform data distributions</li>
+      <li>GPU offloading via CUDA-aware MPI for compute-intensive kernels</li>
+    </ul>
+
+    <div class="project-links">
+      <a href="https://github.com/venkateshakula1729/Parallel-Computing-CS633" class="btn btn-primary" target="_blank" rel="noopener">View Code →</a>
+      <a href="/projects/" class="btn btn-outline">← All Projects</a>
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>

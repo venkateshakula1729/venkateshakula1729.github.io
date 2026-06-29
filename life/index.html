@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life — Venkatesh Akula</title>
+  <meta name="description" content="Personal writings — outdoors, poetry, lyric breakdowns, perspectives, and everything in between.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .life-categories-bar {
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+      justify-content: center; margin-bottom: var(--space-3xl);
+    }
+    .life-cat-chip {
+      padding: 0.5rem 1.2rem; border-radius: 24px;
+      background: var(--bg-card); color: var(--text-secondary);
+      font-size: 0.88rem; border: 1px solid var(--border);
+      cursor: pointer; transition: all var(--transition);
+      text-decoration: none; font-weight: 500;
+    }
+    .life-cat-chip:hover, .life-cat-chip.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+      transform: translateY(-2px); box-shadow: 0 4px 12px rgba(201,162,39,0.3);
+    }
+    .life-section { display: none; }
+    .life-section.active { display: block; }
+    .life-post-card {
+      padding: var(--space-xl); background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--radius-md);
+      margin-bottom: var(--space-lg); transition: all var(--transition);
+      display: block; text-decoration: none;
+    }
+    .life-post-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px var(--shadow); border-color: var(--accent);
+    }
+    .life-post-card h3 {
+      font-family: var(--font-heading); font-size: 1.2rem;
+      margin-bottom: 0.4rem; color: var(--text);
+    }
+    .life-post-card .card-meta {
+      font-family: var(--font-mono); font-size: 0.78rem;
+      color: var(--text-muted); margin-bottom: 0.8rem;
+    }
+    .life-post-card p {
+      color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6;
+    }
+    .life-welcome {
+      text-align: center; max-width: 650px; margin: 0 auto;
+    }
+    .life-welcome h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: var(--space-lg);
+    }
+    .life-welcome p {
+      color: var(--text-secondary); font-size: 1.05rem;
+      line-height: 1.8; margin-bottom: var(--space-lg);
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  <header class="site-header" id="site-header"><nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log book</span></a><div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/" class="nav-link">CV</a><a href="/projects/" class="nav-link">Projects</a><a href="/publications/" class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a href="/readings/" class="nav-link">Readings</a><a href="/life/" class="nav-link active">Life</a><a href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div><div class="nav-actions"><button class="search-btn" aria-label="Search" style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></nav></header>
+
+  <main class="section pt-header"><div class="container" style="max-width: 850px;">
+
+    <!-- Category Chips -->
+    <div class="life-categories-bar">
+      <span class="life-cat-chip active" data-cat="welcome">All</span>
+      <span class="life-cat-chip" data-cat="outdoors">🏔 Outdoors</span>
+      <span class="life-cat-chip" data-cat="poems">✍️ Poems</span>
+      <span class="life-cat-chip" data-cat="lyrics">🎵 For the Love of Lyrics</span>
+      <span class="life-cat-chip" data-cat="perspectives">💡 Perspectives</span>
+      <span class="life-cat-chip" data-cat="self-analysis">🔍 Self Analysis</span>
+      <span class="life-cat-chip" data-cat="misc">📦 Miscellaneous</span>
+    </div>
+
+    <!-- Welcome (default view) -->
+    <div class="life-section active" id="sec-welcome">
+      <div class="life-welcome fade-in">
+        <h1>Beyond the Terminal</h1>
+        <p>
+          Not everything worth writing about involves a compiler. This is where I put the stuff that doesn't fit in a README — trail logs from hikes, poems written at odd hours, thoughts on how the world works (or doesn't), and lyric breakdowns of songs that hit different at 3 AM.
+        </p>
+        <p>
+          Pick a category above and explore. Or don't. I'm not your boss.
+        </p>
+        <p style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted);">
+          More posts coming as I gradually move my scattered notes from Google Docs to here.
+        </p>
+      </div>
+    </div>
+
+    <!-- Outdoors -->
+   <!-- Outdoors -->
+    <div class="life-section" id="sec-outdoors">
+      
+      <!-- Thematic Quote -->
+      <blockquote style="margin: 0 auto 2.5rem auto; padding: 1.5rem 2rem; border-left: 3px solid var(--accent); background: var(--bg-card); border-radius: 0 var(--radius-md) var(--radius-md) 0; box-shadow: 0 4px 12px var(--shadow);">
+        <p style="font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; line-height: 1.7; color: var(--text-secondary); margin-bottom: 1rem;">
+          "Life should not be a journey to the grave with the intention of arriving safely in a pretty and well preserved body, but rather to skid in broadside in a cloud of smoke, thoroughly used up, totally worn out, and loudly proclaiming 'Wow! What a Ride!'"
+        </p>
+        <footer style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); text-align: right;">
+          — Hunter S. Thompson
+        </footer>
+      </blockquote>
+
+      <!-- Coming Soon Card -->
+      <div class="life-post-card fade-in" style="border-style: dashed; cursor: default;">
+        <div class="card-meta">📅 Coming soon</div>
+        <h3>Trail stories loading...</h3>
+        <p>Trek logs, nature photographs, and the occasional existential crisis at 14,000 feet. Stay tuned.</p>
+        <div class="card-tags"><span class="tag">Trekking</span><span class="tag">Nature</span></div>
+      </div>
+      
+    </div>
+    <!-- Poems -->
+    <div class="life-section" id="sec-poems">
+      <a href="/life/real-me/" class="life-post-card fade-in">
+        <div class="card-meta">📅 2026 · ✍️ Original</div>
+        <h3>Real Me</h3>
+        <p>On losing the spark that once drove everything, and hoping it's just a pause in the song.</p>
+        <div class="card-tags"><span class="tag">Poetry</span><span class="tag">Reflection</span><span class="tag">Burnout</span></div>
+      </a>
+    </div>
+
+    <!-- For the Love of Lyrics -->
+    <div class="life-section" id="sec-lyrics">
+      <div class="life-post-card fade-in" style="border-style: dashed; cursor: default;">
+        <div class="card-meta">📅 Coming soon</div>
+        <h3>Song breakdowns incoming...</h3>
+        <p>Lyric analyses of songs that resonate — the kind you play on repeat and then Google the meaning at 2 AM.</p>
+        <div class="card-tags"><span class="tag">Music</span><span class="tag">Lyrics</span></div>
+      </div>
+    </div>
+
+    <!-- Perspectives -->
+    <div class="life-section" id="sec-perspectives">
+      <a href="/life/Colorism/" class="life-post-card fade-in">
+        <div class="card-meta">📅 2026 · ✍️ Original</div>
+        <h3>Colorism in India</h3>
+        <p>Exploring the sensitive issue of colorism in India through a personal lens.</p>
+        <div class="card-tags"><span class="tag">Society</span><span class="tag">Opinion</span></div>
+      </a>
+    </div>
+
+    <!-- Self Analysis -->
+    <div class="life-section" id="sec-self-analysis">
+      <div class="life-post-card fade-in" style="border-style: dashed; cursor: default;">
+        <div class="card-meta">📅 Coming soon</div>
+        <h3>Self analysis posts loading...</h3>
+        <p>Introspection, personal growth reflections, and honest takes on who I am vs who I want to be.</p>
+        <div class="card-tags"><span class="tag">Growth</span><span class="tag">Reflection</span></div>
+      </div>
+    </div>
+
+    <!-- Miscellaneous -->
+    <div class="life-section" id="sec-misc">
+      <div class="life-post-card fade-in" style="border-style: dashed; cursor: default;">
+        <div class="card-meta">📅 Coming soon</div>
+        <h3>Random notes and scattered thoughts</h3>
+        <p>Things that don't fit anywhere else. Book notes, productivity experiments, travel logs, and the occasional rant.</p>
+        <div class="card-tags"><span class="tag">Random</span><span class="tag">Notes</span></div>
+      </div>
+    </div>
+
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom" style="border-top:none;padding-top:0;"><span>© 2026 Venkatesh Akula</span><span style="display:flex;gap:var(--space-lg);"><a href="https://github.com/venkateshakula1729" style="color:var(--text-muted)">GitHub</a><a href="mailto:venkateshakula042004@gmail.com" style="color:var(--text-muted)">Email</a></span></div></div></footer>
+  <script src="/js/main.js"></script>
+  <script>
+    document.querySelectorAll('.life-cat-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.life-cat-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const cat = chip.dataset.cat;
+        document.querySelectorAll('.life-section').forEach(s => s.classList.remove('active'));
+        document.getElementById('sec-' + cat).classList.add('active');
+        document.querySelectorAll('#sec-' + cat + ' .fade-in').forEach(el => {
+          el.classList.remove('visible');
+          setTimeout(() => el.classList.add('visible'), 50);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

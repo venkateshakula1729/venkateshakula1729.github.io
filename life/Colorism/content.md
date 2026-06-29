@@ -1,0 +1,202 @@
+**Colorism** In India
+=================
+
+**_Disclaimer_** _— This blog explores the sensitive issue of colorism in India through a personal lens. It acknowledges the complexity of the topic and may include my experiences and viewpoints. However, I will try to present a balanced perspective and avoid generalizations or strong language._
+
+Why the hell am I even writing about this topic?
+
+This topic is seriously bugging me for so long and not letting me focus on my work, so let's clear this shit up and get some much-needed clarity. It is taking away my fundamental human right to equality because it implies that you are inferior because of your color. People don't discuss this as they don't want to be perceived as weak for letting it hurt them and not being able to just get over it.
+
+It's 2026 and still even the so-called educated people are acting as racists and perpetuating the color discrimination. India and Korea are the best examples. Despite being a country with the most educated citizens, Korea’s obsession with plastic surgery is much like ours with fairness. Unfortunately, our Indian education system sucks here as well in creating no awareness about this kind of moral topic and focusing more on rote learning. But, that’s a topic for some other post.
+
+> **_The problem is we are all academically educated but not socially educated._ We don't live in a perfectly idealistic world that conforms to mathematical equations, for which elegant solutions exist. The fact is, we live in a world with a lot of crummy people who say and do a lot of bad things and there are no exact solutions to these problems.**
+
+I won’t be delving into the same old generic or widely discussed content on this matter. I suggest you watch [this](https://youtu.be/lhRM23EizwM?feature=shared) or [this](https://www.youtube.com/watch?v=hDDJabnirTM) to set the background for the rest of the blog.
+
+What is Colorism?
+-----------------
+
+**Colorism** is a form of **discrimination** within one’s race where lighter skin tones are considered more beautiful, superior, and desirable, and are ranked higher within the community.
+
+Colorism can be more depressing than racism or casteism due to the unique and varied nature of **skin tones**. Unlike racism/casteism, where communities face discrimination together, colorism can make individuals feel alone, as skin tones form a **spectrum** with no two people having exactly the same shade. It's the unspoken discrimination. We now have legal protection against discrimination for almost everything you can think of, except for looks and age discrimination, which is far more common than most other forms of discrimination. Read about the **Halo effect** .
+
+> **“Life is a Race, be a racist.”**
+
+**India’s Obsession with Fairness**
+--------------------------------
+
+India’s deep-rooted obsession with fair skin is widely known. Color prejudice is shamelessly practiced openly across the country, with skin color determining a person’s worth in our society. People(friends/family/relatives) casually/subtly pass such racist comments for which we laugh at them and silently cry in our room afterward. Virtues like purity, innocence, smartness, and beauty are all associated with “fairness,” while anything dark is burdened with negative connotations, from blackmail to black magic and the dark side.
+
+Basically in India
+
+> **“Life will not be fair if your skin is not fair”**
+
+If you are fair and you are very proud of it in the sense that you think it makes you **better** than those who aren’t, or think that being fair means you have awesome genes, then it's pretty substandard genes if color is your only claim to fame. ( ̶n̶o̶ ̶ Yes offense). And my dear dark guys, never feel inferior to such proud fair people, raise your voice, and flaunt your achievements, otherwise, they will start demonstrating the [Dunning–Kruger](https://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect) effect. There are still going to be some ignorant people who will underestimate your accomplishments and have [Illusory superiority](https://en.wikipedia.org/wiki/Illusory_superiority).
+
+> **_Being fair is neither a talent nor a skill nor an indicator of good genes._**
+
+Roots and Propagation of Color Discrimination
+---------------------------------------------
+
+Numerous factors have contributed to the prevalence of color discrimination in India. Let’s shed light on a few:
+
+### **Social Media:**
+
+Despite the majority of Indians having darker skin tones, have you ever seen dark-skinned heroines in [Bollywood films](https://medium.com/the-wvoice/brown-face-in-bollywood-6632f336788c) with a story that doesn't involve colorism in India? And where are the portrayals of Lord Krishna in his original color? Coz, the producers know that, If God were black, our people wouldn’t even care about his divinity, let alone humanity. As luck would have it, Krishna is no longer here, but otherwise, our people would have presented a fair and lovely offering to him as well. Our generation is filled with those idiotic actors/influencers who talk about women's empowerment and then go for melanin-reduction surgeries. See [this](https://medium.com/@seema.hari87/the-truth-about-priyanka-chopra-17d3f83675b9).
+
+We can neither blame these Indian cinemas, as Art reflects society, and society is already screwed up. Both movies and media reinforce each other's beliefs and propagate confirmation biases. I am not ranting about the whole movie industry, I really love the beautiful stories of the [Malayalam film](https://youtu.be/x2Spve-l2F8?feature=shared) industry portraying pure, relatable, and realistic characters caring more about the story and less about the actor's looks/stardom. Kerala has the highest literacy rate in India and this is what education does to society. Many people like Sai Pallavi, Aparna Balamurali, Darshana Rajendran, and Nimisha broke so many stereotypes and redefined beauty through films like Premam, Maheshinte Prathikaaram, and Hridayam.
+
+### **_Cosmetic Industry_**:
+
+The mantra “fair is beauty” has been perpetuated by the cosmetic industry, reinforcing the belief that fair skin equates to attractiveness and trying to portray dark skin as something unwanted, or repulsive. From the [advertisements](https://www.youtube.com/watch?v=5FLgZJtn06w) on TV, the dark people never realized their dreams. They never got the women. They never hung out with the cool gang. The ad convinces us to apply fair and lovely so that our face will become the source of light for the universe. All these ads made us believe that dark-skinned people are ugly and undesirable. People do not know what to desire, they instead, decide to highly value what others(society) consider desirable. In fact, psychologists have a name for this phenomenon, “the mimetic theory of desire.”
+
+These fairness cream companies have somehow managed to convince the entire dam nation sub-consciously that if you’re not fair you are not beautiful. Have you seen any beggar with a fair complexion? Even If we see a fair handsome guy working as a waiter we say, this guy is so fair and handsome (fair = handsome, in our country) why is he working as a waiter? I mean WTF? Please, go and bleach your eyes as well my dear racists.
+
+> **Beauty industries profit from creating and exploiting insecurities, perpetuating unrealistic standards. Beauty products are marketed in a way that makes darker shades look ugly rather than beautiful and natural. “Bleaching” your skin with fairness creams isn’t just about color, it’s about erasing your values, identity, dimming your confidence, and undervaluing who you are. We need to bleach this colorist mindset, not our skin! People seriously need to know the difference between ‘Skincare’ and ‘Complexion obsession’ !!!**
+
+### **_Colonialism_:**
+
+The colonial and caste system era associated power and privilege with lighter skin, leaving a lasting impact on societal norms and perceptions. It left behind a sense of worshipping white skin and white-skinned people among some people in the population of India.
+
+**But hold on, How exactly is skin color decided? Enter Melanin**
+
+### Understanding Melanin: The Basis of Skin Color
+
+Skin color is about as deep as ** [insert a shallow object here]**, while societal biases run far, far deeper.
+
+> **Skin Deep: Why Melanin Matters, But Color Doesn’t**
+
+Melanin, a pigment, is the boss of your skin tone. Melanin protects us from the sun’s harmful rays, and the amount we have determines how light or dark our skin appears. It’s there to protect us from the sun’s harmful rays, not to define our worth. There’s zero correlation between melanin levels and how pure/intelligent/good you are!!!
+
+![Map of the world by natural skin color](https://miro.medium.com/v2/resize:fit:782/format:webp/1*whLhmQ5y6YeOnUb5YGerlw.jpeg)
+
+Melanin is a biological accident, a twist of genetics as random as the color of your eyes. We wouldn’t reject someone as a friend or fire them from a job because they have brown eyes instead of blue, so why treat skin color any differently?
+
+> **Colorism is not a natural preference. It's a systemic bias which is a result of social conditioning and historical biases which are perpetuating across generations, impacting how we see ourselves and others !!!**
+
+Impact of Colorism:
+-------------------
+
+**Meet Priya.** A vibrant four-year-old with a smile that could melt glaciers. Her laughter and playful dances are infectious. Full of life, she explores the world with boundless curiosity.
+
+**And Priya has dark skin. Let's see how colorism impacts her life.**
+
+### Childhood
+
+Priya’s first day of school proved to be a harsh awakening as she was immediately hit with the cruel reality of societal divides. The picture attached below says it all. Priya couldn’t help but feel out of place, her vibrant spirit overshadowed by the darkness of her complexion. As class assignments and play roles were handed out, it became clear that fair skin was the prerequisite for success. Each photograph seemed to reinforce this bias, leaving Priya feeling invisible and unimportant.
+
+It’s disheartening for Priya to see this discrimination perpetuated not only by society but also by her own Indian parents, who unknowingly reinforce the harmful beauty standards. The very institutions that are meant to educate and nurture become breeding grounds for prejudice and injustice, leaving Priya to grapple with the weight of colorism at such a tender age.
+
+![captionless image](https://miro.medium.com/v2/resize:fit:1080/format:webp/1*_12eocmqlDWMoYM5WVDLug.jpeg)
+
+Adolescence
+-----------
+
+As she grew older, Priya felt society’s obsession with fair skin seep deeper into her veins. In adolescence, cruel remarks about her dark complexion cut at her self-confidence. She would listen to her relatives give her advice on all the natural remedies for “curing” dark skin . She observed that most of the popular creators and celebrities on social media were the ones with fair skin. She couldn’t escape reminders that she didn’t fit the mold of beauty. Her classmates were praised while she felt invisible or ridiculed. The taunts chipped away at her worth and she began to believe her dark skin made her less desirable. She tried to lighten her skin with creams, desperate for acceptance from a rejecting society.
+
+Being a simple girl, she took all of this in and accepted the fact that being dark was ugly and undesirable.
+
+Youth
+-----
+
+Despite having a caramel complexion that some deemed as less desirable, Priya excelled in her studies and poured all of her energy into proving herself beyond skin color. However, despite her hard work and determination, discrimination followed her into the workforce. She was consistently passed over for promotions and raises, despite having innovative ideas and being a valuable member of the team.
+
+When it came to marriage proposals, Priya found herself constantly being overlooked in favor of fairer-skinned women. Potential suitors would make comments about her complexion, asking if she could lighten her skin for the wedding day. The rejection and constant reminder of her perceived inadequacy took a toll on Priya’s self-esteem.
+
+The girl who used to radiate with confidence and joy now seemed unsure, her movements weighed down by a heavy burden of doubt. She no longer recognized herself in the mirror, questioning every decision and action she made.
+
+The Harmful Effects
+-------------------
+
+Colorism leads to beauty and body shaming, perpetuating harmful stereotypes. We don’t choose our parents! We don’t choose our skin color! yet we’re judged based on these arbitrary factors.
+
+As a sensitive individual, I couldn’t help but express my thoughts on this matter. Seemingly simple comments like “This shirt color doesn’t suit dark people like you” from friends/family are not just remarks; they chip away at one’s self-confidence, self-respect, and sense of belonging.
+
+### The Psychological and Emotional Toll
+
+Colorism takes a toll on our self-image, pushing us towards introversion, a negative mindset, and a constant state of insecurity. It shapes how we’re treated in society and impacts our career prospects. It’s a vicious cycle that needs to be broken. People call you reserved, shy, introverted, attitude, etc. but in reality, you feel inferior to talk with fellow students. Your social life will be completely fucked up if you stay in this same thought pattern.
+
+One may easily handwave the topic by saying that color doesn’t matter and that it’s just an excuse for people to gain sympathy due to their incompetence. However, dismissing colorism overlooks its deep-rooted impact on individuals’ lives and perpetuates harmful stereotypes.
+
+To those who question the significance of addressing colorism, I would urge them to consider the book “**Psycho-Cybernetics**” which explains how our self-image influences our actions and mindset. Color shaming is not a silly topic for the ones who face it regularly. Colorism truly affects our self-confidence, shaping our interactions and opportunities in profound ways.
+
+Ok, enough of the negativity. Let's discuss some advantages of being dark.
+
+Advantages of dark-skinned people
+---------------------------------
+
+1. You will be able to attract the real people who really see the real you. They will not get attracted with that dark color but it will be your inner beauty that will attract them to you! dusky skin helps you in the long run to identify real people, not the racists who run for one shade fairer.
+2. You don’t have to waste your time on social media show-offs.
+3. Darker skin has more melanin, which offers natural protection from the sun. This can be a major health benefit in sunny regions!
+4. Dark-skinned individuals often face societal biases head-on, building inner strength and resilience in the face of adversity.
+5. Dark-skinned individuals don’t have to waste time navigating the rapid influx of attention based solely on their appearance, unlike their fair-skinned counterparts. Instead, they can focus their energy on cultivating meaningful connections and pursuing their goals without the distraction of superficial admiration.
+
+Self Introspection
+------------------
+
+* School anniversary, the teacher told you to pick a dance partner from two girls, you don’t know both of them. Would you pick the dark girl or the white girl?
+* On the first day in a new school, you enter the class and two seats are vacant. Would you sit with a white boy or a dark boy?
+* You’re scrolling through social media and come across two beauty influencers with similar content. One influencer has a darker skin tone and the other influencer has a lighter skin tone. Who are you more likely to hit “follow”?
+* Imagine setting up a dating profile. While choosing photos, do you find yourself subconsciously filtering out pictures where your skin appears darker due to lighting conditions?
+* Watching the movie, the hero/heroine is making fun of someone for being dark in a racist way and everyone around you is roaring with laughter. Are you shocked, angry, or laughing?
+
+Think about your answers, and tell me with a straight face that skin color doesn’t matter, only your ability and skills do.
+
+Think back to your initial answers. Did societal conditioning influence your choices? Would the 5-year-old version of yourself have given the same answers?
+
+While I may not be able to change the mindset of my Indian grandma/aunties, I can challenge the mentality of my present-day peers who still favor light skin over dark. The glorification of fair skin isn’t just about vanity; it’s tied to self-worth, intelligence, and privilege. No matter however the way anybody comments on your skin color, stop taking it as a taunt rather take it as a compliment. Start the change by changing oneself mind first.
+
+It’s time to shift the conversation away from these unrealistic [beauty standards](https://www.youtube.com/watch?v=HJ1IMdd9EPk) perpetuated by the media. We need to focus our mental energy on more productive endeavors. The beauty lies in the eyes of the viewer!
+
+> In short, our **reality** was simple**:** In India, you as a person had less value because of the color of your skin.
+
+So, what you can do? What is beauty?
+------------------------------------
+
+First, change your perspective about beauty and realize that skin tone and figure are not the only beautiful traits. I will tell you what are the other traits of [beauty](https://www.youtube.com/watch?v=HJ1IMdd9EPk)/society standards. True beauty is subjective and individual, not dictated by societal norms.
+
+Step 0: Educate yourself about colorism and recognize that being dark does not equate to being ugly. (Congratulations🎉, you’re already on track by reading this blog!)
+
+1. Confidence. How can you develop Confidence? First of all, you should be brutally honest with yourself and accept who you are. You cant be really confident by It is a skill and everyone can build this unless they have integrity and you are honest with yourself
+2. Be presentable. Yes, it does lie in the way you dress up and carry yourself.
+3. Sharpen your mind💡 by reading books📚 and reading people. All the investments that you make for your body will fade away eventually. Knowledge is a sexiness that stays for life.
+
+Love yourself. What exactly do I mean by love yourself? I don’t mean the fucking Instagram #Selflove trend. I mean that take good care of your physical and mental faculties. You are what you think you are. Don’t subscribe to anyone’s judgment. Enjoy being what you really are. This is a mean world. Don’t let anyone tell you that you are ugly. If someone does, smile, because there is nothing as beautiful as a smile. Realize that deep down, in fact, it is them who are ugly”. I don’t have all the answers but one thing I do know is that there are things that we can’t control in life and spending any time stressing about those things is a waste of time.
+
+Those who matter in my life don’t care about my skin color. And those who care about my skin color don’t matter in my life. Humans are wired to always choose the easiest path rather than the right path to solve a problem. The easiest way to evaluate a person is by his looks and people don't walk around with X-rays to see your inner beauty or upper intelligence. So, it's understandable why people are judged solely by their looks and not by their capabilities.
+
+Mould yourself into a morally better and headstrong individual, such that you are loved by everyone, yet no one should have the guts to talk shit against you about shallow things like physical beauty.
+
+Never accept nonsense. Protest. And if that doesn’t work, just ignore it. Whatever you do, don’t fall for such social crap. If you do, only you will be responsible for all the hurt you are going to face. Society will be society. It would be foolishness to expect them to change. Most sensible people out there would prefer talking to an ugly (by social standards) yet intelligent person, rather than talking to a beauty queen with a head full of shit.
+
+**In India, if you are not beautiful, you have to be confident and funny, an overachiever and physically fit, and a good speaker and a good listener.** If you lack a single thing mentioned in the above list…then you are screwed in this country.
+
+The bronze turns gold during the sunset.
+
+Start facing your fears whatever they might be! Talking to girls? asking them out? Give a public take? Trust me! You can do it!
+
+Should you care about people who think about you in that way?
+
+Hell, no!!! If someone is giving more importance to your color than your personality. It's a damn red flag and you don't have to waste your beautiful life craving for such a low-standard asshole's attention or approval.
+
+Become a master of your craft, rising above the shallow masses with your exceptional skills. It’s no easy feat to develop strong communication and self-confidence, especially when the color of your skin is constantly used against you, planting seeds of inferiority, doubt, and self-loathing in your mind. This whole world hates dark skin and doesn’t prefer it but they tell you to just love yourself as if that would be enough. No one wants to talk to you bcoz they think you are gloomy or have a bad vibe just bcoz of your complexion. It’s a vicious cycle, where lack of color leads to isolation, which breeds a lack of skill, fueling even more disappointment. But do not relent, push harder, for in that struggle lies true success and triumph over those who seek to hold you back.
+
+Let's end this blog with a story,
+
+### Storytime
+
+1. Here I am presenting you a short story of Socrates:-
+
+Once upon a time — nah, too cliched.
+
+-One day a student of Socrates asked him why he continuously regular time intervals go and saw his face in the mirror even though his face was ugly.
+
+-Socrates replied, “However my face is ugly I look in the mirror and always try to remember that I have to hide this ugly face by making my behavior full of goodness and positivity and thus do good deeds and not harm any creature on this earth mentally or physically.”
+
+* He further added “The beautiful people should think that they will never prove their beautiful face wrong by making their behavior as good as their face. So their behavior should not be able to hide their beautiful face.
+
+This blog is dedicated to all the dark-skinned individuals out there. You are not alone, and your skin color does not define your worth. We are all equal✊🏽✊🏾✊🏿✊🏻✊🏼✊, regardless of our hue.
+
+All said and done, it is sad that it is still prevalent in our society, especially for the women out there.
+
+I hope that when you stumble upon this historical artifact on a “blog” in 10 or 20 years, you will laugh because the concept of colorism will be so hilariously unnecessary and bizarre.

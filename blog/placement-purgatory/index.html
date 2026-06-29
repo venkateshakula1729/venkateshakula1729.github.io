@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement Purgatory — Venkatesh Akula</title>
+  <meta name="description" content="An honest account of the IIT Kanpur placement season — off-campus job hunting, quant prep, and how to not lose your mind.">
+  <meta property="og:title" content="Placement Purgatory — Venkatesh Akula">
+  <meta property="og:type" content="article"><meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .blog-3col {
+      display: grid; grid-template-columns: 220px minmax(600px, 1fr) 220px;
+      gap: var(--space-xl); max-width: 1400px; margin: 0 auto;
+    }
+    @media (max-width: 1100px) {
+      .blog-3col { grid-template-columns: 1fr; }
+      .blog-explorer, .blog-toc-sidebar { display: none; }
+    }
+    .blog-explorer {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.84rem; padding-right: var(--space-sm);
+    }
+    .blog-explorer::-webkit-scrollbar { width: 3px; }
+    .blog-explorer::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .blog-toc-sidebar {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.8rem;
+    }
+    .toc-title {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: var(--space-md);
+    }
+    .toc-link {
+      display: block; padding: 0.3rem 0; color: var(--text-secondary);
+      font-size: 0.82rem; text-decoration: none;
+      border-left: 2px solid transparent; padding-left: 0.8rem;
+      transition: all var(--transition);
+    }
+    .toc-link:hover, .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+    .tree-nav a.current { background: var(--bg-card); color: var(--accent); font-weight: 600; }
+    .blog-back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-mono); font-size: 0.82rem;
+      color: var(--accent); text-decoration: none;
+      margin-bottom: var(--space-xl); transition: all var(--transition);
+    }
+    .blog-back-link:hover { transform: translateX(-3px); }
+  
+    .blog-minimal-header {
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100; background: var(--bg);
+      backdrop-filter: blur(12px);
+    }
+    .blog-minimal-header .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+</style>
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  
+  <!-- Minimal standalone header -->
+  <header class="blog-minimal-header" id="site-header">
+    <div class="container">
+      <a href="/" class="nav-logo" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-family:var(--font-heading); font-size:1.2rem; color:var(--text);"><span class="nav-logo-symbol" style="color:var(--accent); font-size:1.4rem;">∇</span> Venkatesh's log book</a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 1rem;">← Back to Home</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="section" style="padding-top: 2rem;"><div class="container">
+    <div class="blog-3col">
+
+      <!-- LEFT: Explorer -->
+      
+      <!-- LEFT: Explorer -->
+      
+      <!-- LEFT: Explorer -->
+      <aside class="blog-explorer fade-in">
+        <h3 class="sidebar-title">Explorer ▾</h3>
+        <ul class="tree-nav">
+          <li><details open><summary>CS</summary><ul>
+            <li><details open><summary>Algorithms</summary><ul>
+              <li><a href="/blog/competitive-programming-math/">CP as Mathematical Training</a></li>
+            </ul></details></li>
+            <li><details open><summary>Machine Learning</summary><ul>
+              <li><a href="/blog/multi-agent-systems-lessons/">Multi-Agent Systems Lessons</a></li>
+            </ul></details></li>
+            <li><details open><summary>Systems</summary><ul>
+              <li><a href="/blog/ml-systems-stack/">The ML Systems Stack</a></li>
+            </ul></details></li>
+          </ul></details></li>
+          <li><details open><summary>Quantitative Finance</summary><ul>
+            <li><a href="/blog/why-quant-research/">Why Quant Research</a></li>
+          </ul></details></li>
+          <li><details open><summary>Career</summary><ul>
+            <li><a href="/blog/placement-purgatory/" class="current">Placement Purgatory</a></li>
+          </ul></details></li>
+          <li><details open><summary>Puzzles</summary><ul>
+            <li><a href="/blog/advent-of-code-2024/">Advent of Code 2024</a></li>
+          </ul></details></li>
+          <li><details open><summary>Miscellaneous</summary><ul>
+            <li><details open><summary>IIT Kanpur</summary><ul>
+              <li><a href="/blog/campus-life/">Campus Life</a></li>
+            </ul></details></li>
+          </ul></details></li>
+        </ul>
+      </aside>
+
+
+
+      <!-- CENTER: Post Content -->
+      <div class="blog-post-body">
+        <a href="/blog/" class="blog-back-link">← Back to Blog</a>
+        <h1 style="font-family:var(--font-heading);font-size:2.5rem;margin-bottom:1.5rem;line-height:1.2;">Placement Purgatory</h1>
+        <div class="blog-meta" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <span>Published: June 2026</span>
+          <span>⏱ 12 min read</span>
+        </div>
+
+        <p><em>An honest account of the IIT Kanpur placement season — the on-campus circus, off-campus grind, and everything I wish someone had told me before Day 1.</em></p>
+
+        <h2 id="knowing-what-you-want">Knowing What You Want</h2>
+        <p>Before the entire placement machine starts rolling, you need to answer one question honestly: <strong>What do I actually want?</strong></p>
+        <p>Most people skip this step. They see friends applying everywhere — SDE at Google, quant at Tower, PM at Flipkart — and the herd instinct kicks in. Applications are free, right? What's the harm?</p>
+        <p>The harm is that you'll burn out giving tests for roles you don't want, and when it's time for the one interview that matters, you'll be running on fumes and 3 hours of sleep.</p>
+        <p>For me, the answer was clear early on. I wanted math. Not the "implement this API" kind of work, but the kind where you stare at a whiteboard, derive something from scratch, and the compiler is just there to verify what your proof already told you. That pointed toward quant research and trading, not software engineering.</p>
+        <p>Proceed by elimination, not addition. Know what you <em>don't</em> want. It's easier and more honest.</p>
+
+        <h2 id="the-resume-game">The Resume Game</h2>
+        <p>Your OCS CV is a one-page document that determines whether you get shortlisted for tests. Here's what actually matters for tech/quant roles:</p>
+        <ul>
+          <li><strong>CPI</strong> — Some companies have hard cutoffs. A 9+ opens most doors. An 8+ opens enough.</li>
+          <li><strong>Projects</strong> — Quality over quantity. Two well-documented projects beat five half-baked ones.</li>
+          <li><strong>Competitive programming</strong> — For quant roles, your Codeforces/CodeChef rating is more relevant than your web dev project.</li>
+          <li><strong>Olympiad background</strong> — INMO, INPhO, KVPY, JEE rank — these still carry weight for quant shortlists.</li>
+        </ul>
+        <p>And please, <strong>don't bluff</strong>. Every single line on your CV is fair game in an interview. If you wrote "implemented a transformer from scratch" and can't explain multi-head attention, you'll crash and burn in front of someone who does this for a living.</p>
+
+        <h2 id="test-season">Test Season</h2>
+        <p>Tests are the most frustrating part of the process. The outcome is essentially stochastic beyond a threshold of competence.</p>
+        <p>I gave tests for quant firms and research labs. Some observations:</p>
+        <ul>
+          <li>A test where I absolutely nailed the probability section didn't result in a shortlist. People who skipped that section got through.</li>
+          <li>A test where I thought I'd done average resulted in an interview call.</li>
+          <li>Some companies just shortlist based on CPI and ignore the test entirely. You find out later.</li>
+        </ul>
+        <p>The stochasticity of the outcome is inversely proportional to your skill. The only way to minimize randomness is to be <em>significantly</em> better than everyone else. Or, get lucky. Both work.</p>
+        <p>This has two implications that took me a while to internalize:</p>
+        <ul>
+          <li>If you got rejected, it doesn't mean you're worse than those who got through.</li>
+          <li>If you got shortlisted, it doesn't mean you're better than those who didn't.</li>
+        </ul>
+
+        <h2 id="the-off-campus-grind">The Off-Campus Grind</h2>
+        <p>Here's the thing about on-campus placements at IITs: they're designed to maximize the number of people placed quickly, not to maximize individual outcomes. If your dream company doesn't come on-campus, or comes on Day 2 while you've already accepted a Day 1 offer — tough luck.</p>
+        <p>I went off-campus for Squarepoint Capital. The process was entirely different from the on-campus conveyor belt:</p>
+        <ul>
+          <li>You cold-email HR. You ping people on LinkedIn. You network.</li>
+          <li>There's no OCS to coordinate timings. Tests happen at random, interviews overlap with classes.</li>
+          <li>The upside: you're not competing with your entire batch for a limited number of slots.</li>
+        </ul>
+        <p>Off-campus requires more initiative but gives you more control. If you know exactly what you want, it's often the better path.</p>
+
+        <h2 id="quant-prep">Quant Prep (What Actually Helps)</h2>
+        <p>For quant roles specifically, here's what I found useful:</p>
+        <ul>
+          <li><strong>Xinfeng Zhou's green book</strong> — Work through every problem. Don't just read solutions.</li>
+          <li><strong>Probability and stochastic processes</strong> — Not from a textbook, but from solving 100+ interview-style problems.</li>
+          <li><strong>Mental math</strong> — Seriously. Practice multiplying 3-digit numbers in your head. Optiver-style firms test this.</li>
+          <li><strong>Brainteasers</strong> — Not LeetCode. Actual probability puzzles, expected value calculations, game theory problems.</li>
+          <li><strong>Competitive programming</strong> — A 1700+ Codeforces rating signals algorithmic fluency. It helps more than you'd think.</li>
+        </ul>
+        <p>What doesn't help: memorizing Black-Scholes without understanding the derivation, doing 500 LeetCode problems, or reading Investopedia articles on "what is a hedge fund."</p>
+
+        <h2 id="interview-day">Interview Day</h2>
+        <p>You're sitting in a room, sharply dressed (or in my case, slightly overdressed), with your CV in hand. The interviewer has it open on their laptop. They've probably spent 30 seconds skimming it.</p>
+        <p>The most important thing: <strong>start simple</strong>. When asked to solve a problem, begin with the brute force approach. Layer in complexity. The interviewer cares about your thought process, not whether you can immediately produce the optimal solution.</p>
+        <p>In quant interviews specifically, they want to see you think out loud. Silence is death. Even if you're stuck, narrate your reasoning: "I think this might be a Markov chain because the future state only depends on the current state, not the history..." That's infinitely better than staring at the ceiling.</p>
+
+        <h2 id="what-i-wish-i-knew">What I Wish Someone Had Told Me</h2>
+        <ul>
+          <li><strong>Your placement does not define you.</strong> People who got "worse" offers than you might be happier in 2 years. People who got "better" offers might be miserable.</li>
+          <li><strong>The SPO system is rigid.</strong> If you accept an on-campus offer and then get an off-campus one you like more, navigating that is a diplomatic minefield. Plan ahead.</li>
+          <li><strong>Preparation compounds.</strong> The math you practiced in 3rd year for fun shows up in your 4th year quant interview. The CP contests you did "for fun" are the reason you can code under pressure.</li>
+          <li><strong>It's a people game.</strong> Talk to seniors who went through it. Ask them what they'd do differently. Most are happy to help — you just have to ask.</li>
+        </ul>
+
+        <hr>
+        <p><em>I ended up at Squarepoint Capital as a Desk Quant. It was the right fit for me — math-heavy, first-principles thinking, and a culture that values intellectual rigor over corporate polish. Your right fit will be different, and that's fine. Just make sure you actually think about what "right" means for you before Day 1 arrives.</em></p>
+
+        <div style="display: flex; flex-wrap: wrap; margin-top: 2rem; margin-bottom: 3rem;">
+          <span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 Career</span><span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 Placements</span><span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 IIT Kanpur</span>
+        </div>
+
+        <!-- Giscus Comments -->
+        <div style="margin-top: var(--space-3xl); padding-top: var(--space-2xl); border-top: 1px solid var(--border);">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: var(--space-lg); color: var(--text);">Comments</h3>
+          <script src="https://giscus.app/client.js"
+            data-repo="venkateshakula1729/Logbook"
+            data-repo-id=""
+            data-category="General"
+            data-category-id=""
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="dark_dimmed"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+          </script>
+        </div>
+      </div>
+
+      <!-- RIGHT: TOC -->
+      <aside class="blog-toc-sidebar">
+        <div class="toc-title">On this page</div>
+        <a href="#knowing-what-you-want" class="toc-link">Knowing What You Want</a>
+        <a href="#the-resume-game" class="toc-link">The Resume Game</a>
+        <a href="#test-season" class="toc-link">Test Season</a>
+        <a href="#the-off-campus-grind" class="toc-link">The Off-Campus Grind</a>
+        <a href="#quant-prep" class="toc-link">Quant Prep</a>
+        <a href="#interview-day" class="toc-link">Interview Day</a>
+        <a href="#what-i-wish-i-knew" class="toc-link">What I Wish Someone Had Told Me</a>
+      </aside>
+
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href')));
+    window.addEventListener('scroll', () => {
+      let current = '';
+      headings.forEach(h => { if (h && h.getBoundingClientRect().top < 120) current = h.id; });
+      tocLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
+    });
+  </script>
+</body>
+</html>

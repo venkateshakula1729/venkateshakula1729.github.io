@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Agent Systems Lessons — Venkatesh Akula</title>
+  <meta name="description" content="Technical lessons from optimizing multi-agent LLM workflows at Adobe Research — communication overhead, context management, and production gaps.">
+  <meta property="og:title" content="Building Efficient Multi-Agent Systems"><meta property="og:type" content="article">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Building Efficient Multi-Agent Systems: Lessons from Adobe Research","author":{"@type":"Person","name":"Venkatesh Akula"},"datePublished":"2026-04-10"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- Prism.js for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js" defer></script>
+
+<style>
+.blog-3col {
+      display: grid; grid-template-columns: 220px minmax(600px, 1fr) 220px;
+      gap: var(--space-xl); max-width: 1400px; margin: 0 auto;
+    }
+    @media (max-width: 1100px) {
+      .blog-3col { grid-template-columns: 1fr; }
+      .blog-explorer, .blog-toc-sidebar { display: none; }
+    }
+    .blog-explorer {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.84rem; padding-right: var(--space-sm);
+    }
+    .blog-explorer::-webkit-scrollbar { width: 3px; }
+    .blog-explorer::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .blog-toc-sidebar {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.8rem;
+    }
+    .toc-title {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: var(--space-md);
+    }
+    .toc-link {
+      display: block; padding: 0.3rem 0; color: var(--text-secondary);
+      font-size: 0.82rem; text-decoration: none;
+      border-left: 2px solid transparent; padding-left: 0.8rem;
+      transition: all var(--transition);
+    }
+    .toc-link:hover, .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+    .tree-nav a.current { background: var(--bg-card); color: var(--accent); font-weight: 600; }
+    .blog-back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-mono); font-size: 0.82rem;
+      color: var(--accent); text-decoration: none;
+      margin-bottom: var(--space-xl); transition: all var(--transition);
+    }
+    .blog-back-link:hover { transform: translateX(-3px); }
+    .blog-minimal-header {
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100; background: var(--bg);
+      backdrop-filter: blur(12px);
+    }
+    .blog-minimal-header .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+</style>
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  
+  <!-- Minimal standalone header -->
+  <header class="blog-minimal-header" id="site-header">
+    <div class="container">
+      <a href="/" class="nav-logo" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-family:var(--font-heading); font-size:1.2rem; color:var(--text);"><span class="nav-logo-symbol" style="color:var(--accent); font-size:1.4rem;">∇</span> Venkatesh's log book</a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 1rem;">← Back to Home</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  
+
+  <main class="section" style="padding-top: 2rem;"><div class="container">
+    <div class="blog-3col">
+      
+      <!-- LEFT: Explorer -->
+      <aside class="blog-explorer fade-in">
+        <h3 class="sidebar-title">Explorer ▾</h3>
+        <ul class="tree-nav">
+          <li><details open><summary>CS</summary><ul>
+            <li><details open><summary>Algorithms</summary><ul>
+              <li><a href="/blog/competitive-programming-math/">CP as Mathematical Training</a></li>
+            </ul></details></li>
+            <li><details open><summary>Machine Learning</summary><ul>
+              <li><a href="/blog/multi-agent-systems-lessons/" class="current">Multi-Agent Systems Lessons</a></li>
+            </ul></details></li>
+            <li><details open><summary>Systems</summary><ul>
+              <li><a href="/blog/ml-systems-stack/">The ML Systems Stack</a></li>
+            </ul></details></li>
+          </ul></details></li>
+          <li><details open><summary>Quantitative Finance</summary><ul>
+            <li><a href="/blog/why-quant-research/">Why Quant Research</a></li>
+          </ul></details></li>
+          <li><details open><summary>Career</summary><ul>
+            <li><a href="/blog/placement-purgatory/">Placement Purgatory</a></li>
+          </ul></details></li>
+          <li><details open><summary>Puzzles</summary><ul>
+            <li><a href="/blog/advent-of-code-2024/">Advent of Code 2024</a></li>
+          </ul></details></li>
+          <li><details open><summary>Miscellaneous</summary><ul>
+            <li><details open><summary>IIT Kanpur</summary><ul>
+              <li><a href="/blog/campus-life/">Campus Life</a></li>
+            </ul></details></li>
+          </ul></details></li>
+        </ul>
+      </aside>
+<div class="blog-post-body">
+        <a href="/blog/" class="blog-back-link">← Back to Blog</a>
+        <h1 style="font-family:var(--font-heading);font-size:2.8rem;margin-bottom:1.5rem;line-height:1.2;">Building Efficient Multi-Agent Systems: Lessons from Adobe Research</h1>
+        <div class="blog-meta" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <span>Published: April 10, 2026</span>
+          <span>Updated: May 1, 2026</span>
+          <span>⏱ 18 min read</span>
+        </div>
+        
+
+
+    <p>During summer 2025, I worked at Adobe Research's Big Data Experience Lab on a problem that sounds deceptively simple: make multi-agent LLM systems communicate more efficiently. Three months later, we had achieved a 35% reduction in decode tokens with 1.5× latency improvements while maintaining accuracy on three benchmark suites. Here is what I learned.</p>
+
+    <h2 id="the-problem-is-communication-not-intelligence">The Problem is Communication, Not Intelligence</h2>
+    <p>When most people think about improving multi-agent LLM systems, they focus on making individual agents smarter — better prompts, better models, better reasoning chains. But after systematic benchmarking of AutoGen, LangChain, DSPy, TextGrad, and AdalFlow, I found that the dominant bottleneck was not agent intelligence. It was inter-agent communication.</p>
+    <p>Agents were sending each other entire conversation histories, repeating context that the receiving agent already had, and filling their context windows with information irrelevant to their specific subtask. The result: token waste, context pollution, and compounding latency.</p>
+
+    <h2 id="three-key-insights">Three Key Insights</h2>
+    <h3>1. Context Compression Must Be Task-Aware</h3>
+    <p>Naive approaches to reducing communication — summarization, truncation, random sampling — all fail for the same reason: they do not know <em>what matters</em> for the downstream task. A summary that preserves the "main idea" might discard the specific data point that the next agent needs to make a decision.</p>
+    <p>Our solution was to make the compression module aware of the task decomposition. Each agent receives only the context slice relevant to its assigned subtask.</p>
+
+    <h3>2. Real-Time Coordination is Feasible</h3>
+    <p>There is a common assumption that large language models are too slow for real-time coordination. In practice, with structured communication protocols — where agents exchange compact, typed messages rather than free-form text — coordination overhead becomes manageable.</p>
+    <p>The key is designing the protocol so that agents do not need to wait for complete responses. Partial results can be streamed and consumed incrementally.</p>
+
+    <h3>3. Evaluation Must Be Multi-Dimensional</h3>
+    <p>We validated on HotpotQA (multi-hop QA), GPQA (graduate-level reasoning), and GSM8K (mathematical problem-solving). No single benchmark captures the full picture. A system that excels at QA might fail at code generation. Multi-dimensional evaluation is not a luxury — it is a requirement.</p>
+
+    <h2 id="what-i-would-do-differently">What I Would Do Differently</h2>
+    <ul>
+      <li>Start with profiling, not optimization. We spent the first two weeks running experiments without a clear bottleneck analysis. The systematic profiling phase, when we finally did it, revealed that 60% of tokens were redundant — and pointed us directly at the right intervention</li>
+      <li>Build evaluation infrastructure early. Ad-hoc evaluation slows everything down. Automating benchmark runs from day one would have saved weeks</li>
+      <li>Read more broadly. The most useful insight — task-aware routing — came from the distributed systems literature, not the LLM literature. Cross-pollination between fields is underrated</li>
+    </ul>
+
+    <h2 id="connections-to-quantitative-systems">Connections to Quantitative Systems</h2>
+    <p>Many of these lessons transfer directly to quantitative trading systems:</p>
+    <ul>
+      <li>Communication overhead between components (data feeds, signal generators, risk managers, execution engines) is a constant concern</li>
+      <li>Task-aware routing is analogous to routing market data only to the strategies that need it</li>
+      <li>Multi-dimensional evaluation mirrors the need to evaluate strategies across multiple market regimes</li>
+    </ul>
+
+    <hr>
+    <p><em>The full technical details are in the <a href="/projects/multi-agent-llm/">project page</a>. For questions about multi-agent systems or research methodology — feel free to reach out.</em></p>
+
+      
+      
+    
+      <div class="blog-tags" style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+        <span class="tag" style="margin-right: 0.5rem;">ML</span><span class="tag" style="margin-right: 0.5rem;">LLMs</span>
+      </div>
+      
+      <div class="comments" style="margin-top: 3rem;">
+        <script src="https://giscus.app/client.js"
+                data-repo="venkateshakula1729/Logbook"
+                data-repo-id=""
+                data-category="Announcements"
+                data-category-id=""
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+      </div>
+            <aside class="blog-toc-sidebar">
+        <div class="toc-title">On this page</div>
+        <a href="#the-problem-is-communication-not-intelligence" class="toc-link">The Problem is Communication, Not Intelligence</a>
+        <a href="#three-key-insights" class="toc-link">Three Key Insights</a>
+        <a href="#what-i-would-do-differently" class="toc-link">What I Would Do Differently</a>
+        <a href="#connections-to-quantitative-systems" class="toc-link">Connections to Quantitative Systems</a>
+      </aside>
+
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+
+  <script>
+    // TOC active-state tracking
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href')));
+    window.addEventListener('scroll', () => {
+      let current = '';
+      headings.forEach(h => { if (h && h.getBoundingClientRect().top < 120) current = h.id; });
+      tocLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+</body>
+
+</html>

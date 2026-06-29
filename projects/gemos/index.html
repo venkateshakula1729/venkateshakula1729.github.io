@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GemOS — Venkatesh Akula</title>
+  <meta name="description" content="Building an operating system from scratch: custom malloc/free, syscall tracers, process-chaining shells, and mremap with page table walks.">
+  <meta property="og:title" content="Building GemOS — Venkatesh Akula"><meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  <header class="site-header" id="site-header"><nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log book</span></a><div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/" class="nav-link">CV</a><a href="/projects/" class="nav-link active">Projects</a><a href="/publications/" class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a href="/readings/" class="nav-link">Readings</a><a href="/life/" class="nav-link">Life</a><a href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div><div class="nav-actions"><button class="search-btn" aria-label="Search" style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></nav></header>
+
+  <div class="page-header"><div class="container">
+    <p class="section-label">CS330 · Operating Systems</p>
+    <h1>Building GemOS</h1>
+    <div class="page-header-meta"><span>Aug – Nov 2024</span><span>IIT Kanpur</span><span><a href="https://github.com/venkateshakula1729/Operating-Systems-CS330" target="_blank" rel="noopener">GitHub ↗</a></span></div>
+  </div></div>
+
+  <main class="section"><div class="container content-body">
+    <div class="architecture-placeholder">[ Hero Image — Memory layout / page table visualization ]</div>
+
+    <h2>Overview</h2>
+    <p>GemOS is an educational operating system used in IIT Kanpur's CS330 course. Over a semester, I implemented core OS components from scratch — from user-space tools (grep, syscall tracers) to kernel-level memory management (custom allocators, page table manipulation) — building a ground-up understanding of how systems software works.</p>
+
+    <h2>Motivation</h2>
+    <p>Systems programming is where theory meets hardware constraints. Understanding how <code>malloc</code> actually works, how page tables translate virtual to physical addresses, and how processes coordinate via pipes and signals — these are foundational for anyone working on performance-critical systems, whether in HPC, trading infrastructure, or ML serving.</p>
+
+    <h2>Technical Details</h2>
+    <h3>User-Space Tools</h3>
+    <ul>
+      <li><strong>grep-like tool</strong> — pattern matching on file streams using efficient string algorithms</li>
+      <li><strong>Syscall tracer</strong> — used <code>strace</code> internals to intercept and log system calls from target processes</li>
+      <li><strong>Process-chaining shell</strong> — built using <code>fork()</code>, <code>exec()</code>, and <code>pipe()</code> to compose arbitrary process pipelines</li>
+    </ul>
+
+    <h3>Memory Management</h3>
+    <ul>
+      <li><strong>Custom <code>malloc()</code> and <code>free()</code></strong> — implemented a dynamic memory allocator using a free-list approach with linked lists, handling fragmentation through coalescing adjacent free blocks</li>
+      <li><strong><code>mremap()</code> syscall</strong> — implemented virtual memory remapping by allocating new pages, copying contents, updating page table entries, and handling multi-level page table walks</li>
+    </ul>
+
+    <div class="architecture-placeholder">[ Architecture Diagram ]<br><br>User Process → System Call Interface → Page Table Walker → Physical Memory Manager → Hardware MMU</div>
+
+    <h2>Results</h2>
+    <p>All components passed the course's automated test suite. The custom allocator handled allocation patterns ranging from small uniform allocations to adversarial fragmentation-heavy workloads. The mremap implementation correctly handled multi-level page table traversal for various virtual address ranges.</p>
+
+    <h2>Lessons Learned</h2>
+    <ul>
+      <li>Memory management is fundamentally about tradeoffs — time vs space, internal vs external fragmentation, simplicity vs performance</li>
+      <li><code>fork()</code> is conceptually elegant but expensive — copy-on-write is not just an optimization, it is essential for practical process creation</li>
+      <li>Page table walks are where virtual memory abstraction meets hardware reality — understanding this is critical for performance-sensitive systems work</li>
+      <li>Debugging kernel code requires fundamentally different tools and mindset than user-space programming</li>
+    </ul>
+
+    <h2>Future Work</h2>
+    <ul>
+      <li>Implementing a slab allocator for kernel-object caching</li>
+      <li>Adding a simple virtual file system (VFS) layer</li>
+      <li>Exploring lock-free data structures for concurrent kernel operations</li>
+    </ul>
+
+    <div class="project-links">
+      <a href="https://github.com/venkateshakula1729/Operating-Systems-CS330" class="btn btn-primary" target="_blank" rel="noopener">View Code →</a>
+      <a href="/projects/" class="btn btn-outline">← All Projects</a>
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>

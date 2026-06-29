@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Forecasting — Venkatesh Akula</title>
+  <meta name="description" content="LSTM-based stock price prediction with 6.5% RMSE and 95.3% directional accuracy on 10 years of market data.">
+  <meta property="og:title" content="Stock Forecasting with Deep Learning — Venkatesh Akula"><meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  <header class="site-header" id="site-header"><nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log book</span></a><div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/" class="nav-link">CV</a><a href="/projects/" class="nav-link active">Projects</a><a href="/publications/" class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a href="/readings/" class="nav-link">Readings</a><a href="/life/" class="nav-link">Life</a><a href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div><div class="nav-actions"><button class="search-btn" aria-label="Search" style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></nav></header>
+
+  <div class="page-header"><div class="container">
+    <p class="section-label">CS771 · Introduction to Machine Learning</p>
+    <h1>Stock Forecasting with Deep Learning</h1>
+    <div class="page-header-meta"><span>Mar – Apr 2024</span><span>IIT Kanpur</span><span><a href="https://github.com/venkateshakula1729/Stock-Forecasting.git" target="_blank" rel="noopener">GitHub ↗</a></span></div>
+  </div></div>
+
+  <main class="section"><div class="container content-body">
+    <div class="architecture-placeholder">[ Hero Image — Time-series prediction overlay on candlestick chart ]</div>
+
+    <h2>Overview</h2>
+    <p>This project explored temporal deep learning for financial time-series prediction. Using LSTM networks — designed specifically for capturing long-range dependencies in sequential data — I built a model that predicts closing stock prices for the next 2 trading days given a 50-day lookback window, trained on a decade of historical market data.</p>
+
+    <h2>Motivation</h2>
+    <p>Financial time-series exhibit complex non-linear patterns — trend, seasonality, volatility clustering, and regime changes. Traditional statistical models (ARIMA, GARCH) make strong distributional assumptions that often fail in practice. LSTMs can learn these patterns directly from data without explicit feature engineering, making them a natural choice for this task.</p>
+    <p>The project also served as a practical exercise in the challenges specific to financial ML: lookahead bias, non-stationarity, and the gap between statistical accuracy and trading profitability.</p>
+
+    <h2>Technical Details</h2>
+    <h3>Data Preprocessing</h3>
+    <ul>
+      <li><strong>Normalization and scaling</strong> — MinMax scaling to [0,1] range, fit only on training data to prevent lookahead bias</li>
+      <li><strong>Outlier clipping</strong> — Winsorization at the 1st/99th percentiles to reduce the impact of flash crashes and gaps</li>
+      <li><strong>Missing value handling</strong> — forward-fill for weekends and holidays, with volume-weighted interpolation for intraday gaps</li>
+      <li><strong>Sliding window construction</strong> — 50-day input sequences mapped to 2-day output targets</li>
+    </ul>
+
+    <h3>LSTM Architecture</h3>
+    <p>A multi-layer LSTM with dropout regularization, trained with Adam optimizer and MSE loss. The architecture was deliberately kept simple to test whether temporal modeling alone — without auxiliary features like technical indicators — can capture meaningful price dynamics.</p>
+
+    <div class="architecture-placeholder">[ Architecture Diagram ]<br><br>Input (50 × features) → LSTM Layer 1 → Dropout → LSTM Layer 2 → Dense → Output (2-day prediction)</div>
+
+    <h2>Results</h2>
+    <div class="results-grid">
+      <div class="result-card"><div class="result-value">6.5%</div><div class="result-label">RMSE</div></div>
+      <div class="result-card"><div class="result-value">95.3%</div><div class="result-label">Directional Accuracy</div></div>
+      <div class="result-card"><div class="result-value">10 yr</div><div class="result-label">Training Data</div></div>
+      <div class="result-card"><div class="result-value">50 → 2</div><div class="result-label">Lookback → Forecast</div></div>
+    </div>
+
+    <h2>Lessons Learned</h2>
+    <ul>
+      <li>Directional accuracy (95.3%) is more practically meaningful than RMSE for trading applications — knowing <em>which way</em> the price moves matters more than the exact magnitude</li>
+      <li>Simple LSTM architectures can be surprisingly effective when preprocessing is done correctly — feature engineering matters more than model complexity</li>
+      <li>Financial ML requires extreme care with data leakage — even subtle lookahead bias can inflate metrics dramatically</li>
+      <li>The gap between prediction accuracy and profitable trading is significant — transaction costs, slippage, and market impact are not captured by RMSE</li>
+    </ul>
+
+    <h2>Future Work</h2>
+    <ul>
+      <li>Incorporating attention mechanisms (Temporal Fusion Transformer) for interpretable multi-horizon forecasting</li>
+      <li>Adding auxiliary features: options-implied volatility, order flow imbalance, macro indicators</li>
+      <li>Backtesting with realistic transaction costs and position sizing to evaluate economic significance</li>
+      <li>Regime detection to switch between model variants in different market conditions</li>
+    </ul>
+
+    <div class="project-links">
+      <a href="https://github.com/venkateshakula1729/Stock-Forecasting.git" class="btn btn-primary" target="_blank" rel="noopener">View Code →</a>
+      <a href="/projects/" class="btn btn-outline">← All Projects</a>
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>

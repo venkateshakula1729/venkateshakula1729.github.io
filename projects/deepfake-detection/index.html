@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepFake Detection — Venkatesh Akula</title>
+  <meta name="description" content="Adversarially robust deepfake detection using CNN and hybrid CNN+Transformer architectures. 98% clean and 75% robust accuracy.">
+  <meta property="og:title" content="DeepFake Detection — Venkatesh Akula"><meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  <header class="site-header" id="site-header"><nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log book</span></a><div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/" class="nav-link">CV</a><a href="/projects/" class="nav-link active">Projects</a><a href="/publications/" class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a href="/readings/" class="nav-link">Readings</a><a href="/life/" class="nav-link">Life</a><a href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div><div class="nav-actions"><button class="search-btn" aria-label="Search" style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></nav></header>
+
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label">CS776 · Deep Learning for Computer Vision</p>
+      <h1>Adversarially Robust DeepFake Detection</h1>
+      <div class="page-header-meta">
+        <span>Jan – Apr 2025</span>
+        <span>IIT Kanpur</span>
+        <span><a href="https://github.com/venkateshakula1729/CS-776-Project-Deepfake-Detection-.git" target="_blank" rel="noopener">GitHub ↗</a></span>
+      </div>
+    </div>
+  </div>
+
+  <main class="section"><div class="container content-body">
+    <div class="architecture-placeholder">[ Hero Image — CNN feature maps and adversarial perturbation visualization ]</div>
+
+    <h2>Overview</h2>
+    <p>As generative models improve, distinguishing synthetic media from authentic content becomes a critical challenge. This project investigated not just detection accuracy, but <strong>adversarial robustness</strong> — how well deepfake detectors hold up when an adversary deliberately crafts inputs to fool them.</p>
+    <p>We built and evaluated multiple CNN baselines, implemented adversarial attacks, and ultimately designed a hybrid CNN+Transformer architecture that achieves strong performance under both clean and adversarial conditions.</p>
+
+    <h2>Motivation</h2>
+    <p>Most deepfake detectors are evaluated only on clean data. In practice, an adversary generating deepfakes can also optimize them to bypass detection. We wanted to answer: <strong>which architectures degrade gracefully under adversarial pressure, and can we design detectors that are inherently more robust?</strong></p>
+
+    <h2>Technical Details</h2>
+    <h3>Baseline Models</h3>
+    <p>We trained four CNN architectures from scratch on CIFAKE and DFRI datasets:</p>
+    <ul>
+      <li><strong>VGG19</strong> — deep feature extraction baseline</li>
+      <li><strong>ResNet50</strong> — residual learning for gradient stability</li>
+      <li><strong>MobileNetV1</strong> — lightweight, deployment-oriented</li>
+      <li><strong>EfficientNet-B0</strong> — compound scaling across depth/width/resolution</li>
+    </ul>
+    <p>All baselines achieved up to <strong>94% clean accuracy</strong> but showed significant vulnerability to adversarial perturbations.</p>
+
+    <h3>Adversarial Attack Suite</h3>
+    <p>We implemented three attack families in PyTorch:</p>
+    <ul>
+      <li><strong>FGSM</strong> (Fast Gradient Sign Method) — single-step, ε-bounded perturbations</li>
+      <li><strong>PGD</strong> (Projected Gradient Descent) — iterative, stronger attack</li>
+      <li><strong>One-Pixel Attack</strong> — extreme sparsity constraint, differential evolution-based</li>
+    </ul>
+
+    <h3>Hybrid CNN + Transformer Architecture</h3>
+    <p>We designed a <strong>DeiT-based Vision Transformer</strong> combined with CNN feature extractors. The key insight: CNNs capture local texture artifacts (compression, blending boundaries), while Transformers model global semantic consistency. The hybrid leverages both signal types.</p>
+
+    <div class="architecture-placeholder">[ Architecture Diagram ]<br><br>Input → CNN Feature Extractor → Patch Embedding → Transformer Encoder → Classification Head</div>
+
+    <h2>Results</h2>
+    <div class="results-grid">
+      <div class="result-card"><div class="result-value">98%</div><div class="result-label">Clean Accuracy</div></div>
+      <div class="result-card"><div class="result-value">75%</div><div class="result-label">Robust Accuracy</div></div>
+      <div class="result-card"><div class="result-value">94%</div><div class="result-label">CNN Baseline Best</div></div>
+      <div class="result-card"><div class="result-value">3</div><div class="result-label">Attack Types Tested</div></div>
+    </div>
+
+    <h2>Lessons Learned</h2>
+    <ul>
+      <li>Clean accuracy is a misleading metric in isolation — adversarial evaluation is essential for any safety-critical vision system</li>
+      <li>Transformer attention mechanisms provide a natural form of robustness by attending to global structure rather than local pixel patterns</li>
+      <li>One-Pixel attacks, despite their extreme sparsity, expose unexpected vulnerabilities in architectures that overfit to texture features</li>
+    </ul>
+
+    <h2>Future Work</h2>
+    <ul>
+      <li>Extending to video-level deepfake detection with temporal consistency checks</li>
+      <li>Adversarial training as a defense mechanism — measuring the accuracy-robustness tradeoff</li>
+      <li>Evaluating on more recent generative model outputs (Stable Diffusion, DALL-E 3)</li>
+    </ul>
+
+    <div class="project-links">
+      <a href="https://github.com/venkateshakula1729/CS-776-Project-Deepfake-Detection-.git" class="btn btn-primary" target="_blank" rel="noopener">View Code →</a>
+      <a href="/projects/" class="btn btn-outline">← All Projects</a>
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>

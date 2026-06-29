@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Venkatesh Akula</title>
+  <meta name="description"
+    content="Tutorials, experiences, and thoughts on algorithms, systems, quant finance, and life.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .blog-3col {
+      display: grid;
+      grid-template-columns: 220px minmax(600px, 1fr) 220px;
+      gap: var(--space-xl);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 1100px) {
+      .blog-3col {
+        grid-template-columns: 200px 1fr;
+      }
+
+      .blog-toc-sidebar {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .blog-3col {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-explorer {
+        position: static;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    .blog-explorer {
+      position: sticky;
+      top: 80px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      font-size: 0.84rem;
+      padding-right: var(--space-sm);
+    }
+
+    .blog-explorer::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .blog-explorer::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    .blog-center {
+      max-width: 850px;
+      min-height: 60vh;
+    }
+
+    .blog-toc-sidebar {
+      position: sticky;
+      top: 80px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      font-size: 0.8rem;
+    }
+
+    .blog-welcome {
+      padding: var(--space-xl) 0;
+    }
+
+    .blog-welcome h1 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      margin-bottom: var(--space-lg);
+      color: var(--text);
+    }
+
+    .blog-welcome p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: var(--space-lg);
+    }
+
+    .blog-welcome .highlight {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .tree-nav a.current {
+      background: var(--bg-card);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .blog-minimal-header {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      backdrop-filter: blur(12px);
+    }
+
+    .blog-minimal-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-container">
+    <div class="progress-bar" id="reading-progress"></div>
+  </div>
+
+  <!-- Minimal standalone header -->
+  <header class="blog-minimal-header" id="site-header">
+    <div class="container">
+      <a href="/" class="nav-logo" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-family:var(--font-heading); font-size:1.2rem; color:var(--text);"><span class="nav-logo-symbol" style="color:var(--accent); font-size:1.4rem;">∇</span> Venkatesh's log book</a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 1rem;">←
+          Back to Home</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <path
+              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="section" style="padding-top: 2rem;">
+    <div class="container">
+      <div class="blog-3col">
+
+        <!-- LEFT: Explorer -->
+        <aside class="blog-explorer fade-in">
+          <h3 class="sidebar-title">Explorer ▾</h3>
+          <ul class="tree-nav">
+            <li>
+              <details open>
+                <summary>CS</summary>
+                <ul>
+                  <li>
+                    <details open>
+                      <summary>Algorithms</summary>
+                      <ul>
+                        <li><a href="/blog/competitive-programming-math/">CP as Mathematical Training</a></li>
+                      </ul>
+                    </details>
+                  </li>
+                  <li>
+                    <details open>
+                      <summary>Machine Learning</summary>
+                      <ul>
+                        <li><a href="/blog/multi-agent-systems-lessons/">Multi-Agent Systems Lessons</a></li>
+                      </ul>
+                    </details>
+                  </li>
+                  <li>
+                    <details open>
+                      <summary>Systems</summary>
+                      <ul>
+                        <li><a href="/blog/ml-systems-stack/">The ML Systems Stack</a></li>
+                      </ul>
+                    </details>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details open>
+                <summary>Quantitative Finance</summary>
+                <ul>
+                  <li><a href="/blog/why-quant-research/">Why Quant Research</a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details open>
+                <summary>Career</summary>
+                <ul>
+                  <li><a href="/blog/placement-purgatory/">Placement Purgatory</a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details open>
+                <summary>Puzzles</summary>
+                <ul>
+                  <li><a href="/blog/advent-of-code-2024/">Advent of Code 2024</a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details open>
+                <summary>Miscellaneous</summary>
+                <ul>
+                  <li>
+                    <details open>
+                      <summary>IIT Kanpur</summary>
+                      <ul>
+                        <li><a href="/blog/campus-life/">Campus Life</a></li>
+                      </ul>
+                    </details>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </aside>
+
+        <!-- CENTER: Welcome -->
+        <div class="blog-center">
+          <div class="blog-welcome fade-in" id="blog-welcome">
+            <h1>Welcome to my blog ✍️</h1>
+            <p>
+              Hey, you found my corner of the internet. This is where I write about things I find genuinely interesting
+              — algorithms, systems, quant finance, and the occasional opinion nobody asked for.
+            </p>
+            <p>
+              This is where I will be writing some tutorials as well as experiences that I think are worth sharing. I will also try to write some personal blogs here, which you might (not) find interesting. If something reads like a human wrote it at 2 AM
+              with chai in hand, that's because it probably was.
+            </p>
+            <p>
+              Browse the explorer on the left to find a post, or just click on anything that catches your eye. Have a Good day!
+            </p>
+            <p
+              style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-xl);">
+              📬 Got feedback? Drop me a comment on any post (powered by <a href="https://giscus.app" target="_blank"
+                style="color: var(--accent);">Giscus</a>) or <a href="mailto:venkateshakula042004@gmail.com"
+                style="color: var(--accent);">email me</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT: TOC (empty on landing) -->
+        <aside class="blog-toc-sidebar">
+          <div class="toc" id="blog-toc" style="display:none;"></div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+  <script src="/js/main.js"></script>
+</body>
+
+</html>

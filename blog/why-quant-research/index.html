@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why I Chose Quantitative Research — Venkatesh Akula</title>
+  <meta name="description" content="On choosing quantitative research at Squarepoint Capital over software engineering — why mathematics, markets, and rigorous problem-solving drew me in.">
+  <meta property="og:title" content="Why I Chose Quantitative Research Over Software Engineering">
+  <meta property="og:type" content="article"><meta name="twitter:card" content="summary">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why I Chose Quantitative Research Over Software Engineering","author":{"@type":"Person","name":"Venkatesh Akula"},"datePublished":"2026-06-15"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+  <style>
+    .blog-3col {
+      display: grid;
+      grid-template-columns: 220px minmax(600px, 1fr) 220px;
+      gap: var(--space-xl);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    @media (max-width: 1100px) {
+      .blog-3col { grid-template-columns: 1fr; }
+      .blog-explorer, .blog-toc-sidebar { display: none; }
+    }
+    .blog-explorer {
+      position: sticky; top: 80px;
+      max-height: calc(100vh - 100px); overflow-y: auto;
+      font-size: 0.84rem; padding-right: var(--space-sm);
+    }
+    .blog-explorer::-webkit-scrollbar { width: 3px; }
+    .blog-explorer::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .blog-toc-sidebar {
+      position: sticky; top: 80px;
+      max-height: calc(100vh - 100px); overflow-y: auto;
+      font-size: 0.8rem;
+    }
+    .toc-title {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: var(--space-md);
+    }
+    .toc-link {
+      display: block; padding: 0.3rem 0; color: var(--text-secondary);
+      font-size: 0.82rem; text-decoration: none;
+      border-left: 2px solid transparent; padding-left: 0.8rem;
+      transition: all var(--transition);
+    }
+    .toc-link:hover, .toc-link.active {
+      color: var(--accent); border-left-color: var(--accent);
+    }
+    .tree-nav a.current {
+      background: var(--bg-card); color: var(--accent); font-weight: 600;
+    }
+    .blog-back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-mono); font-size: 0.82rem;
+      color: var(--accent); text-decoration: none;
+      margin-bottom: var(--space-xl); transition: all var(--transition);
+    }
+    .blog-back-link:hover { transform: translateX(-3px); }
+  
+    .blog-minimal-header {
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100; background: var(--bg);
+      backdrop-filter: blur(12px);
+    }
+    .blog-minimal-header .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+</style>
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  
+  <!-- Minimal standalone header -->
+  <header class="blog-minimal-header" id="site-header">
+    <div class="container">
+      <a href="/" class="nav-logo" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-family:var(--font-heading); font-size:1.2rem; color:var(--text);"><span class="nav-logo-symbol" style="color:var(--accent); font-size:1.4rem;">∇</span> Venkatesh's log book</a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 1rem;">← Back to Home</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="section" style="padding-top: 2rem;"><div class="container">
+    <div class="blog-3col">
+
+      <!-- LEFT: Explorer -->
+      
+      <!-- LEFT: Explorer -->
+      
+      <!-- LEFT: Explorer -->
+      <aside class="blog-explorer fade-in">
+        <h3 class="sidebar-title">Explorer ▾</h3>
+        <ul class="tree-nav">
+          <li><details open><summary>CS</summary><ul>
+            <li><details open><summary>Algorithms</summary><ul>
+              <li><a href="/blog/competitive-programming-math/">CP as Mathematical Training</a></li>
+            </ul></details></li>
+            <li><details open><summary>Machine Learning</summary><ul>
+              <li><a href="/blog/multi-agent-systems-lessons/">Multi-Agent Systems Lessons</a></li>
+            </ul></details></li>
+            <li><details open><summary>Systems</summary><ul>
+              <li><a href="/blog/ml-systems-stack/">The ML Systems Stack</a></li>
+            </ul></details></li>
+          </ul></details></li>
+          <li><details open><summary>Quantitative Finance</summary><ul>
+            <li><a href="/blog/why-quant-research/" class="current">Why Quant Research</a></li>
+          </ul></details></li>
+          <li><details open><summary>Career</summary><ul>
+            <li><a href="/blog/placement-purgatory/">Placement Purgatory</a></li>
+          </ul></details></li>
+          <li><details open><summary>Puzzles</summary><ul>
+            <li><a href="/blog/advent-of-code-2024/">Advent of Code 2024</a></li>
+          </ul></details></li>
+          <li><details open><summary>Miscellaneous</summary><ul>
+            <li><details open><summary>IIT Kanpur</summary><ul>
+              <li><a href="/blog/campus-life/">Campus Life</a></li>
+            </ul></details></li>
+          </ul></details></li>
+        </ul>
+      </aside>
+
+
+
+      <!-- CENTER: Post Content -->
+      <div class="blog-post-body">
+        <a href="/blog/" class="blog-back-link">← Back to Blog</a>
+        <h1 style="font-family:var(--font-heading);font-size:2.5rem;margin-bottom:1.5rem;line-height:1.2;">Why I Chose Quantitative Research Over Software Engineering</h1>
+        <div class="blog-meta" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <span>Published: June 15, 2026</span>
+          <span>Updated: Jun 22, 2026</span>
+          <span>⏱ 8 min read</span>
+        </div>
+
+        <h2 id="mathematics-question">The Mathematics Question</h2>
+        <p>I grew up doing math olympiads. I qualified for INMO through RMO 2019, cleared INAO, and placed in the national top 1% in chemistry and physics olympiads. KVPY SA at AIR 148 was another confirmation that mathematics was not just a subject I studied — it was how I thought about problems.</p>
+        <p>Four years at IIT Kanpur reinforced this. Topology, discrete mathematics, probability theory, computational complexity — every A* on my transcript came from courses that demanded mathematical reasoning, not just engineering execution. When I sat in the machine learning course (CS771), I found myself more interested in the optimization theory behind gradient descent than in the TensorFlow API.</p>
+        <p>Software engineering, at most companies, asks you to build reliable systems. That is important work. But it rarely asks you to <em>derive</em> the solution from first principles. Quantitative research does.</p>
+
+        <h2 id="right-kind-of-hard">The Right Kind of Hard</h2>
+        <p>The interview process for quant firms is telling. At Barclays, they asked me to derive PCA from eigenvalue decomposition. At Morgan Stanley, they wanted expected payoff calculations for sequential dice rolls. At Trexquant, the conversation was about logistic regression loss functions, covariance matrices, and the precise meaning of multiclass classification from a statistical perspective.</p>
+        <p>These were not coding puzzles. They were mathematical reasoning problems with computational components — exactly the kind of thinking I had trained for since I was solving geometry problems at AIMED and AMTI competitions in middle school.</p>
+        <p>Software engineering interviews test data structures and system design. Quant interviews test whether you can <em>think</em>. For someone with my background, the choice was clear.</p>
+
+        <h2 id="adobe-research">What Research at Adobe Taught Me</h2>
+        <p>My internship at Adobe Research was formative. Working on multi-agent LLM optimization, I saw firsthand what research engineering looks like: systematic experiments, literature reviews, hypothesis testing, and measurable results (35% token reduction, 1.5× latency improvement). This was not about shipping features — it was about understanding a system deeply enough to improve it fundamentally.</p>
+        <p>Quantitative research at a firm like Squarepoint is similar in spirit: understand market microstructure, model it rigorously, and build systems that execute on those models. The difference is that the feedback loop is measured in P&L rather than benchmarks.</p>
+
+        <h2 id="honest-tradeoffs">The Honest Tradeoffs</h2>
+        <p>Quant research is not for everyone. The hours can be intense. The signal-to-noise ratio in financial data is brutally low. And unlike software engineering, you cannot always Google your way out of a problem — the problems are often novel, and the solutions require genuine mathematical creativity.</p>
+        <p>But for someone who spent their teenage years grinding through RMO problem sets and KVPY papers, who ranked first in Advent of Code at IIT Kanpur by solving problems in C++ for fun, and who gravitates toward mathematical rigor over API familiarity — this is the right kind of hard.</p>
+
+        <hr>
+        <p><em>I am joining Squarepoint Capital after graduating from IIT Kanpur in 2026. If you want to discuss quantitative research, competitive programming, or anything at the intersection of math and engineering — reach out.</em></p>
+
+        <div style="display: flex; flex-wrap: wrap; margin-top: 2rem; margin-bottom: 3rem;">
+          <span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 Career</span><span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 Quant</span>
+        </div>
+
+        <!-- Giscus Comments -->
+        <div style="margin-top: var(--space-3xl); padding-top: var(--space-2xl); border-top: 1px solid var(--border);">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: var(--space-lg); color: var(--text);">Comments</h3>
+          <script src="https://giscus.app/client.js"
+            data-repo="venkateshakula1729/Logbook"
+            data-repo-id=""
+            data-category="General"
+            data-category-id=""
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="dark_dimmed"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+          </script>
+        </div>
+      </div>
+
+      <!-- RIGHT: TOC -->
+      <aside class="blog-toc-sidebar">
+        <div class="toc-title">On this page</div>
+        <a href="#mathematics-question" class="toc-link">The Mathematics Question</a>
+        <a href="#right-kind-of-hard" class="toc-link">The Right Kind of Hard</a>
+        <a href="#adobe-research" class="toc-link">What Research at Adobe Taught Me</a>
+        <a href="#honest-tradeoffs" class="toc-link">The Honest Tradeoffs</a>
+      </aside>
+
+    </div>
+  </div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
+  <script src="/js/main.js"></script>
+  <script>
+    // TOC active-state tracking
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href')));
+    window.addEventListener('scroll', () => {
+      let current = '';
+      headings.forEach(h => { if (h && h.getBoundingClientRect().top < 120) current = h.id; });
+      tocLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+</body>
+</html>

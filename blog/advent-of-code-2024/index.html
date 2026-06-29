@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advent of Code 2024: 50 Stars and a Lot of Coffee — Venkatesh Akula</title>
+  <meta name="description" content="My journey to placing 1st at IIT Kanpur in Advent of Code 2024.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .blog-3col {
+      display: grid; grid-template-columns: 220px minmax(600px, 1fr) 220px;
+      gap: var(--space-xl); max-width: 1400px; margin: 0 auto;
+    }
+    @media (max-width: 1100px) {
+      .blog-3col { grid-template-columns: 1fr; }
+      .blog-explorer, .blog-toc-sidebar { display: none; }
+    }
+    .blog-explorer {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.84rem; padding-right: var(--space-sm);
+    }
+    .blog-explorer::-webkit-scrollbar { width: 3px; }
+    .blog-explorer::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .blog-toc-sidebar {
+      position: sticky; top: 80px; max-height: calc(100vh - 100px);
+      overflow-y: auto; font-size: 0.8rem;
+    }
+    .toc-title {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: var(--space-md);
+    }
+    .toc-link {
+      display: block; padding: 0.3rem 0; color: var(--text-secondary);
+      font-size: 0.82rem; text-decoration: none;
+      border-left: 2px solid transparent; padding-left: 0.8rem;
+      transition: all var(--transition);
+    }
+    .toc-link:hover, .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+    .tree-nav a.current { background: var(--bg-card); color: var(--accent); font-weight: 600; }
+    .blog-back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-mono); font-size: 0.82rem;
+      color: var(--accent); text-decoration: none;
+      margin-bottom: var(--space-xl); transition: all var(--transition);
+    }
+    .blog-back-link:hover { transform: translateX(-3px); }
+  
+    .blog-minimal-header {
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100; background: var(--bg);
+      backdrop-filter: blur(12px);
+    }
+    .blog-minimal-header .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+</style>
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  
+  <!-- Minimal standalone header -->
+  <header class="blog-minimal-header" id="site-header">
+    <div class="container">
+      <a href="/" class="nav-logo" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-family:var(--font-heading); font-size:1.2rem; color:var(--text);"><span class="nav-logo-symbol" style="color:var(--accent); font-size:1.4rem;">∇</span> Venkatesh's log book</a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 1rem;">← Back to Home</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="section" style="padding-top: 2rem;"><div class="container">
+    <div class="blog-3col">
+
+      
+      <!-- LEFT: Explorer -->
+      <aside class="blog-explorer fade-in">
+        <h3 class="sidebar-title">Explorer ▾</h3>
+        <ul class="tree-nav">
+          <li><details open><summary>CS</summary><ul>
+            <li><details open><summary>Algorithms</summary><ul>
+              <li><a href="/blog/competitive-programming-math/">CP as Mathematical Training</a></li>
+            </ul></details></li>
+            <li><details open><summary>Machine Learning</summary><ul>
+              <li><a href="/blog/multi-agent-systems-lessons/">Multi-Agent Systems Lessons</a></li>
+            </ul></details></li>
+            <li><details open><summary>Systems</summary><ul>
+              <li><a href="/blog/ml-systems-stack/">The ML Systems Stack</a></li>
+            </ul></details></li>
+          </ul></details></li>
+          <li><details open><summary>Quantitative Finance</summary><ul>
+            <li><a href="/blog/why-quant-research/">Why Quant Research</a></li>
+          </ul></details></li>
+          <li><details open><summary>Career</summary><ul>
+            <li><a href="/blog/placement-purgatory/">Placement Purgatory</a></li>
+          </ul></details></li>
+          <li><details open><summary>Puzzles</summary><ul>
+            <li><a href="/blog/advent-of-code-2024/" class="current">Advent of Code 2024</a></li>
+          </ul></details></li>
+          <li><details open><summary>Miscellaneous</summary><ul>
+            <li><details open><summary>IIT Kanpur</summary><ul>
+              <li><a href="/blog/campus-life/">Campus Life</a></li>
+            </ul></details></li>
+          </ul></details></li>
+        </ul>
+      </aside>
+
+
+      <div class="blog-post-body">
+        <a href="/blog/" class="blog-back-link">← Back to Blog</a>
+        <h1 style="font-family:var(--font-heading);font-size:2.5rem;margin-bottom:1.5rem;line-height:1.2;">Advent of Code 2024: 50 Stars and a Lot of Coffee</h1>
+        <div class="blog-meta" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <span>Published: Jan 2025</span>
+          <span>⏱ 8 min read</span>
+        </div>
+
+        <p>If you're not familiar with it, <a href="https://adventofcode.com" target="_blank" style="color:var(--accent);">Advent of Code</a> is a yearly programming puzzle calendar. From December 1st to 25th, Eric Wastl drops a two-part algorithmic puzzle every day at exactly midnight EST (which translates to roughly 10:30 AM IST). The goal? Solve it as fast as possible.</p>
+
+        <h2 id="the-setup">The Setup</h2>
+        <p>By December 2024, I was in my pre-final year vacations at IIT Kanpur. I decided it was a great time to compete against 200+ other folks at IITK on our private leaderboard.</p>
+        <p>I had my C++ template ready, my Python environment configured for when string parsing got too annoying in C++, and a concerning amount of coffee.</p>  
+
+        <h2 id="the-first-week">The First Week: Speed is Everything</h2>
+        <p>The first 7 days are always a test of reading comprehension and typing speed. The algorithmic complexity is low — usually basic string manipulation, hash maps, or simple simulation. The real challenge is not making stupid off-by-one errors.</p>
+        <p>During these days, my Codeforces background (hovering around 1729 rating) carried me. When you're used to competitive programming, writing a DFS or a BFS takes less time than reading the problem description. I managed to secure top 3 on the IITK leaderboard almost every day in the first week.</p>
+
+        <h2 id="the-middle">The Middle: Where Graphs Reign Supreme</h2>
+        <p>Around Day 10, things start getting spicy. We saw 3D geometry, cellular automata, and the inevitable shortest-path problems. Day 16 was particularly brutal — a dynamic programming problem disguised as a graph traversal. I spent a good hour debugging a memoization state that was slightly too large for my cache.</p>
+        <p>This is where Python became a liability. While it's great for parsing the weird inputs Eric gives us, running a BFS on a 1000x1000 grid in Python is just asking for a Time Limit Exceeded. I fully committed to C++ from this point on.</p>
+
+        <h2 id="the-endgame">The Endgame: Pure Math and Optimization</h2>
+        <p>Days 20 to 25 are the real separator. They almost always require recognizing a mathematical property of the input. In 2024, there was a problem involving modular arithmetic and the Chinese Remainder Theorem, which was a beautiful throwback to my Olympiad days.</p>
+        <p>The final push was Day 24, a massive system of equations that needed to be solved using Z3 (a theorem prover). Some people wrote manual solvers, but realizing that Z3 could handle it in 5 lines of Python was a game-changer. That insight alone pushed me to the #1 spot on the leaderboard.</p>
+
+        <h2 id="takeaways">Takeaways</h2>
+        <p>Finishing 1st at IIT Kanpur was incredibly satisfying, but the real reward was the sheer fun of it. Advent of Code doesn't just test your algorithms; it tests your ability to think clearly under time pressure, use the right tool for the job, and appreciate the elegance of a well-crafted puzzle.</p>
+        <p>Will I do it again? Probably. Will I regret losing sleep over it? Absolutely not.</p>
+        
+        <hr>
+
+        <div style="display: flex; flex-wrap: wrap; margin-top: 2rem; margin-bottom: 3rem;">
+          <span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 Puzzles</span><span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 Competitive Programming</span>
+        </div>
+      </div>
+
+      <aside class="blog-toc-sidebar">
+        <div class="toc-title">On this page</div>
+        <a href="#the-setup" class="toc-link">The Setup</a>
+        <a href="#the-first-week" class="toc-link">The First Week</a>
+        <a href="#the-middle" class="toc-link">The Middle</a>
+        <a href="#the-endgame" class="toc-link">The Endgame</a>
+        <a href="#takeaways" class="toc-link">Takeaways</a>
+      </aside>
+
+    </div>
+  </div></main>
+  <script src="/js/main.js"></script>
+</body>
+</html>

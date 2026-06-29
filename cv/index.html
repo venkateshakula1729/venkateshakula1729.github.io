@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curriculum Vitae — Venkatesh Akula</title>
+  <meta name="description" content="Academic and professional background of Venkatesh Akula.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .cv-body { max-width: 900px; }
+    .cv-header { display: flex; align-items: center; gap: 1rem; margin-bottom: var(--space-4xl); }
+    .cv-header h1 { font-family: var(--font-heading); font-size: 2.5rem; margin: 0; }
+    .pdf-link { color: var(--accent); display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 500; text-decoration: none; padding: 0.4rem 0.8rem; border-radius: 4px; background: rgba(120, 180, 255, 0.1); }
+    .pdf-link:hover { background: rgba(120, 180, 255, 0.2); }
+    
+    .deba-cv-section { margin-bottom: var(--space-4xl); }
+    .deba-cv-section h2 { 
+      font-family: var(--font-heading); 
+      font-size: 1.6rem; 
+      margin-bottom: var(--space-xl); 
+      color: var(--text);
+    }
+    .deba-cv-item { 
+      display: grid; 
+      grid-template-columns: 140px 240px 1fr; 
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl); 
+    }
+    @media (max-width: 768px) {
+      .deba-cv-item { grid-template-columns: 1fr; gap: var(--space-xs); margin-bottom: var(--space-xl); }
+    }
+    .deba-cv-date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); }
+    .deba-cv-title { font-weight: 600; color: var(--text); font-size: 1rem; margin-bottom: 0.2rem; }
+    .deba-cv-subtitle { color: var(--text-muted); font-size: 0.85rem; }
+    
+    .deba-cv-right { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); }
+    .deba-cv-right p { margin-bottom: var(--space-sm); }
+    .deba-cv-right ul { padding-left: 1.2rem; margin-bottom: var(--space-sm); }
+    .deba-cv-right strong { color: var(--text); font-weight: 500; }
+    .deba-cv-right .grade { font-family: var(--font-mono); font-size: 0.85rem; display: inline-block; margin-top: 0.4rem; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
+  <header class="site-header" id="site-header"><nav class="nav-container"><a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log book</span></a><div class="nav-links" id="nav-links"><a href="/" class="nav-link">Home</a><a href="/cv/" class="nav-link active">CV</a><a href="/projects/" class="nav-link">Projects</a><a href="/publications/" class="nav-link">Publications</a><a href="/achievements/" class="nav-link">Achievements</a><a href="/coursework/" class="nav-link">Coursework</a><a href="/blog/" class="nav-link">Blog</a><a href="/readings/" class="nav-link">Readings</a><a href="/life/" class="nav-link">Life</a><a href="/timeline/" class="nav-link">Timeline</a><a href="/archives/" class="nav-link">Archives</a></div><div class="nav-actions"><button class="search-btn" aria-label="Search" style="background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem; margin-right: 1rem;">🔍</button><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></nav></header>
+ 
+  <main class="section pt-header">
+    <div class="container content-body cv-body">
+      
+      <div class="cv-header fade-in">
+        <h1>Curriculum Vitae</h1>
+        <a href="/cv/Resume.pdf" target="_blank" class="pdf-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="12" y2="18"></line>
+            <line x1="15" y1="15" x2="12" y2="18"></line>
+          </svg>
+          PDF
+        </a>
+      </div>
+
+      <section class="deba-cv-section fade-in">
+        <h2>Professional Experience</h2>
+        
+        <div class="deba-cv-item">
+          <div class="deba-cv-date">2026 - Present</div>
+          <div>
+            <div class="deba-cv-title">Desk Quant</div>
+            <div class="deba-cv-subtitle">Squarepoint Capital</div>
+          </div>
+          <div class="deba-cv-right">
+            <p>Trading mathematical models for P&L feedback loops on the fast-paced trading floor. Realized that deriving solutions from first principles in quantitative finance beats building scalable CRUD backends any day. Learning to love adversarial markets.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="deba-cv-section fade-in">
+        <h2>Internships</h2>
+
+        <div class="deba-cv-item">
+          <div class="deba-cv-date">May '25 - Jul '25</div>
+          <div>
+            <div class="deba-cv-title">Summer Intern</div>
+            <div class="deba-cv-subtitle">Adobe Research (Big Data Lab)</div>
+          </div>
+          <div class="deba-cv-right">
+            <p>Optimized multi-agent LLM systems. Proved that agents talk too much and listen too little; achieved a 35% reduction in decode tokens by introducing task-aware compression. Learned that distributed systems papers are more useful for ML than ML papers.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="deba-cv-section fade-in">
+        <h2>Academic Background</h2>
+
+        <div class="deba-cv-item">
+          <div class="deba-cv-date">2022 - 2026</div>
+          <div>
+            <div class="deba-cv-title">B.Tech (CSE)</div>
+            <div class="deba-cv-subtitle">IIT Kanpur</div>
+          </div>
+          <div class="deba-cv-right">
+            <p>Surviving the JEE aftermath and the realization that professors don't spoon-feed. Ended up ranking 1st in Advent of Code 2024, peaking at 1729 on Codeforces, and getting 16 A* grades. Learned how to sit with a problem until the compiler or the math yields.</p>
+            <p><strong>Awards:</strong> Academic Excellence Award (2022-23, 2023-24)</p>
+            <span class="grade">CPI: 9.3/10.0</span>
+          </div>
+        </div>
+
+        <div class="deba-cv-item">
+          <div class="deba-cv-date">2020 - 2022</div>
+          <div>
+            <div class="deba-cv-title">High School</div>
+            <div class="deba-cv-subtitle">Hyderabad, India</div>
+          </div>
+          <div class="deba-cv-right">
+            <p>Deep inside the RMO, INMO, and JEE prep grind. Spent hours solving Olympiad geometry and algebra just to feel the thrill of a proof. Placed AIR 477 in JEE Advanced and AIR 148 in KVPY SA.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="deba-cv-section fade-in">
+        <h2>Relevant Coursework</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-xl); font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6;">
+          
+          <div>
+            <h3 style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Mathematics</h3>
+            <ul style="list-style-type: none; padding: 0;">
+              <li style="margin-bottom: 0.3rem;">Mathematics for CS (Discrete & Prob)</li>
+              <li style="margin-bottom: 0.3rem;">Linear Algebra</li>
+              <li style="margin-bottom: 0.3rem;">Ordinary Differential Equations</li>
+              <li style="margin-bottom: 0.3rem;">Calculus (Single & Several Variable)</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Computer Science</h3>
+            <ul style="list-style-type: none; padding: 0;">
+              <li style="margin-bottom: 0.3rem;">Data Structures & Algorithms I & II</li>
+              <li style="margin-bottom: 0.3rem;">Operating Systems</li>
+              <li style="margin-bottom: 0.3rem;">Computer Networks</li>
+              <li style="margin-bottom: 0.3rem;">Parallel Computing</li>
+              <li style="margin-bottom: 0.3rem;">Machine Learning & Deep Learning</li>
+              <li style="margin-bottom: 0.3rem;">Modern Cryptology</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Finance</h3>
+            <ul style="list-style-type: none; padding: 0;">
+              <li style="margin-bottom: 0.3rem;">Intro to Mathematical Finance</li>
+              <li style="margin-bottom: 0.3rem;">Financial Economics</li>
+              <li style="margin-bottom: 0.3rem;">Macroeconomics I</li>
+            </ul>
+          </div>
+          
+        </div>
+      </section>
+
+
+      <section class="deba-cv-section fade-in">
+        <h2>Technical Skills</h2>
+        <div style="display: grid; grid-template-columns: 130px 1fr; gap: var(--space-lg) var(--space-xl); align-items: baseline; font-size: 0.92rem;">
+          
+          <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); font-weight: 500;">Languages</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <span class="meta-pill">C</span><span class="meta-pill">C++</span><span class="meta-pill">Python</span><span class="meta-pill">JavaScript</span><span class="meta-pill">Solidity</span><span class="meta-pill">HTML/CSS</span><span class="meta-pill">Verilog</span>
+          </div>
+          
+          <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); font-weight: 500;">ML / DL</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <span class="meta-pill">PyTorch</span><span class="meta-pill">scikit-learn</span><span class="meta-pill">OpenCV</span><span class="meta-pill">Transformers</span><span class="meta-pill">LSTM</span><span class="meta-pill">CNNs</span>
+          </div>
+          
+          <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); font-weight: 500;">Systems</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <span class="meta-pill">Operating Systems</span><span class="meta-pill">Computer Architecture</span><span class="meta-pill">HPC (MPI)</span><span class="meta-pill">Socket Programming</span><span class="meta-pill">DNS</span><span class="meta-pill">System Design</span>
+          </div>
+          
+          <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); font-weight: 500;">Web / Backend</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <span class="meta-pill">React</span><span class="meta-pill">Node.js</span><span class="meta-pill">Express</span><span class="meta-pill">MongoDB</span><span class="meta-pill">MySQL</span><span class="meta-pill">REST APIs</span>
+          </div>
+          
+          <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); font-weight: 500;">Data</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <span class="meta-pill">NumPy</span><span class="meta-pill">Pandas</span><span class="meta-pill">Matplotlib</span><span class="meta-pill">Bash</span>
+          </div>
+          
+          <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); font-weight: 500;">Tools</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <span class="meta-pill">Linux</span><span class="meta-pill">Git</span><span class="meta-pill">GitHub</span><span class="meta-pill">Vim</span>
+          </div>
+
+        </div>
+      </section>
+
+     
+
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom" style="border-top:none;padding-top:0;"><span>© 2026 Venkatesh Akula</span><span style="display:flex;gap:var(--space-lg);"><a href="https://github.com/venkateshakula1729" style="color:var(--text-muted)">GitHub</a><a href="mailto:venkateshakula042004@gmail.com" style="color:var(--text-muted)">Email</a><a href="/feed.xml" style="color:var(--text-muted)">RSS</a></span></div></div></footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>
