@@ -1,377 +1,347 @@
-/* ================================================
-   Portfolio — Main JS + Interactive Particle System
-   ================================================ */
-(function() {
+/*
+That is a real graph traversal, not an expanding circle.
+======================================================== */
+
+(function () {
   'use strict';
 
-  // --- Theme ---
-  var THEME_KEY = 'va-theme';
-  function getTheme() {
-    return localStorage.getItem(THEME_KEY) ||
-      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  }
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem(THEME_KEY, t);
-  }
-  setTheme(getTheme());
-
-  document.addEventListener('DOMContentLoaded', function() {
-    // Theme toggle
-    var toggle = document.getElementById('theme-toggle');
-    if (toggle) toggle.addEventListener('click', function() {
-      setTheme(getTheme() === 'dark' ? 'light' : 'dark');
-    });
-
-    // Mobile nav
-    var menuBtn = document.getElementById('nav-menu-btn');
-    var navLinks = document.getElementById('nav-links');
-    if (menuBtn && navLinks) {
-      menuBtn.addEventListener('click', function() { navLinks.classList.toggle('open'); });
-      document.addEventListener('click', function(e) {
-        if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove('open');
-      });
-    }
-
-    // Active nav
-    var path = window.location.pathname;
-    document.querySelectorAll('.nav-link').forEach(function(link) {
-      var href = link.getAttribute('href');
-      if (href === '/' && (path === '/' || path === '/index.html')) link.classList.add('active');
-      else if (href !== '/' && path.startsWith(href)) link.classList.add('active');
-    });
-
-    // Scroll fade-in
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
-
-    // Header shadow
-    var header = document.getElementById('site-header');
-    if (header) window.addEventListener('scroll', function() {
-      header.style.boxShadow = window.scrollY > 60 ? '0 2px 16px rgba(0,0,0,.15)' : 'none';
-    }, { passive: true });
-
-    // --- Particle Canvas (HOMEPAGE ONLY) ---
-    initParticles();
-
-    // --- Generate TOC for Blog Posts ---
-    generateTOC();
-  });
-
-  // --- TOC ---
-  function generateTOC() {
-    var content = document.querySelector('.blog-post-body');
-    var tocContainer = document.getElementById('toc-list');
-    if (!content || !tocContainer) return;
-
-    var headings = content.querySelectorAll('h2, h3');
-    if (headings.length === 0) return;
-
-    headings.forEach(function(h, index) {
-      if (!h.id) h.id = 'heading-' + index;
-      var link = document.createElement('a');
-      link.href = '#' + h.id;
-      link.textContent = h.textContent;
-      link.className = h.tagName.toLowerCase() === 'h3' ? 'toc-h3' : 'toc-h2';
-      tocContainer.appendChild(link);
-    });
-
-    var tocLinks = tocContainer.querySelectorAll('a');
-    window.addEventListener('scroll', function() {
-      var current = '';
-      headings.forEach(function(h) {
-        if (window.scrollY >= h.offsetTop - 100) current = h.id;
-      });
-      tocLinks.forEach(function(link) {
-        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-      });
-    }, { passive: true });
-  }
-
-  // --- Particle System (homepage hero only) ---
-  function initParticles() {
+  function initGraph() {
     var canvas = document.getElementById('particle-canvas');
     if (!canvas) return;
 
     var container = canvas.parentElement;
-    var ctx = canvas.getContext('2d');
-    var dpr = window.devicePixelRatio || 1;
+    var ctx = canvas.getContext('2d', { alpha: true });
 
-    // ========== CONFIGURABLE CONSTANTS ==========
-    // Adjust these to change the look and feel of the animation
+    /* ------------- tuning ---------------- */
+    var CFG = {
+      density: 0.000075, // nodes per px^2 - scales with viewport
+      minNodes: 40,
+      maxNodes: 130,
+      radius: 2.6,
+      radiusVar: 1.4,
+      speed: 14,       // px per second (NOT per frame)
+      linkDist: 150,      // px, max edge length
+      linkAlpha: 0.16,     // edge opacity at zero length
+      nodeAlpha: 0.30,
+      hoverRadius: 140,
+      signalSpeed: 420,      // px per second along an edge
+      hopDecay: 0.66,     // energy multiplier per hop
+      minEnergy: 0.16,     // below this the signal dies
+      refractory: 300,      // ms before a node can re-emit
+      flashDecay: 2.2,      // flash units lost per second
+      maxSignals: 220,      // hard safety cap
+      clickGrabDist: 90       // click within this distance fires a node
+    };
+    /* ------------------------------------- */
 
-    var PARTICLE_COUNT    = 70;        // Number of initial nodes
-    var MAX_PARTICLES     = 150;       // Cap so clicks don't slow things down
-    var NODE_RADIUS       = 3.5;       // Base radius of each node (px)
-    var NODE_RADIUS_VAR   = 1.5;       // Random variance added to radius
-    var NODE_COLOR        = '160, 160, 165';  // RGB for nodes (grey)
-    var NODE_ALPHA        = 0.25;      // Base opacity of nodes
-    var NODE_ALPHA_VAR    = 0.1;       // Random variance on opacity
-    var EDGE_COLOR        = '160, 160, 165';  // RGB for connection lines
-    var EDGE_WIDTH        = 1.0;       // Base line width for edges
-    var EDGE_ALPHA_MULT   = 0.18;      // Max alpha multiplier for edges
-    var CONNECTION_DIST   = 140;       // Max distance to draw a connection (px)
-    var PARTICLE_SPEED    = 0.4;       // Max speed per axis
-    var CONNECT_ON_CLICK  = 5;         // How many nearest nodes a new click-node connects to
-    var PULSE_COLOR       = '120, 180, 255';  // Pulse / ripple color (soft blue)
-    var PULSE_TRAIL_LEN   = 25;        // Max trail segment length (px) — keep short
-    var PULSE_DECAY       = 0.04;      // How fast pulse fades per frame
-    var RIPPLE_SPEED      = 12;        // How fast ripple ring expands
-    var MOUSE_GLOW_RADIUS = 130;       // Radius of mouse proximity glow
-    // =============================================
+    var nodes = [], signals = [], adj = [];
+    var w = 0, h = 0, dpr = 1;
+    var mouse = { x: -9999, y: -9999 };
+    var running = false, inView = true, rafId = null, lastT = 0;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    var w, h, particles = [], ripples = [], mouse = { x: -1000, y: -1000 };
+    /* ---- theme-aware colours, read from your CSS variables ---- */
+    var COL = { node: '150,150,155', accent: '120,180,255' };
 
-    function makeParticle(x, y, pulsed) {
+    function readThemeColors() {
+      var cs = getComputedStyle(document.documentElement);
+      COL.node = toRGB(cs.getPropertyValue('--text-muted') || cs.getPropertyValue('--text-secondary')) || COL.node;
+      COL.accent = toRGB(cs.getPropertyValue('--accent')) || COL.accent;
+    }
+
+    function toRGB(value) {
+      value = (value || '').trim();
+      if (!value) return null;
+      var m = value.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+      if (m) {
+        var hex = m[1];
+        if (hex.length === 3) hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+        return parseInt(hex.slice(0, 2), 16) + ',' + parseInt(hex.slice(2, 4), 16) + ',' + parseInt(hex.slice(4, 6), 16);
+      }
+      m = value.match(/rgba?\((\s*[^)]+)\)/i);
+      if (m) return m[1].split(',').slice(0, 3).map(function (n) { return Math.round(parseFloat(n)); }).join(',');
+      return null;
+    }
+
+    /* ---- sizing ---- */
+    function resize() {
+      var rect = container.getBoundingClientRect();
+      var newW = Math.max(1, rect.width), newH = Math.max(1, rect.height);
+      dpr = Math.min(window.devicePixelRatio || 1, 2); // cap at 2 - 3x DPR kills fill rate
+      canvas.width = Math.round(newW * dpr);
+      canvas.height = Math.round(newH * dpr);
+      canvas.style.width = newW + 'px';
+      canvas.style.height = newH + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      if (w && h && nodes.length) {
+        // keep the existing graph, rescale it instead of teleporting nodes
+        var sx = newW / w, sy = newH / h;
+        for (var i = 0; i < nodes.length; i++) { nodes[i].x *= sx; nodes[i].y *= sy; }
+      }
+      w = newW; h = newH;
+      reconcileCount();
+    }
+
+    function targetCount() {
+      return Math.max(CFG.minNodes, Math.min(CFG.maxNodes, Math.round(w * h * CFG.density)));
+    }
+
+    function reconcileCount() {
+      var target = targetCount();
+      while (nodes.length < target) nodes.push(makeNode(Math.random() * w, Math.random() * h));
+      if (nodes.length > target) nodes.length = target;
+    }
+
+    function makeNode(x, y) {
+      var a = Math.random() * Math.PI * 2;
+      var s = CFG.speed * (0.4 + Math.random() * 0.8);
       return {
         x: x, y: y,
-        vx: (Math.random() - 0.5) * PARTICLE_SPEED * 2,
-        vy: (Math.random() - 0.5) * PARTICLE_SPEED * 2,
-        r: NODE_RADIUS + Math.random() * NODE_RADIUS_VAR,
-        baseAlpha: NODE_ALPHA + Math.random() * NODE_ALPHA_VAR,
-        alpha: NODE_ALPHA,
-        pulseIntensity: pulsed ? 1.0 : 0
+        vx: Math.cos(a) * s,
+        vy: Math.sin(a) * s,
+        r: CFG.radius + Math.random() * CFG.radiusVar,
+        baseAlpha: CFG.nodeAlpha + Math.random() * 0.12,
+        flash: 0,
+        lastFired: -Infinity
       };
     }
 
-    function resize() {
-      var rect = container.getBoundingClientRect();
-      w = rect.width; h = rect.height;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Seed initial particles
-    for (var i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push(makeParticle(Math.random() * w, Math.random() * h, false));
-    }
-
-    // Click: spawn node at click point, connect to K nearest, pulse outward
-    function onInteract(px, py) {
-      if (particles.length < MAX_PARTICLES) {
-        var newP = makeParticle(px, py, true);
-        particles.push(newP);
-
-        // Find K nearest and pulse them
-        var dists = [];
-        for (var i = 0; i < particles.length - 1; i++) {
-          var dx = particles[i].x - px, dy = particles[i].y - py;
-          dists.push({ idx: i, d: Math.sqrt(dx * dx + dy * dy) });
-        }
-        dists.sort(function(a, b) { return a.d - b.d; });
-        for (var k = 0; k < Math.min(CONNECT_ON_CLICK, dists.length); k++) {
-          particles[dists[k].idx].pulseIntensity = 0.8;
-        }
-      }
-      // Also fire a ripple ring
-      ripples.push({ x: px, y: py, radius: 0, alpha: 0.6 });
-    }
-
-    container.addEventListener('click', function(e) {
-      var rect = container.getBoundingClientRect();
-      onInteract(e.clientX - rect.left, e.clientY - rect.top);
-    });
-    container.addEventListener('touchstart', function(e) {
-      var rect = container.getBoundingClientRect();
-      var t = e.touches[0];
-      onInteract(t.clientX - rect.left, t.clientY - rect.top);
-    }, { passive: true });
-
-    container.addEventListener('mousemove', function(e) {
-      var rect = container.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top;
-    });
-    container.addEventListener('mouseleave', function() { mouse.x = -1000; mouse.y = -1000; });
-
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-
-      // Draw edges
-      for (var i = 0; i < particles.length; i++) {
-        var a = particles[i];
-        for (var j = i + 1; j < particles.length; j++) {
-          var b = particles[j];
+    /* ---- graph: rebuild adjacency once per frame ---- */
+    function buildAdjacency() {
+      var n = nodes.length, maxSq = CFG.linkDist * CFG.linkDist;
+      for (var i = 0; i < n; i++) { adj[i] = adj[i] || []; adj[i].length = 0; }
+      adj.length = n;
+      for (var i = 0; i < n; i++) {
+        var a = nodes[i];
+        for (var j = i + 1; j < n; j++) {
+          var b = nodes[j];
           var dx = a.x - b.x, dy = a.y - b.y;
-          var d = Math.sqrt(dx * dx + dy * dy);
-          if (d < CONNECTION_DIST) {
-            var lineAlpha = (1 - d / CONNECTION_DIST) * EDGE_ALPHA_MULT;
-            var maxPulse = Math.max(a.pulseIntensity, b.pulseIntensity);
-
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            if (maxPulse > 0.05) {
-              ctx.strokeStyle = 'rgba(' + PULSE_COLOR + ',' + Math.min(0.7, lineAlpha + maxPulse * 0.5) + ')';
-              ctx.lineWidth = EDGE_WIDTH + maxPulse * 1.5;
-            } else {
-              ctx.strokeStyle = 'rgba(' + EDGE_COLOR + ',' + lineAlpha + ')';
-              ctx.lineWidth = EDGE_WIDTH;
-            }
-            ctx.stroke();
+          var dsq = dx * dx + dy * dy;
+          if (dsq < maxSq) {      // squared compare - no sqrt in the hot loop
+            var d = Math.sqrt(dsq);
+            adj[i].push({ n: j, d: d });
+            adj[j].push({ n: i, d: d });
           }
         }
       }
-
-      // Update and draw nodes
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-        p.x = Math.max(0, Math.min(w, p.x));
-        p.y = Math.max(0, Math.min(h, p.y));
-
-        p.pulseIntensity = Math.max(0, p.pulseIntensity - PULSE_DECAY);
-
-        // Ripple interaction: pulse nodes the wavefront passes through
-        for (var r = 0; r < ripples.length; r++) {
-          var rp = ripples[r];
-          var rdx = p.x - rp.x, rdy = p.y - rp.y;
-          var rdist = Math.sqrt(rdx * rdx + rdy * rdy);
-          if (Math.abs(rdist - rp.radius) < 30) {
-            p.pulseIntensity = Math.min(1, p.pulseIntensity + 0.3);
-          }
-        }
-
-        // Mouse proximity glow
-        var md = Math.sqrt((p.x - mouse.x) * (p.x - mouse.x) + (p.y - mouse.y) * (p.y - mouse.y));
-        p.alpha = md < MOUSE_GLOW_RADIUS
-          ? Math.min(0.9, p.baseAlpha + (1 - md / MOUSE_GLOW_RADIUS) * 0.4)
-          : p.baseAlpha;
-
-        var drawR = p.r + p.pulseIntensity * 2;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, drawR, 0, Math.PI * 2);
-        if (p.pulseIntensity > 0.05) {
-          ctx.fillStyle = 'rgba(' + PULSE_COLOR + ',' + Math.min(0.9, p.alpha + p.pulseIntensity * 0.6) + ')';
-        } else {
-          ctx.fillStyle = 'rgba(' + NODE_COLOR + ',' + p.alpha + ')';
-        }
-        ctx.fill();
-      }
-
-      // Update ripple rings
-      for (var r = ripples.length - 1; r >= 0; r--) {
-        ripples[r].radius += RIPPLE_SPEED;
-        ripples[r].alpha *= 0.92;
-        if (ripples[r].alpha < 0.005) ripples.splice(r, 1);
-      }
-
-      requestAnimationFrame(draw);
     }
-    draw();
-  }
-})();
 
-// Reading Progress Bar & TOC Highlighting
-document.addEventListener('DOMContentLoaded', function() {
-  var progressBar = document.getElementById('reading-progress');
-  var tocLinks = document.querySelectorAll('.toc a');
-  var headings = Array.from(document.querySelectorAll('.blog-post-body h2, .blog-post-body h3'));
+    /* ---- propagation ---- */
+    function fireNode(index, energy, now, cameFrom) {
+      var node = nodes[index];
+      if (!node) return;
+      // two independent dampers: a refractory period, and a rule that a signal
+      // may only re-fire a node it is brighter than. Together they guarantee
+      // the wave terminates instead of echoing around cycles forever.
+      if (now - node.lastFired < CFG.refractory) return;
+      if (energy <= node.flash) return;
+      node.lastFired = now;
+      node.flash = Math.max(node.flash, energy);
 
-  if (progressBar) {
-    window.addEventListener('scroll', function() {
-      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var scrolled = (winScroll / height) * 100;
-      progressBar.style.width = scrolled + '%';
-    });
-  }
-
-  if (tocLinks.length > 0 && headings.length > 0) {
-    window.addEventListener('scroll', function() {
-      var scrollPos = window.scrollY + 100;
-      var currentId = '';
-
-      for (var i = headings.length - 1; i >= 0; i--) {
-        if (headings[i].offsetTop <= scrollPos) {
-          currentId = headings[i].id;
-          break;
-        }
-      }
-
-      if (currentId) {
-        tocLinks.forEach(function(link) {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + currentId) {
-            link.classList.add('active');
-          }
+      var neighbours = adj[index] || [];
+      for (var k = 0; k < neighbours.length; k++) {
+        if (neighbours[k].n === cameFrom) continue;   // never bounce straight back
+        if (signals.length >= CFG.maxSignals) break;
+        signals.push({
+          from: index,
+          to: neighbours[k].n,
+          len: neighbours[k].d,
+          t: 0,
+          energy: energy * CFG.hopDecay
         });
       }
+    }
+
+    function advanceSignals(dt, now) {
+      for (var i = signals.length - 1; i >= 0; i--) {
+        var s = signals[i];
+        var a = nodes[s.from], b = nodes[s.to];
+        if (!a || !b) { signals.splice(i, 1); continue; }
+
+        s.t += (CFG.signalSpeed * dt) / Math.max(1, s.len);
+        if (s.t >= 1) {
+          signals.splice(i, 1);
+          if (s.energy > CFG.minEnergy) fireNode(s.to, s.energy, now, s.from);
+          else nodes[s.to].flash = Math.max(nodes[s.to].flash, s.energy);
+        }
+      }
+    }
+
+    /* ---- interaction ---- */
+    function nearestNode(x, y) {
+      var best = -1, bestSq = CFG.clickGrabDist * CFG.clickGrabDist;
+      for (var i = 0; i < nodes.length; i++) {
+        var dx = nodes[i].x - x, dy = nodes[i].y - y;
+        var dsq = dx * dx + dy * dy;
+        if (dsq < bestSq) { bestSq = dsq; best = i; }
+      }
+      return best;
+    }
+
+    function onPointerDown(e) {
+      // never swallow a click meant for a link, button or form control
+      if (e.target.closest && e.target.closest('a, button, input, textarea, select, [role="button"]')) return;
+
+      var rect = container.getBoundingClientRect();
+      var x = e.clientX - rect.left, y = e.clientY - rect.top;
+      var now = performance.now();
+
+      var idx = nearestNode(x, y);
+      if (idx === -1) {
+        if (nodes.length >= CFG.maxNodes) nodes.shift(); // recycle instead of silently ignoring the click
+        nodes.push(makeNode(x, y));
+        buildAdjacency();
+        idx = nodes.length - 1;
+      }
+      nodes[idx].lastFired = -Infinity; // a deliberate click always fires
+      nodes[idx].flash = 1;
+      fireNode(idx, 1, now, -1);
+    }
+
+    /* ---- rendering ---- */
+    function drawFrame(dt, now) {
+      ctx.clearRect(0, 0, w, h);
+
+      // edges
+      ctx.lineWidth = 1;
+      for (var i = 0; i < nodes.length; i++) {
+        var a = nodes[i];
+        var list = adj[i];
+        for (var k = 0; k < list.length; k++) {
+          if (list[k].n < i) continue;                // draw each edge once
+          var b = nodes[list[k].n];
+          var alpha = (1 - list[k].d / CFG.linkDist) * CFG.linkAlpha;
+          var lit = Math.max(a.flash, b.flash);
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = lit > 0.05
+            ? 'rgba(' + COL.accent + ',' + Math.min(0.55, alpha + lit * 0.35) + ')'
+            : 'rgba(' + COL.node + ',' + alpha + ')';
+          ctx.stroke();
+        }
+      }
+
+      // travelling signals - a short bright segment moving along the edge
+      for (var s = 0; s < signals.length; s++) {
+        var sig = signals[s];
+        var p = nodes[sig.from], q = nodes[sig.to];
+        if (!p || !q) continue;
+        var head = Math.min(1, sig.t);
+        var tail = Math.max(0, sig.t - 0.22);
+        ctx.beginPath();
+        ctx.moveTo(p.x + (q.x - p.x) * tail, p.y + (q.y - p.y) * tail);
+        ctx.lineTo(p.x + (q.x - p.x) * head, p.y + (q.y - p.y) * head);
+        ctx.strokeStyle = 'rgba(' + COL.accent + ',' + Math.min(0.85, 0.25 + sig.energy * 0.6) + ')';
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+      }
+      ctx.lineWidth = 1;
+
+      // nodes
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        var dx = n.x - mouse.x, dy = n.y - mouse.y;
+        var md = Math.sqrt(dx * dx + dy * dy);
+        var hover = md < CFG.hoverRadius ? (1 - md / CFG.hoverRadius) * 0.35 : 0;
+        var alpha = Math.min(0.95, n.baseAlpha + hover + n.flash * 0.65);
+
+        if (n.flash > 0.05) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r + n.flash * 7, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + COL.accent + ',' + (n.flash * 0.12) + ')';
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r + n.flash * 1.6, 0, Math.PI * 2);
+        ctx.fillStyle = n.flash > 0.05
+          ? 'rgba(' + COL.accent + ',' + alpha + ')'
+          : 'rgba(' + COL.node + ',' + alpha + ')';
+        ctx.fill();
+      }
+    }
+
+    function step(now) {
+      rafId = requestAnimationFrame(step);
+      if (!inView || document.hidden) { lastT = now; return; }
+
+      var dt = Math.min((now - lastT) / 1000, 0.05); // seconds, clamped so a tab switch can't teleport nodes
+      lastT = now;
+
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        n.x += n.vx * dt;
+        n.y += n.vy * dt;
+        if (n.x < 0) { n.x = 0; n.vx = Math.abs(n.vx); }
+        if (n.x > w) { n.x = w; n.vx = -Math.abs(n.vx); }
+        if (n.y < 0) { n.y = 0; n.vy = Math.abs(n.vy); }
+        if (n.y > h) { n.y = h; n.vy = -Math.abs(n.vy); }
+        n.flash = Math.max(0, n.flash - CFG.flashDecay * dt);
+      }
+
+      buildAdjacency();
+      advanceSignals(dt, now);
+      drawFrame(dt, now);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      lastT = performance.now();
+      rafId = requestAnimationFrame(step);
+    }
+
+    function stop() {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+
+    /* ---- wiring ---- */
+    readThemeColors();
+    resize();
+
+    new MutationObserver(readThemeColors)
+      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(container);
+    else window.addEventListener('resize', resize);
+
+    container.addEventListener('pointerdown', onPointerDown);
+    container.addEventListener('pointermove', function (e) {
+      var rect = container.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    }, { passive: true });
+    container.addEventListener('pointerleave', function () { mouse.x = mouse.y = -9999; });
+
+    // stop burning battery when the hero is off screen or the tab is hidden
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+      }, { threshold: 0 }).observe(container);
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else start();
+    });
+
+    if (reduced.matches) {
+      buildAdjacency();
+      drawFrame(0, performance.now());     // one static frame, no motion
+    } else {
+      start();
+    }
+    reduced.addEventListener('change', function (e) {
+      if (e.matches) { stop(); buildAdjacency(); drawFrame(0, performance.now()); }
+      else start();
     });
   }
-});
 
-// --- Global Search ---
-document.addEventListener('DOMContentLoaded', function() {
-  var searchBtns = document.querySelectorAll('#search-btn, .search-btn');
-  if (searchBtns.length === 0) return;
-
-  // Create modal HTML
-  var modalHtml = `
-    <div id="search-modal" class="search-modal">
-      <div class="search-modal-content">
-        <div class="search-header">
-          <input type="text" id="search-input" placeholder="Search posts, life, readings..." autocomplete="off">
-          <button id="search-close">&times;</button>
-        </div>
-        <div id="search-results" class="search-results"></div>
-      </div>
-    </div>
-  `;
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-
-  var modal = document.getElementById('search-modal');
-  var input = document.getElementById('search-input');
-  var results = document.getElementById('search-results');
-  var closeBtn = document.getElementById('search-close');
-  var searchData = null;
-
-  function openSearch() {
-    modal.classList.add('active');
-    input.focus();
-    if (!searchData) {
-      fetch('/assets/search.json')
-        .then(res => res.json())
-        .then(data => searchData = data)
-        .catch(err => console.error("Failed to load search index", err));
-    }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGraph);
+  } else {
+    initGraph();
   }
-
-  function closeSearch() {
-    modal.classList.remove('active');
-  }
-
-  searchBtns.forEach(btn => btn.addEventListener('click', openSearch));
-  closeBtn.addEventListener('click', closeSearch);
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) closeSearch();
-  });
-
-  input.addEventListener('input', function() {
-    var query = this.value.toLowerCase().trim();
-    if (!query || !searchData) {
-      results.innerHTML = '';
-      return;
-    }
-    var matches = searchData.filter(item => 
-      item.title.toLowerCase().includes(query) || 
-      item.content.toLowerCase().includes(query)
-    ).slice(0, 15);
-
-    if (matches.length === 0) {
-      results.innerHTML = '<div class="search-no-result">No results found.</div>';
-      return;
-    }
-
-    results.innerHTML = matches.map(item => `
-      <a href="${item.url}" class="search-result-item">
-        <div class="search-result-title">${item.title} <span class="search-result-cat">${item.category}</span></div>
-      </a>
-    `).join('');
-  });
-});
+})();
