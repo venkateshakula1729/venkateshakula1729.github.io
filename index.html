@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Venkatesh Akula</title>
+  <title>Venkatesh Akula — Quantitative Researcher | IIT Kanpur</title>
   <meta name="description"
     content="Personal website of Venkatesh Akula — mathematics, engineering, finance, and curiosity.">
   <meta name="author" content="Venkatesh Akula">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=3">
+  <link rel="canonical" href="https://venkateshakula1729.github.io/">
 
-  <meta property="og:title" content="Venkatesh Akula">
+  <meta property="og:title" content="Venkatesh Akula — Quantitative Researcher | IIT Kanpur">
   <meta property="og:description" content="Mathematics · Engineering · Finance · Curiosity">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://venkateshakula1729.github.io/">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Venkatesh Akula">
+  <meta property="og:image" content="https://venkateshakula1729.github.io/assets/og/default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Venkatesh Akula — Quantitative Researcher | IIT Kanpur">
+  <meta name="twitter:description" content="Mathematics · Engineering · Finance · Curiosity">
+  <meta name="twitter:image" content="https://venkateshakula1729.github.io/assets/og/default.png">
 
+  <script>(function(){try{var t=localStorage.getItem('va-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})()</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -64,13 +71,29 @@
   </style>
 
   <meta name="google-site-verification" content="7DBi7nWF8aEUHEhVPuWlJVXXcFQTH5bSDX3kZ3Ch0zo" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Venkatesh Akula",
+    "url": "https://venkateshakula1729.github.io/",
+    "image": "https://venkateshakula1729.github.io/assets/images/Profile.png",
+    "jobTitle": "Quantitative Researcher",
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Indian Institute of Technology Kanpur" },
+    "knowsAbout": ["Quantitative research", "Machine learning", "High-performance computing", "Competitive programming"],
+    "sameAs": [
+      "https://github.com/venkateshakula1729",
+      "https://www.linkedin.com/in/venkatesh-akula-imo1729/",
+      "https://x.com/venkatesh_akula"
+    ]
+  }
+  </script>
+  <noscript><style>.fade-in{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 
 <body>
 
-  <div class="progress-container">
-    <div class="progress-bar" id="reading-progress"></div>
-  </div>
   <header class="site-header" id="site-header">
     <nav class="nav-container">
       <a href="/" class="nav-logo"><span class="nav-logo-symbol">∇</span><span class="nav-logo-text">Venkatesh's log
@@ -106,7 +129,8 @@
   <section class="hero-canvas-wrap">
     <canvas id="particle-canvas"></canvas>
     <div class="hero-inner">
-      <h1 class="hero-hello">HELLO WORLD<span>,</span></h1>
+      <h1 class="visually-hidden">Venkatesh Akula — Quantitative Researcher, IIT Kanpur</h1>
+      <p class="hero-hello" aria-hidden="true">HELLO WORLD<span>,</span></p>
       <p class="hero-intro">
         I am <strong>Venkatesh</strong>, a <a href="https://www.cse.iitk.ac.in/" target="_blank" rel="noopener"
           class="link-institution">Computer Science</a> graduate from <strong><a href="https://www.iitk.ac.in/"
@@ -159,6 +183,7 @@
           </svg>
         </a>
       </div>
+      <p class="hero-hint" aria-hidden="true">click the network</p>
     </div>
   </section>
 
@@ -306,6 +331,7 @@
   </footer>
 
   <script src="/js/main.js"></script>
+  <script src="/js/particles.js" defer></script>
 </body>
 
 </html>

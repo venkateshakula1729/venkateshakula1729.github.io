@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Multi-Agent Systems Lessons — Venkatesh Akula</title>
   <meta name="description" content="Technical lessons from optimizing multi-agent LLM workflows at Adobe Research — communication overhead, context management, and production gaps.">
   <meta property="og:title" content="Building Efficient Multi-Agent Systems"><meta property="og:type" content="article">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Building Efficient Multi-Agent Systems: Lessons from Adobe Research","author":{"@type":"Person","name":"Venkatesh Akula"},"datePublished":"2026-04-10"}</script>
+  <link rel="canonical" href="https://venkateshakula1729.github.io/blog/multi-agent-systems-lessons/">
+  <meta property="og:image" content="https://venkateshakula1729.github.io/assets/og/default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://venkateshakula1729.github.io/assets/og/default.png">
+  <script>(function(){try{var t=localStorage.getItem('va-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})()</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap">
@@ -66,6 +73,7 @@
       display: flex; justify-content: space-between; align-items: center;
     }
 </style>
+  <noscript><style>.fade-in{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
   <div class="progress-container"><div class="progress-bar" id="reading-progress"></div></div>
@@ -207,18 +215,7 @@
   <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
   <script src="/js/main.js"></script>
 
-  <script>
-    // TOC active-state tracking
-    const tocLinks = document.querySelectorAll('.toc-link');
-    const headings = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href')));
-    window.addEventListener('scroll', () => {
-      let current = '';
-      headings.forEach(h => { if (h && h.getBoundingClientRect().top < 120) current = h.id; });
-      tocLinks.forEach(l => {
-        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
-      });
-    });
-  </script>
+  
 </body>
 
 </html>

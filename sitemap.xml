@@ -1,21 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://venkateshakula1729.github.io/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/cv/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/projects/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/projects/multi-agent-llm/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/projects/deepfake-detection/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/projects/high-performance-computing/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/projects/stock-forecasting/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/projects/domain-adaptation/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/projects/gemos/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/blog/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/blog/why-quant-research/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/blog/competitive-programming-math/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/blog/multi-agent-systems-lessons/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/blog/ml-systems-stack/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/publications/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/readings/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/archives/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://venkateshakula1729.github.io/life/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Home -->
+  <url><loc>https://venkateshakula1729.github.io/</loc><lastmod>2026-08-15</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+
+  <!-- Main Sections -->
+  <url><loc>https://venkateshakula1729.github.io/cv/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/achievements/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/coursework/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/timeline/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/publications/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/archives/</loc><lastmod>2026-08-15</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Projects -->
+  <url><loc>https://venkateshakula1729.github.io/projects/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/projects/multi-agent-llm/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/projects/deepfake-detection/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/projects/high-performance-computing/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/projects/stock-forecasting/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/projects/domain-adaptation/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/projects/gemos/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/projects/billing-360/</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/projects/uncertainty-llm-alignment/</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Blog -->
+  <url><loc>https://venkateshakula1729.github.io/blog/</loc><lastmod>2026-08-15</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/blog/why-quant-research/</loc><lastmod>2026-06-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/blog/competitive-programming-math/</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/blog/multi-agent-systems-lessons/</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/blog/ml-systems-stack/</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/blog/advent-of-code-2024/</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/blog/campus-life/</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/blog/placement-purgatory/</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Life -->
+  <url><loc>https://venkateshakula1729.github.io/life/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/life/Colorism/</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/life/real-me/</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- Readings -->
+  <url><loc>https://venkateshakula1729.github.io/readings/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/bishop-prml/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/green-book/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/ddia/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/ostep/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/concrete-mathematics/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/munkres-topology/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/advances-financial-ml/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/art-of-problem-solving/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/atomic-habits/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/deep-work/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/perfect-rigor/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://venkateshakula1729.github.io/readings/wings-of-fire/</loc><lastmod>2026-06-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
