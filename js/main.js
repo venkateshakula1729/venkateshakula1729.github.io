@@ -15,13 +15,6 @@
     localStorage.setItem(THEME_KEY, t);
   }
 
-  // --- HTML escaping for search results (XSS prevention) ---
-  function esc(s) {
-    return String(s).replace(/[&<>"']/g, function(c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function() {
     // Theme toggle
     var toggle = document.getElementById('theme-toggle');

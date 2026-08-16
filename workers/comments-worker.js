@@ -18,7 +18,7 @@
  *  POST  /?page=/blog/why-quant-research/               -> { ok: true, comment: {...} }
  *          body: { "name": "...", "body": "...", "website": "" }
  *  DELETE /?page=...&id=...  with header  X-Admin-Token: <ADMIN_TOKEN>
- */
+ */ 
 
 const LIMITS = {
   name: 60,

@@ -15,7 +15,7 @@
     /* ---- tuning ------------ */
     var CFG = {
       density:       0.000075, // nodes per px^2 - scales with viewport
-      minNodes:      20, 
+      minNodes:      20,  
       maxNodes:      130, 
       radius:        3.4,      // node size
       radiusVar:     1.6,      // random size variance

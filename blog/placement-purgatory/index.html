@@ -212,26 +212,8 @@
           <span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 Career</span><span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 Placements</span><span class="meta-pill" style="font-family:var(--font-sans); margin-right:0.4rem; font-size:0.75rem;">🏷 IIT Kanpur</span>
         </div>
 
-        <!-- Giscus Comments -->
-        <!-- <div style="margin-top: var(--space-3xl); padding-top: var(--space-2xl); border-top: 1px solid var(--border);">
-          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: var(--space-lg); color: var(--text);">Comments</h3>
-          <script src="https://giscus.app/client.js"
-            data-repo="venkateshakula1729/Logbook"
-            data-repo-id=""
-            data-category="General"
-            data-category-id=""
-            data-mapping="pathname"
-            data-strict="0"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="top"
-            data-theme="dark_dimmed"
-            data-lang="en"
-            data-loading="lazy"
-            crossorigin="anonymous"
-            async>
-          </script>
-        </div> -->
+        <div id="comments"></div>
+        <script src="/js/comments.js" defer></script>
       </div>
 
       <!-- RIGHT: TOC -->
@@ -251,14 +233,6 @@
 
   <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>© 2026 Venkatesh Akula</span></div></div></footer>
   <script src="/js/main.js"></script>
-  <script>
-    const tocLinks = document.querySelectorAll('.toc-link');
-    const headings = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href')));
-    window.addEventListener('scroll', () => {
-      let current = '';
-      headings.forEach(h => { if (h && h.getBoundingClientRect().top < 120) current = h.id; });
-      tocLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
-    });
-  </script>
+
 </body>
 </html>

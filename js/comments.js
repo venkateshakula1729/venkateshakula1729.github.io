@@ -7,9 +7,7 @@
    ----------------------------------------------------------- */
 (function () {
     'use strict';
-
-    // paste your deployed Worker URL here (no trailing slash)
-    var WORKER_URL = 'https://YOUR-WORKER.workers.dev';
+    var WORKER_URL = 'https://logbook.venkateshakula042004.workers.dev';
 
     var mount = document.getElementById('comments');
     if (!mount) return;
