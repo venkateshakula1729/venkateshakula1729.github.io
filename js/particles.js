@@ -15,7 +15,7 @@
     /* ---- tuning ------------ */
     var CFG = {
       density:       0.000075, // nodes per px^2 - scales with viewport
-      minNodes:      40,
+      minNodes:      30,
       maxNodes:      130,
       radius:        3.4,      // node size
       radiusVar:     1.6,      // random size variance
@@ -34,7 +34,7 @@
       refractory:    220,      // ms before a node can re-emit
       flashDecay:    1.8,      // flash units lost per second
       maxSignals:    220,      // hard safety cap
-      maxHops:       6         // hard ceiling on cascade depth
+      maxHops:       10         // hard ceiling on cascade depth
     };
     /* ------------------------ */
 
