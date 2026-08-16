@@ -19,7 +19,7 @@
       maxNodes:      130,
       radius:        3.4,      // node size
       radiusVar:     1.6,      // random size variance
-      speed:         90,       // px per second - ambient node drift
+      speed:         60,       // px per second - ambient node drift
       linkDist:      150,      // px, max edge length
       linkAlpha:     0.20,     // edge opacity at zero length 
       nodeAlpha:     0.30, 
