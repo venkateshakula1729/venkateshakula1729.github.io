@@ -1,6 +1,6 @@
 /*
-That is a real graph traversal, not an expanding circle.
-======================================================== */
+ That is a real graph traversal, not an expanding circle.
+ ----------------------------------------------------------- */
 
 (function () {
   'use strict';
@@ -12,30 +12,34 @@ That is a real graph traversal, not an expanding circle.
     var container = canvas.parentElement;
     var ctx = canvas.getContext('2d', { alpha: true });
 
-    /* ------------- tuning ---------------- */
+    /* ---- tuning ------------ */
     var CFG = {
-      density: 0.000075, // nodes per px^2 - scales with viewport
-      minNodes: 40,
-      maxNodes: 130,
-      radius: 2.6,
-      radiusVar: 1.4,
-      speed: 14,       // px per second (NOT per frame)
-      linkDist: 150,      // px, max edge length
-      linkAlpha: 0.16,     // edge opacity at zero length
-      nodeAlpha: 0.30,
-      hoverRadius: 140,
-      signalSpeed: 420,      // px per second along an edge
-      hopDecay: 0.66,     // energy multiplier per hop
-      minEnergy: 0.16,     // below this the signal dies
-      refractory: 300,      // ms before a node can re-emit
-      flashDecay: 2.2,      // flash units lost per second
-      maxSignals: 220,      // hard safety cap
-      clickGrabDist: 90,       // click within this distance fires a node
-      maxHops: 10
+      density:       0.000075, // nodes per px^2 - scales with viewport
+      minNodes:      40,
+      maxNodes:      130,
+      radius:        3.4,      // node size
+      radiusVar:     1.6,      // random size variance
+      speed:         32,       // px per second - ambient node drift
+      linkDist:      150,      // px, max edge length
+      linkAlpha:     0.20,     // edge opacity at zero length
+      nodeAlpha:     0.30,
+      edgeWidth:     1.5,      // thickness of the resting connection lines
+      signalWidth:   2.8,      // thickness of the travelling pulse
+      outwardOnly:   true,     // wavefront may only move AWAY from the click
+      outwardSlack:  6,        // px of tolerance, so the wave can round corners
+      hoverRadius:   140,
+      signalSpeed:   900,      // px per second - the travelling pulse
+      hopDecay:      0.66,     // energy multiplier per hop
+      minEnergy:     0.16,     // below this the signal dies
+      refractory:    220,      // ms before a node can re-emit
+      flashDecay:    1.8,      // flash units lost per second
+      maxSignals:    220,      // hard safety cap
+      maxHops:       6         // hard ceiling on cascade depth
     };
-    /* ------------------------------------- */
+    /* ------------------------ */
 
     var nodes = [], signals = [], adj = [];
+    var waveId = 0;
     var w = 0, h = 0, dpr = 1;
     var mouse = { x: -9999, y: -9999 };
     var running = false, inView = true, rafId = null, lastT = 0;
@@ -59,7 +63,7 @@ That is a real graph traversal, not an expanding circle.
         if (hex.length === 3) hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
         return parseInt(hex.slice(0, 2), 16) + ',' + parseInt(hex.slice(2, 4), 16) + ',' + parseInt(hex.slice(4, 6), 16);
       }
-      m = value.match(/rgba?\((\s*[^)]+)\)/i);
+      m = value.match(/rgba?\(([\s\S]+)\)/i);
       if (m) return m[1].split(',').slice(0, 3).map(function (n) { return Math.round(parseFloat(n)); }).join(',');
       return null;
     }
@@ -103,7 +107,9 @@ That is a real graph traversal, not an expanding circle.
         vy: Math.sin(a) * s,
         r: CFG.radius + Math.random() * CFG.radiusVar,
         baseAlpha: CFG.nodeAlpha + Math.random() * 0.12,
-        flash: 0,
+        flash: 0,              // VISUAL only - never read by the propagation logic
+        born: 0,
+        lastWave: -1,          // which cascade last visited this node
         lastFired: -Infinity
       };
     }
@@ -119,7 +125,7 @@ That is a real graph traversal, not an expanding circle.
           var b = nodes[j];
           var dx = a.x - b.x, dy = a.y - b.y;
           var dsq = dx * dx + dy * dy;
-          if (dsq < maxSq) {      // squared compare - no sqrt in the hot loop
+          if (dsq < maxSq) {    // squared compare - no sqrt in the hot loop
             var d = Math.sqrt(dsq);
             adj[i].push({ n: j, d: d });
             adj[j].push({ n: i, d: d });
@@ -129,31 +135,49 @@ That is a real graph traversal, not an expanding circle.
     }
 
     /* ---- propagation ---- */
-    function fireNode(index, energy, now, cameFrom, hops) {
+    function fireNode(index, energy, now, cameFrom, hops, wave, ox, oy) {
       var node = nodes[index];
       if (!node) return;
 
-    
-      // two independent dampers: a refractory period, and a rule that a signal
-      // may only re-fire a node it is brighter than. Together they guarantee
-      // the wave terminates instead of echoing around cycles forever.
-      if(hops > CFG.maxHops) return;
-      if (now - node.lastFired < CFG.refractory) return;
+      // Termination is guaranteed by dampers that are all INDEPENDENT OF
+      // RENDERING: a hop ceiling, energy decay, and a per-wave visit marker.
+      // Deliberately not keyed on node.flash - that is a visual value, and
+      // coupling the two makes the animation breakable by a styling tweak.
+      if (hops > CFG.maxHops) return;
       if (energy < CFG.minEnergy) return;
+      if (node.lastWave === wave) return;                 // already part of this cascade
+      if (now - node.lastFired < CFG.refractory) return;
 
+      node.lastWave = wave;
       node.lastFired = now;
       node.flash = Math.max(node.flash, energy);
 
+      // Distance of THIS node from the click point. The wavefront may only
+      // advance to neighbours further out than this, which is what stops the
+      // cascade folding back over itself.
+      var here = Math.sqrt((node.x - ox) * (node.x - ox) + (node.y - oy) * (node.y - oy));
+
       var neighbours = adj[index] || [];
       for (var k = 0; k < neighbours.length; k++) {
-        if (neighbours[k].n === cameFrom) continue;   // never bounce straight back
+        var nb = nodes[neighbours[k].n];
+        if (!nb) continue;
+        if (neighbours[k].n === cameFrom) continue;      // never bounce straight back
+        if (nb.lastWave === wave) continue;              // already lit by this cascade
+
+        if (CFG.outwardOnly) {
+          var there = Math.sqrt((nb.x - ox) * (nb.x - ox) + (nb.y - oy) * (nb.y - oy));
+          if (there < here - CFG.outwardSlack) continue;   // inward - drop it
+        }
+
         if (signals.length >= CFG.maxSignals) break;
         signals.push({
           from: index,
           to: neighbours[k].n,
           len: neighbours[k].d,
           t: 0,
-          hops: hops+1,
+          hops: hops + 1,
+          wave: wave,
+          ox: ox, oy: oy,
           energy: energy * CFG.hopDecay
         });
       }
@@ -164,26 +188,17 @@ That is a real graph traversal, not an expanding circle.
         var s = signals[i];
         var a = nodes[s.from], b = nodes[s.to];
         if (!a || !b) { signals.splice(i, 1); continue; }
+
         s.t += (CFG.signalSpeed * dt) / Math.max(1, s.len);
         if (s.t >= 1) {
-        signals.splice(i, 1);
-        nodes[s.to].flash = Math.max(nodes[s.to].flash, s.energy);
-          fireNode(s.to, s.energy, now, s.from, s.hops);
+          signals.splice(i, 1);
+          nodes[s.to].flash = Math.max(nodes[s.to].flash, s.energy); // always light the arrival node
+          fireNode(s.to, s.energy, now, s.from, s.hops, s.wave, s.ox, s.oy);
         }
       }
     }
 
     /* ---- interaction ---- */
-    function nearestNode(x, y) {
-      var best = -1, bestSq = CFG.clickGrabDist * CFG.clickGrabDist;
-      for (var i = 0; i < nodes.length; i++) {
-        var dx = nodes[i].x - x, dy = nodes[i].y - y;
-        var dsq = dx * dx + dy * dy;
-        if (dsq < bestSq) { bestSq = dsq; best = i; }
-      }
-      return best;
-    }
-
     function onPointerDown(e) {
       // never swallow a click meant for a link, button or form control
       if (e.target.closest && e.target.closest('a, button, input, textarea, select, [role="button"]')) return;
@@ -192,32 +207,35 @@ That is a real graph traversal, not an expanding circle.
       var x = e.clientX - rect.left, y = e.clientY - rect.top;
       var now = performance.now();
 
-      
-      if (nodes.length >= CFG.maxNodes) nodes.shift(); // recycle instead of silently ignoring the click
+      // A click ALWAYS drops a new node exactly under the cursor and starts the
+      // cascade there - the dot you clicked into existence is the one that fires.
+      if (nodes.length >= CFG.maxNodes) nodes.shift();   // recycle the oldest
       var node = makeNode(x, y);
-      node.vx *= 0.25;
+      node.vx *= 0.25;                                   // born nearly still, so it reads as "placed"
       node.vy *= 0.25;
       node.born = now;
       nodes.push(node);
 
-      buildAdjacency();
+      buildAdjacency();                                  // the new node needs edges before it can fire
       var idx = nodes.length - 1;
-      
-      nodes[idx].lastFired = -Infinity; // a deliberate click always fires
-      fireNode(idx, 1, now, -1, 0);
+
+      waveId++;                                          // each click is its own cascade
+      nodes[idx].lastFired = -Infinity;                  // a deliberate click always fires
+      nodes[idx].lastWave = -1;
+      fireNode(idx, 1, now, -1, 0, waveId, x, y);
     }
 
     /* ---- rendering ---- */
-    function drawFrame(dt, now) {
+    function drawFrame() {
       ctx.clearRect(0, 0, w, h);
 
       // edges
-      ctx.lineWidth = 1;
+      ctx.lineWidth = CFG.edgeWidth;
       for (var i = 0; i < nodes.length; i++) {
         var a = nodes[i];
         var list = adj[i];
         for (var k = 0; k < list.length; k++) {
-          if (list[k].n < i) continue;                // draw each edge once
+          if (list[k].n < i) continue;                   // draw each edge once
           var b = nodes[list[k].n];
           var alpha = (1 - list[k].d / CFG.linkDist) * CFG.linkAlpha;
           var lit = Math.max(a.flash, b.flash);
@@ -242,10 +260,10 @@ That is a real graph traversal, not an expanding circle.
         ctx.moveTo(p.x + (q.x - p.x) * tail, p.y + (q.y - p.y) * tail);
         ctx.lineTo(p.x + (q.x - p.x) * head, p.y + (q.y - p.y) * head);
         ctx.strokeStyle = 'rgba(' + COL.accent + ',' + Math.min(0.85, 0.25 + sig.energy * 0.6) + ')';
-        ctx.lineWidth = 1.4;
+        ctx.lineWidth = CFG.signalWidth;
         ctx.stroke();
       }
-      ctx.lineWidth = 1;
+      ctx.lineWidth = CFG.edgeWidth;
 
       // nodes
       for (var i = 0; i < nodes.length; i++) {
@@ -291,7 +309,7 @@ That is a real graph traversal, not an expanding circle.
 
       buildAdjacency();
       advanceSignals(dt, now);
-      drawFrame(dt, now);
+      drawFrame();
     }
 
     function start() {
@@ -310,7 +328,8 @@ That is a real graph traversal, not an expanding circle.
     /* ---- wiring ---- */
     readThemeColors();
     resize();
-    buildAdjacency();
+    buildAdjacency();   // so a click landing before the first frame still has edges
+
     new MutationObserver(readThemeColors)
       .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
@@ -337,12 +356,12 @@ That is a real graph traversal, not an expanding circle.
 
     if (reduced.matches) {
       buildAdjacency();
-      drawFrame(0, performance.now());     // one static frame, no motion
+      drawFrame();                          // one static frame, no motion
     } else {
       start();
     }
     reduced.addEventListener('change', function (e) {
-      if (e.matches) { stop(); buildAdjacency(); drawFrame(0, performance.now()); }
+      if (e.matches) { stop(); buildAdjacency(); drawFrame(); }
       else start();
     });
   }
