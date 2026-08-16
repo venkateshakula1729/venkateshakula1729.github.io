@@ -28,7 +28,6 @@
         '<textarea id="comment-body" name="body" rows="4" maxlength="4000" required ' +
         'placeholder="Leave a comment" aria-label="Your comment"></textarea>' +
         '<div class="comment-form-foot">' +
-        '<span class="comment-note" id="comment-note">No account needed. Be kind.</span>' +
         '<button type="submit" class="btn btn-outline" id="comment-submit">Post</button>' +
         '</div>' +
         '</form>' +
@@ -138,7 +137,6 @@
                 listEl.innerHTML = '';
                 var p = document.createElement('p');
                 p.className = 'comment-empty';
-                p.textContent = 'Comments are unavailable right now.';
                 listEl.appendChild(p);
             });
     }
