@@ -14,23 +14,24 @@ That is a real graph traversal, not an expanding circle.
 
     /* ------------- tuning ---------------- */
     var CFG = {
-      density:      0.000075, // nodes per px^2 - scales with viewport
-      minNodes:     40,
-      maxNodes:     130,
-      radius:       2.6,
-      radiusVar:    1.4,
-      speed:        14,       // px per second (NOT per frame)
-      linkDist:     150,      // px, max edge length
-      linkAlpha:    0.16,     // edge opacity at zero length
-      nodeAlpha:    0.30,
-      hoverRadius:  140,
-      signalSpeed:  420,      // px per second along an edge
-      hopDecay:     0.66,     // energy multiplier per hop
-      minEnergy:    0.16,     // below this the signal dies
-      refractory:   300,      // ms before a node can re-emit
-      flashDecay:   2.2,      // flash units lost per second
-      maxSignals:   220,      // hard safety cap
-      clickGrabDist: 90       // click within this distance fires a node
+      density: 0.000075, // nodes per px^2 - scales with viewport
+      minNodes: 40,
+      maxNodes: 130,
+      radius: 2.6,
+      radiusVar: 1.4,
+      speed: 14,       // px per second (NOT per frame)
+      linkDist: 150,      // px, max edge length
+      linkAlpha: 0.16,     // edge opacity at zero length
+      nodeAlpha: 0.30,
+      hoverRadius: 140,
+      signalSpeed: 420,      // px per second along an edge
+      hopDecay: 0.66,     // energy multiplier per hop
+      minEnergy: 0.16,     // below this the signal dies
+      refractory: 300,      // ms before a node can re-emit
+      flashDecay: 2.2,      // flash units lost per second
+      maxSignals: 220,      // hard safety cap
+      clickGrabDist: 90,       // click within this distance fires a node
+      maxHops: 10
     };
     /* ------------------------------------- */
 
@@ -128,14 +129,15 @@ That is a real graph traversal, not an expanding circle.
     }
 
     /* ---- propagation ---- */
-    function fireNode(index, energy, now, cameFrom) {
+    function fireNode(index, energy, now, cameFrom, hops) {
       var node = nodes[index];
       if (!node) return;
       // two independent dampers: a refractory period, and a rule that a signal
       // may only re-fire a node it is brighter than. Together they guarantee
       // the wave terminates instead of echoing around cycles forever.
+      if(hops > CFG.maxHops) return;
       if (now - node.lastFired < CFG.refractory) return;
-      if (energy <= node.flash) return;
+      if (energy < CFG.minEnergy) return;
       node.lastFired = now;
       node.flash = Math.max(node.flash, energy);
 
@@ -148,6 +150,7 @@ That is a real graph traversal, not an expanding circle.
           to: neighbours[k].n,
           len: neighbours[k].d,
           t: 0,
+          hops: hops+1,
           energy: energy * CFG.hopDecay
         });
       }
@@ -157,13 +160,8 @@ That is a real graph traversal, not an expanding circle.
       for (var i = signals.length - 1; i >= 0; i--) {
         var s = signals[i];
         var a = nodes[s.from], b = nodes[s.to];
-        if (!a || !b) { signals.splice(i, 1); continue; }
-
-        s.t += (CFG.signalSpeed * dt) / Math.max(1, s.len);
-        if (s.t >= 1) {
-          signals.splice(i, 1);
-          if (s.energy > CFG.minEnergy) fireNode(s.to, s.energy, now, s.from);
-          else nodes[s.to].flash = Math.max(nodes[s.to].flash, s.energy);
+        if (!a || !Math.max(nodes[s.to].flash, s.energy)) {
+          fireNode(s.to, s.energy, now, s.from, s.hops);
         }
       }
     }
@@ -195,8 +193,7 @@ That is a real graph traversal, not an expanding circle.
         idx = nodes.length - 1;
       }
       nodes[idx].lastFired = -Infinity; // a deliberate click always fires
-      nodes[idx].flash = 1;
-      fireNode(idx, 1, now, -1);
+      fireNode(idx, 1, now, -1, 0);
     }
 
     /* ---- rendering ---- */
@@ -302,7 +299,7 @@ That is a real graph traversal, not an expanding circle.
     /* ---- wiring ---- */
     readThemeColors();
     resize();
-
+    buildAdjacency();
     new MutationObserver(readThemeColors)
       .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
