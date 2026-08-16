@@ -15,26 +15,26 @@
     /* ---- tuning ------------ */
     var CFG = {
       density:       0.000075, // nodes per px^2 - scales with viewport
-      minNodes:      30,
+      minNodes:      30, 
       maxNodes:      130,
       radius:        3.4,      // node size
       radiusVar:     1.6,      // random size variance
-      speed:         32,       // px per second - ambient node drift
+      speed:         40,       // px per second - ambient node drift
       linkDist:      150,      // px, max edge length
       linkAlpha:     0.20,     // edge opacity at zero length
-      nodeAlpha:     0.30,
-      edgeWidth:     1.5,      // thickness of the resting connection lines
-      signalWidth:   2.8,      // thickness of the travelling pulse
+      nodeAlpha:     0.30, 
+      edgeWidth:     2.5,      // thickness of the resting connection lines
+      signalWidth:   3,      // thickness of the travelling pulse
       outwardOnly:   true,     // wavefront may only move AWAY from the click
       outwardSlack:  6,        // px of tolerance, so the wave can round corners
       hoverRadius:   140,
-      signalSpeed:   900,      // px per second - the travelling pulse
+      signalSpeed:   800,      // px per second - the travelling pulse
       hopDecay:      0.66,     // energy multiplier per hop
-      minEnergy:     0.16,     // below this the signal dies
+      minEnergy:     0.1,     // below this the signal dies
       refractory:    220,      // ms before a node can re-emit
       flashDecay:    1.8,      // flash units lost per second
       maxSignals:    220,      // hard safety cap
-      maxHops:       50         // hard ceiling on cascade depth
+      maxHops:       100       // hard ceiling on cascade depth
     };
     /* ------------------------ */
 
