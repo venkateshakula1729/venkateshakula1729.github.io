@@ -28,8 +28,8 @@
       outwardOnly:   true,     // wavefront may only move AWAY from the click
       outwardSlack:  6,        // px of tolerance, so the wave can round corners
       hoverRadius:   140,
-      signalSpeed:   800,      // px per second - the travelling pulse
-      hopDecay:      0.66,     // energy multiplier per hop
+      signalSpeed:   850,      // px per second - the travelling pulse
+      hopDecay:      0.9,     // energy multiplier per hop
       minEnergy:     0.1,     // below this the signal dies
       refractory:    220,      // ms before a node can re-emit
       flashDecay:    1.8,      // flash units lost per second
