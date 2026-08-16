@@ -132,12 +132,15 @@ That is a real graph traversal, not an expanding circle.
     function fireNode(index, energy, now, cameFrom, hops) {
       var node = nodes[index];
       if (!node) return;
+
+    
       // two independent dampers: a refractory period, and a rule that a signal
       // may only re-fire a node it is brighter than. Together they guarantee
       // the wave terminates instead of echoing around cycles forever.
       if(hops > CFG.maxHops) return;
       if (now - node.lastFired < CFG.refractory) return;
       if (energy < CFG.minEnergy) return;
+
       node.lastFired = now;
       node.flash = Math.max(node.flash, energy);
 
@@ -160,7 +163,11 @@ That is a real graph traversal, not an expanding circle.
       for (var i = signals.length - 1; i >= 0; i--) {
         var s = signals[i];
         var a = nodes[s.from], b = nodes[s.to];
-        if (!a || !Math.max(nodes[s.to].flash, s.energy)) {
+        if (!a || !b) { signals.splice(i, 1); continue; }
+        s.t += (CFG.signalSpeed * dt) / Math.max(1, s.len);
+        if (s.t >= 1) {
+        signals.splice(i, 1);
+        nodes[s.to].flash = Math.max(nodes[s.to].flash, s.energy);
           fireNode(s.to, s.energy, now, s.from, s.hops);
         }
       }
@@ -185,13 +192,17 @@ That is a real graph traversal, not an expanding circle.
       var x = e.clientX - rect.left, y = e.clientY - rect.top;
       var now = performance.now();
 
-      var idx = nearestNode(x, y);
-      if (idx === -1) {
-        if (nodes.length >= CFG.maxNodes) nodes.shift(); // recycle instead of silently ignoring the click
-        nodes.push(makeNode(x, y));
-        buildAdjacency();
-        idx = nodes.length - 1;
-      }
+      
+      if (nodes.length >= CFG.maxNodes) nodes.shift(); // recycle instead of silently ignoring the click
+      var node = makeNode(x, y);
+      node.vx *= 0.25;
+      node.vy *= 0.25;
+      node.born = now;
+      nodes.push(node);
+
+      buildAdjacency();
+      var idx = nodes.length - 1;
+      
       nodes[idx].lastFired = -Infinity; // a deliberate click always fires
       fireNode(idx, 1, now, -1, 0);
     }

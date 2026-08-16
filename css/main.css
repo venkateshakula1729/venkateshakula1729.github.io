@@ -77,7 +77,20 @@ img{max-width:100%;display:block}
 .nav-menu-btn span{width:20px;height:2px;background:var(--text);border-radius:2px;transition:var(--transition)}
 
 /* ======== HERO — HELLO WORLD ======== */
-.hero-canvas-wrap{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:crosshair}
+.hero-canvas-wrap{
+position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+overflow:hidden;cursor:crosshair;
+user-select:none;-webkit-user-select:none;    /* drag no longer selects the headline */
+touch-action:manipulation;                  /* kills the 300ms double-tap-zoom delay */
+-webkit-tap-highlight-color:transparent;      /* no grey flash on mobile tap */
+}
+
+/* cursor is inherited - hand it back to the content sitting above the canvas */
+.hero-inner{cursor:default}
+.hero-inner a,.hero-inner button{cursor:pointer}
+
+/* the intro prose stays selectable; the giant display type does not */
+.hero-intro{user-select:text;-webkit-user-select:text;cursor:text}
 .hero-hint{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;
  text-transform:uppercase;color:var(--text-muted);margin-top:var(--space-xl);opacity:.6}
 #particle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
