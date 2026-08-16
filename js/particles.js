@@ -34,7 +34,7 @@
       refractory:    220,      // ms before a node can re-emit
       flashDecay:    1.8,      // flash units lost per second
       maxSignals:    220,      // hard safety cap
-      maxHops:       10         // hard ceiling on cascade depth
+      maxHops:       50         // hard ceiling on cascade depth
     };
     /* ------------------------ */
 
